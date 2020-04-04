@@ -27,9 +27,6 @@ class ListDataset:
     def get_labels(self):
         return self.labels
 
-    def get_old_class_map(self):
-        return self.class_map
-
     def get_new_class_map(self):
         return self.initial_class_labels
 
@@ -172,3 +169,5 @@ class ListDataset:
 
         self.data[init] = tmp_series
         self.labels[init] = tmp_label
+
+
