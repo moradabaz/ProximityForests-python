@@ -63,13 +63,64 @@ class MyTestCase(unittest.TestCase):
         self.dataset2.labels.append(5)
         self.assertEqual(self.dataset2.get_labels(), [1, 2, 4, 3, 5])
 
-
-
-    def test_class_map1(self):
+    def test_add_series(self):
         self.dataset1.add_series(1, [4, 3])
         self.assertEqual(self.dataset1.class_map[1], 1)
         self.assertEqual(self.dataset1.data[0], [4, 3])
         self.assertEqual(self.dataset1.labels[0], 1)
+
+    def test_add_series2(self):
+        self.dataset1.add_series(1, [4, 3])
+        self.dataset1.add_series(1, [5, 6])
+        self.assertEqual(self.dataset1.class_map[1], 2)
+        self.assertEqual(self.dataset1.data[0], [4, 3])
+        self.assertEqual(self.dataset1.data[1], [5, 6])
+        self.assertEqual(self.dataset1.labels[0], 1)
+
+    def test_remove_item1(self):
+        self.dataset1.add_series(1, [4, 3])
+        self.assertEqual(self.dataset1.class_map[1], 1)
+        self.assertEqual(self.dataset1.data[0], [4, 3])
+        self.assertEqual(self.dataset1.labels[0], 1)
+        self.dataset1.remove_item(0)
+        self.assertEqual(self.dataset1.class_map[1], 0)
+        self.assertEqual(self.dataset1.data, [])
+        self.assertEqual(self.dataset1.labels, [])
+
+    def test_remove_item2(self):
+        self.dataset1.add_series(1, [4, 3])
+        self.dataset1.add_series(1, [5, 6])
+        self.assertEqual(self.dataset1.class_map[1], 2)
+        self.assertEqual(self.dataset1.data[0], [4, 3])
+        self.assertEqual(self.dataset1.labels[0], 1)
+        self.dataset1.remove_item(0)
+        self.assertEqual(self.dataset1.class_map[1], 1)
+        self.assertEqual(self.dataset1.data[0], [5, 6])
+        self.assertNotEqual(self.dataset1.labels, [])
+
+    def test_unique_classes_as_set(self):
+        self.dataset1.add_series(1, [4, 3])
+        self.dataset1.add_series(1, [5, 6])
+        self.dataset1.add_series(3, [4, 3])
+        self.dataset1.add_series(4, [5, 6])
+        self.assertEqual(len(self.dataset1.get_unique_classes_as_set()), 3)
+
+    def test_unique_classes(self):
+        self.dataset1.add_series(1, [4, 3])
+        self.dataset1.add_series(1, [5, 6])
+        self.dataset1.add_series(3, [4, 3])
+        self.dataset1.add_series(4, [5, 6])
+        self.assertEqual(self.dataset1.get_unique_classes(), [1, 3, 4])
+
+
+    def test_split_classes(self):
+        self.dataset2.add_series(1, [4, 3])
+        self.dataset2.add_series(2, [7, 8])
+        self.dataset2.add_series(3, [4, 3])
+        self.dataset2.add_series(4, [9, 2])
+        return
+
+
 
 if __name__ == '__main__':
     unittest.main()
