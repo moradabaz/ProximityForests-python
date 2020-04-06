@@ -95,12 +95,11 @@ class ListDataset:
     def split_classes(self):
         split = dict()
         size = self.lenght
-        for i in range(0, size - 1):
+        for i in range(0, size):
             label = self.labels[i]
             if label != none:
-                if split[label] != none:
-                    class_set = ListDataset(expected_size=size)
-                    split[label] = class_set
+                class_set = ListDataset(expected_size=size)
+                split[label] = class_set
                 split[label].add_series(label, self.data[i])
         return split
 
@@ -136,6 +135,7 @@ class ListDataset:
                 new_order[old_label] = new_label
                 temp_label = new_label
                 new_label = new_label + 1
+            new_dataset.add_series(temp_label, self.data[i])
 
         new_dataset.set_initial_class_order(new_order)
         new_dataset.set_reordered(True)
@@ -150,11 +150,14 @@ class ListDataset:
     def _get_initial_class_labels(self):
         return self.initial_class_labels
 
-    def sample_n(self, n_items, rand):
+    def sample_n(self, n_items):
         n = n_items
         if n > self.expected_size:
             n = self.expected_size
         sample = ListDataset(expected_size=n, length=self.lenght)
+
+        # TODO: self.shuffle
+
         for i in range(0, n - 1):
             sample.add_series(self.labels[i], self.data[i])
 

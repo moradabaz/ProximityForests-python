@@ -112,15 +112,38 @@ class MyTestCase(unittest.TestCase):
         self.dataset1.add_series(4, [5, 6])
         self.assertEqual(self.dataset1.get_unique_classes(), [1, 3, 4])
 
-
     def test_split_classes(self):
         self.dataset2.add_series(1, [4, 3])
         self.dataset2.add_series(2, [7, 8])
         self.dataset2.add_series(3, [4, 3])
         self.dataset2.add_series(4, [9, 2])
-        return
+        split = self.dataset2.split_classes()
+        for spl in split:
+            self.assertIsNotNone(spl)
 
+    def test_split_classes2(self):
+        self.dataset2.add_series(1, [4, 3])
+        self.dataset2.add_series(2, [7, 8])
+        self.dataset2.add_series(3, [4, 3])
+        self.dataset2.add_series(4, [9, 2])
+        split = self.dataset2.split_classes()
+        self.assertEqual(len(split), 4)
+        for i in range(0, len(split) - 1):
+            self.assertIsNotNone(split)
 
+    def test_reorder_class_labels(self):
+        new_dataset = self.dataset1.reorder_class_labels(dict())
+        for dt in new_dataset.get_data():
+            self.assertIsNotNone(dt)
+
+    def test_swap(self):
+        self.dataset1.add_series(0, [1, 6])
+        self.dataset1.add_series(1, [2, 7])
+        self.dataset1.add_series(2, [5, 6])
+        self.dataset1.add_series(3, [9, 4])
+        self.dataset1.add_series(4, [8, 7])
+        self.dataset1.swap(0, 4)
+        self.assertEqual(self.dataset1.data[0], [8, 7])
 
 if __name__ == '__main__':
     unittest.main()
