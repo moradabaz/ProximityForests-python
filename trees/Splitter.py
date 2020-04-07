@@ -1,4 +1,6 @@
 import dtw
+from numpy.distutils.fcompiler import none
+
 from dataset import ListDataset
 from core import AppContext
 import random
@@ -13,6 +15,7 @@ class Splitter:
         splits = ListDataset.ListDataset(sample.get_num_classes())
         temp_exemplars = sample.get_num_classes()
         branch = 0
+        r = none
         for entry in data_per_class.keys():
             r = random.randint(data_per_class[entry])
             splits[branch] = ListDataset.ListDataset(sample.expected_size, 0)
