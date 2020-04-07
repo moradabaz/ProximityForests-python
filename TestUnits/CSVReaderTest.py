@@ -14,11 +14,15 @@ class MyTestCase(unittest.TestCase):
     tabla_4 = open(file_name4)
 
     def test_read_file1(self):
-
         line = self.tabla_1.readline()
         while len(line) > 0:
             print(line)
             line = self.tabla_1.readline()
+
+    def test_read_file(self):
+        file_info = CSVReader.CSVReader.getFileInformation(filename="this", separator=" ")
+
+
 
     def test_read_file2(self):
         line = self.tabla_2.readline()
@@ -50,11 +54,20 @@ class MyTestCase(unittest.TestCase):
     # Comprobaciones con el dataset
 
     def test_dataset_labels(self):
-
         dataset = CSVReader.CSVReader.readCSVToListDataset(fileName=self.file_name1, has_header=False, targetColumnsIsFirst=True, separator=" ")
         print(len(dataset.labels))
-        for l in dataset.labels:
-            print(dataset.data[l])
+        for i in dataset.series_data:
+            print(i)
+        for j in dataset.labels:
+            print(j)
+
+    def test_dataset_labels2(self):
+        dataset = CSVReader.CSVReader.readCSVToListDataset(fileName=self.file_name2, has_header=True,targetColumnsIsFirst=False, separator=" ")
+        print(len(dataset.labels))
+        for i in dataset.series_data:
+            print(i)
+        for j in dataset.labels:
+            print(j)
 
 
 if __name__ == '__main__':

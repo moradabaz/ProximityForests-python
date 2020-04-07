@@ -1,12 +1,13 @@
 from numpy.distutils.fcompiler import none
+import random
 
 
 class ListDataset:
 
     def __init__(self, expected_size=0, length=0):
-        self.data = list()
+        self.series_data = list()
         self.labels = list()
-        self.class_map = dict()
+        self.class_size_map = dict()
         self.initial_class_labels = dict()
         self.lenght = length
         self.is_ordered = False
@@ -19,10 +20,10 @@ class ListDataset:
         self.expected_size = size
 
     def get_data_size(self):
-        return len(self.data)
+        return len(self.series_data)
 
     def get_data(self):
-        return self.data
+        return self.series_data
 
     def get_labels(self):
         return self.labels
@@ -43,44 +44,44 @@ class ListDataset:
         return self.expected_size
 
     def add_series(self, label, series):
-        self.data.append(series)
+        self.series_data.append(series)
         self.labels.append(label)
         exists = False
-        for lab in self.class_map.keys():
+        for lab in self.class_size_map.keys():
             if lab == label:
                 exists = True
-                self.class_map[label] = self.class_map.get(label) + 1
+                self.class_size_map[label] = self.class_size_map.get(label) + 1
         if not exists:
-            self.class_map[label] = 1
+            self.class_size_map[label] = 1
 
     def remove_item(self, i):
         label = self.labels[i]
-        if self.class_map[label] != none:
-            count = self.class_map[label]
+        if self.class_size_map[label] != none:
+            count = self.class_size_map[label]
             if count > 0:
-                self.class_map[label] = count - 1
+                self.class_size_map[label] = count - 1
             else:
-                self.class_map.pop(label)
-        self.data.pop(i)
+                self.class_size_map.pop(label)
+        self.series_data.pop(i)
         self.labels.pop(i)
 
     def get_series(self, i):
-        return self.data[i]
+        return self.series_data[i]
 
     def get_class(self, i):
         return self.labels[i]
 
     def get_num_classes(self):
-        return len(self.class_map)
+        return len(self.class_size_map)
 
     def get_class_size(self, label):
-        return self.class_map[label]
+        return self.class_size_map[label]
 
     def get_class_map(self):
-        return self.class_map
+        return self.class_size_map
 
     def get_unique_classes(self):
-        keys = self.class_map.keys()
+        keys = self.class_size_map.keys()
         unique_classes = [None] * len(keys)
         i = 0
         for key in keys:
@@ -90,7 +91,7 @@ class ListDataset:
         return unique_classes
 
     def get_unique_classes_as_set(self):
-        return self.class_map.keys()
+        return self.class_size_map.keys()
 
     def split_classes(self):
         split = dict()
@@ -100,20 +101,19 @@ class ListDataset:
             if label != none:
                 class_set = ListDataset(expected_size=size)
                 split[label] = class_set
-                split[label].add_series(label, self.data[i])
+                split[label].add_series(label, self.series_data[i])
         return split
 
     def gini(self):
         total_sum = 0
-        total_size = len(self.data)
-        for item in self.class_map.items():
-            # p = (item./ total_size)
-            p = 0
+        total_size = len(self.series_data)
+        for item in self.class_size_map.keys():
+            p = (self.class_size_map[item] / total_size)
             total_sum = total_sum + p * p
         return 1 - total_sum
 
     def _internal_data_list(self):
-        return self.data
+        return self.series_data
 
     def _internal_class_list(self):
         return self.labels
@@ -135,7 +135,7 @@ class ListDataset:
                 new_order[old_label] = new_label
                 temp_label = new_label
                 new_label = new_label + 1
-            new_dataset.add_series(temp_label, self.data[i])
+            new_dataset.add_series(temp_label, self.series_data[i])
 
         new_dataset.set_initial_class_order(new_order)
         new_dataset.set_reordered(True)
@@ -159,18 +159,20 @@ class ListDataset:
         # TODO: self.shuffle
 
         for i in range(0, n - 1):
-            sample.add_series(self.labels[i], self.data[i])
+            sample.add_series(self.labels[i], self.series_data[i])
 
         return sample
 
     def swap(self, init, final):
-        tmp_series = self.data[final]
+        tmp_series = self.series_data[final]
         tmp_label = self.labels[final]
 
-        self.data[final] = self.data[init]
+        self.series_data[final] = self.series_data[init]
         self.labels[final] = self.labels[init]
 
-        self.data[init] = tmp_series
+        self.series_data[init] = tmp_series
         self.labels[init] = tmp_label
 
-
+    def shuffle(self):
+        random.shuffle(self.series_data)
+        random.shuffle(self.labels)

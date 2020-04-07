@@ -43,9 +43,9 @@ class CSVReader:
         file = none
         try:
             file = open(fileName, "r")
-            print("Reading File:[", fileName, "]")
+            print("Reading File: [", fileName, "]")
         except:
-            print("File Not Found:[", fileName, "]")
+            print("File Not Found: [", fileName, "]")
             return
         start = time.time()
         file_info = CSVReader.getFileInformation(fileName, has_header, separator)
@@ -55,6 +55,8 @@ class CSVReader:
 
         line = file.readline()
         num_line = 0
+        if has_header:
+            line = file.readline()
         while len(line) > 0:
             line_array = line.split(separator)
             series = list()
