@@ -1,4 +1,5 @@
 from numpy.distutils.fcompiler import none
+from trees import Splitter as sp
 
 
 class Node:
@@ -11,6 +12,7 @@ class Node:
         self.node_id = node_id
         self.tree = tree
         self.children = list()
+        self.splitter = None
         if parent != none:
             self.node_depth = parent.node_depth + 1
 
@@ -33,5 +35,10 @@ class Node:
             self.is_leaf = True
             return
 
-        
+        self.splitter = sp.Splitter(self)
+        best_split = self.splitter.find_best_splits(dataset)
+        for i in range(0, best_split.get_lenght()):
+            self.children[i] = Node(self, i, self.tree.node_counter + 1, self.tree)
 
+        for i in range(0, best_split.get_lenght()):
+            self.children[i].train(best_split[i])
