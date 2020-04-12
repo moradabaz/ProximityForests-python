@@ -1,10 +1,11 @@
 from numpy.distutils.fcompiler import none
 from trees import Splitter as sp
+from trees import ProximityTree as ptree
 
 
 class Node:
 
-    def __init__(self, parent, label, node_id, tree):
+    def __init__(self, parent, label, node_id, tree: ptree.ProximityTree):
         self.is_leaf = False
         self.node_depth = 0
         self.parent = parent
