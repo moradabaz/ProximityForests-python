@@ -44,6 +44,7 @@ class ListDataset:
         return len(self.class_size_map.keys())
 
     def add_series(self, label, series):
+        self.expected_size = self.expected_size + 1
         self.series_data.append(series)
         self.labels.append(label)
         exists = False
@@ -64,6 +65,7 @@ class ListDataset:
                 self.class_size_map.pop(label)
         self.series_data.pop(i)
         self.labels.pop(i)
+        self.expected_size = self.expected_size - 1
 
     def get_series(self, i):
         return self.series_data[i]
@@ -95,7 +97,7 @@ class ListDataset:
 
     def split_classes(self):
         split = dict()
-        size = self.lenght
+        size = self.get_expected_size()
         for i in range(0, size):
             label = self.labels[i]
             if label != none:

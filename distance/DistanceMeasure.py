@@ -7,19 +7,19 @@ from core import AppContext
 class DistanceMeasure:
 
     @staticmethod
-    def find_closest_nodes(query, exemplars):
+    def find_closest_nodes(query, temp_exemplars: list):
         array_query = np.asarray(query)
         closest_nodes = list()
         dist = 100000
         bsf = 100000
 
-        for i in range(0, len(exemplars)):
-            exemplar = np.asarray(exemplars[i])
+        for i in range(0, len(temp_exemplars)):
+            exemplars = np.asarray(temp_exemplars[i])
 
-            if (exemplar == array_query).all():
+            if (exemplars == array_query).all():
                 return i
 
-            dist = dtw.accelerated_dtw(array_query, exemplar, 'euclidean')[0]
+            dist = dtw.accelerated_dtw(array_query, exemplars, 'euclidean')[0]
             if dist < bsf:
                 bsf = dist
                 closest_nodes.clear()
