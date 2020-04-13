@@ -41,7 +41,7 @@ class ListDataset:
         return self.is_ordered
 
     def get_expected_size(self):
-        return len(self.class_size_map.keys())
+        return len(self.series_data)
 
     def add_series(self, label, series):
         self.expected_size = self.expected_size + 1

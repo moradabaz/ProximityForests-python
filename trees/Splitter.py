@@ -15,17 +15,19 @@ class Splitter:
         self.best_splits = None
         self.exemplars = None
 
-    def split_data(self, sample: ListDataset, data_per_class: list):
+    def split_data(self, sample: ListDataset, data_per_class: dict):
         splits = dict()
         branch = 0
         r = None
-        for entry in data_per_class:
+        datasets = Splitter.get_list_from_dict(data_per_class)
+        for entry in datasets:
             lenght = entry.get_expected_size() - 1
-            if lenght > 0:
-                r = random.randint(0, lenght)
-                splits[branch] = ListDataset.ListDataset()
-                self.temp_exemplars[branch] = np.asarray(entry.get_series(r))
-                branch = branch + 1
+            if lenght < 0:
+                return
+            r = random.randint(0, lenght)
+            splits[branch] = ListDataset.ListDataset()
+            self.temp_exemplars[branch] = np.asarray(entry.get_series(r))
+            branch = branch + 1
 
         # this
         sample_size = sample.expected_size

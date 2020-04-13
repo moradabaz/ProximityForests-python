@@ -16,7 +16,7 @@ class DistanceMeasure:
         for i in range(0, len(temp_exemplars)):
             exemplars = np.asarray(temp_exemplars[i])
 
-            if (exemplars == array_query).all():
+            if len(exemplars) == len(array_query) and exemplars.all() == array_query.all():
                 return i
 
             dist = dtw.accelerated_dtw(array_query, exemplars, 'euclidean')[0]

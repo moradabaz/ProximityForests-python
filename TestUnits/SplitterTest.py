@@ -3,7 +3,7 @@ from trees import Splitter
 import unittest
 import numpy as np
 from trees import Node
-
+from util import randomNumbers as rnumbers
 
 class MyTestCase(unittest.TestCase):
     dataset1 = ListDataset.ListDataset()
@@ -66,6 +66,13 @@ class MyTestCase(unittest.TestCase):
         splitters = self.splitter.find_closest_branch(serie, temp_exemplar)
         print(splitters)
 
+    def test_find_closest_branch2(self):
+        dt_list = rnumbers.randomNumbers.create_multiple_datasets(6, 5)
+        serie = rnumbers.randomNumbers.generate_random_array(5)
+        temp_exemplar = np.asarray(dt_list[0].series_data)
+        splitters = self.splitter.find_closest_branch(serie, temp_exemplar.__array__())
+        print(splitters)
+
     def test_gini(self):
         listdataset = ListDataset.ListDataset()
         listdataset.add_series(0, self.datos1)
@@ -93,10 +100,13 @@ class MyTestCase(unittest.TestCase):
         listdataset.add_series(0, self.datos1)
         listdataset.add_series(1, self.datos2)
         listdataset.add_series(2, self.datos3)
-        listdataset.add_series(3, self.datos4)
-        listdataset.add_series(4, self.datos5)
+
         best_splits = self.splitter.find_best_splits(listdataset)
         self.assertIsNotNone(best_splits)
+        for split in best_splits:
+            print("Split")
+            for serie in split.series_data:
+                print(serie)
 
 
 if __name__ == '__main__':
