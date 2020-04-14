@@ -98,12 +98,13 @@ class ListDataset:
     def split_classes(self):
         split = dict()
         size = self.get_expected_size()
-        for i in range(0, size):
-            label = self.labels[i]
+        contador = 0
+        for label in self.labels:
             if label != none:
                 class_set = ListDataset(expected_size=size)
                 split[label] = class_set
-                split[label].add_series(label, self.series_data[i])
+                split[label].add_series(label, self.series_data[contador])
+                contador = contador + 1
         return split
 
     def gini(self):

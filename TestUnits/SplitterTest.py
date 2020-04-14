@@ -73,6 +73,15 @@ class MyTestCase(unittest.TestCase):
         splitters = self.splitter.find_closest_branch(serie, temp_exemplar.__array__())
         print(splitters)
 
+    def test_split_classes(self):
+        dt_list = rnumbers.randomNumbers.create_multiple_datasets(6, 5)
+        serie = rnumbers.randomNumbers.generate_random_array(5)
+        for dt in dt_list:
+            print("> best splits")
+            best_splits = self.splitter.find_best_splits(dt)
+            for split in best_splits:
+                print(split.series_data)
+
     def test_gini(self):
         listdataset = ListDataset.ListDataset()
         listdataset.add_series(0, self.datos1)

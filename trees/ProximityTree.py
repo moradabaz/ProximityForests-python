@@ -8,9 +8,10 @@ class ProximityTree:
     def __init__(self, id, forest):
         self.root = None
         self.id = id
-        self.proximity_forest_id = forest.getId()
+        if forest is not None:
+            self.proximity_forest_id = forest.getId()
+            self.stats = TreeStatCollector(id, self.proximity_forest_id)
         self.random = random()
-        self.stats = TreeStatCollector(id, self.proximity_forest_id)
         self.node_counter = 0
 
     def get_root_node(self):

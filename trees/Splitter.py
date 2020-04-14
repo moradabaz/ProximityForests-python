@@ -12,7 +12,7 @@ class Splitter:
         self.num_children = None
         self.temp_exemplars = dict()
         self.node = node
-        self.best_splits = None
+        self.best_splits = dict()
         self.exemplars = None
 
     def split_data(self, sample: ListDataset, data_per_class: dict):
@@ -37,7 +37,7 @@ class Splitter:
             if closest_branch == -1:
                 assert False
             splits[closest_branch].add_series(sample.get_class(j), sample.get_series(j))
-        return splits.values()
+        return splits
 
     @staticmethod
     def find_closest_branch(query, e):
@@ -51,7 +51,7 @@ class Splitter:
 
     def weighted_gini(self, parent_size, splits):
         wgini = 0.0
-        for spt in splits:
+        for spt in splits.values():
             wgini = wgini + (spt.get_expected_size() / parent_size) * spt.gini()
         return wgini
 

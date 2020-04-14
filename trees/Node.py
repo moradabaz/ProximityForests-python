@@ -1,11 +1,10 @@
-from numpy.distutils.fcompiler import none
 from trees import Splitter as sp
 from trees import ProximityTree as ptree
-
+from dataset import ListDataset as ltd
 
 class Node:
 
-    def __init__(self, parent, label, node_id, tree: ptree.ProximityTree):
+    def __init__(self, parent, label, node_id, tree):
         self.is_leaf = False
         self.node_depth = 0
         self.parent = parent
@@ -14,7 +13,7 @@ class Node:
         self.tree = tree
         self.children = list()
         self.splitter = None
-        if parent != none:
+        if parent is not None:
             self.node_depth = parent.node_depth + 1
 
     def is_leaf(self):
@@ -26,20 +25,22 @@ class Node:
     def get_children(self):
         return self.children
 
-    def train(self, dataset):
-        if dataset is none:
+    def train(self, dataset: ltd.ListDataset):
+        if dataset is None:
             print("[ERROR] Dataset is none or empty")
             return
 
         if dataset.gini() == 0:
-            self.label = dataset.class_size_map[0]
+            self.label = dataset.labels[0]
             self.is_leaf = True
             return
 
         self.splitter = sp.Splitter(self)
         best_split = self.splitter.find_best_splits(dataset)
-        for i in range(0, best_split.get_lenght()):
-            self.children[i] = Node(self, i, self.tree.node_counter + 1, self.tree)
+        for split in best_split.values():
+            self.children.append(Node(self, split, self.tree.node_counter + 1, self.tree))
 
-        for i in range(0, best_split.get_lenght()):
-            self.children[i].train(best_split[i])
+        counter = 0
+        for split in best_split.values():
+            self.children[counter].train(split)
+            counter = counter + 1
