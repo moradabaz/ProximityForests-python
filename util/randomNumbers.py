@@ -77,6 +77,22 @@ class randomNumbers:
         return dt
 
     @staticmethod
+    def generate_dataset_with_labels(labels: list, num_series, len_serie):
+        dt = randomNumbers.generate_empty_dataset()
+        arrays_ = randomNumbers.generate_several_arrays(num_series, len_serie)
+        counter = 0
+        for array in arrays_:
+            if dt is None:
+                return
+            if len(array) == 0 or array is None:
+                continue
+            else:
+                label = labels.__getitem__(counter)
+                dt.add_series(label, np.asarray(array))
+                counter = counter + 1
+        return dt
+
+    @staticmethod
     def generate_dataset_multiple_series(series_per_array, num_series, len_serie):
         contador = 0
         dt = randomNumbers.generate_empty_dataset()

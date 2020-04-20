@@ -153,7 +153,7 @@ class ProximityForest:
             elif temp_count == max_vote_count:
                 self.max_voted_classes.append(label)
 
-        r = random.randint(0, self.max_voted_classes.__len__() - 1)
+        r = random.randrange(self.max_voted_classes.__len__())
         if self.max_voted_classes.__len__() > 1:
             self.result.majority_vote_match_count = self.result.majority_vote_match_count + 1
         return self.max_voted_classes.__getitem__(r)

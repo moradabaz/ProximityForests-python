@@ -16,11 +16,12 @@ class MyTestCase(unittest.TestCase):
         self.pfresult.collate_results()
 
     def test_collate_results_2(self):
-        dataset = rdnumbers.randomNumbers.generate_dataset(5, 6)
-        test_datset = rdnumbers.randomNumbers.generate_dataset(5, 6)
+        dataset = rdnumbers.randomNumbers.generate_dataset(10, 6)
+        #test_datset = rdnumbers.randomNumbers.generate_dataset(10, 6)
+        test_datset = rdnumbers.randomNumbers.generate_dataset_with_labels(dataset.labels, 10, 6)
         self.pforest.train(dataset)
-        self.pforest.test(test_datset)
-        self.pforest.print_results(dataset, 64, "str")
+        result = self.pforest.test(test_datset)
+        result.print_results(dataset, 64, "str")
 
 
 if __name__ == '__main__':

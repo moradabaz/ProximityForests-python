@@ -1,5 +1,5 @@
 from numpy.distutils.fcompiler import none
-
+from dataset import ListDataset
 import util.Constants
 from dtw import *
 
@@ -13,15 +13,18 @@ class AppContext:
     testing_file = "/Users/morad/git/ProximityForest/paper/ItalyPowerDemand_TRAIN.csv"
     output_dir = "output/"
     csv_has_header = False
-    target_column_is_first = True
+    target_column_is_first = False
     dataset_name = ""
     verbosity = 2
-    num_repeats = 10
+    num_repeats = 1
     num_trees = 50
-    num_candidates_per_split = 10
+    num_candidates_per_split = 5
     random_dm_per_node = True
     shuffle_dataset = True
     export_level = 0
+    separator = ","
+    training_dataset = ListDataset.ListDataset()
+    testing_dataset = ListDataset.ListDataset()
 
     def __init__(self, train_dataset, test_dataset):
         self.training_file = train_dataset
@@ -32,14 +35,14 @@ class AppContext:
 
     # -train
     def set_training_dataset(self, data_set):
-        self.training_file = data_set
+        self.training_dataset = data_set
 
     def get_testing_dataset(self):
         return self.testing_file
 
     # test
     def set_testing_dataset(self, data_set):
-        self.testing_file = data_set
+        self.testing_dataset = data_set
 
     # -out
     def set_output_dir(self, output_dir):

@@ -27,7 +27,8 @@ class ProximityTree:
         if node is None:
             return -1
         while not node.is_leaf:
-            node = node.children[node.splitter.find_closest_branch_(query)]
+            posicion = node.splitter.find_closest_branch_(query)
+            node = node.children[posicion]
         return node.label
 
     def get_treestat_collection(self):

@@ -69,6 +69,14 @@ class MyTestCase(unittest.TestCase):
         for j in dataset.labels:
             print(j)
 
+    def test_dataset_labels3(self):
+        dataset = CSVReader.CSVReader.readCSVToListDataset(fileName="/Users/morad/PycharmProjects/PForests/util/tabla1.csv", has_header=False, targetColumnsIsFirst=True, separator=" ")
+        print(len(dataset.labels))
+        for i in dataset.series_data:
+            print(i)
+        for j in dataset.labels:
+            print(j)
+
 
 if __name__ == '__main__':
     unittest.main()

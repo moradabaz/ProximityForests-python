@@ -81,12 +81,12 @@ class PFResult:
 
         self.collate_results()
 
-        pre = "REPEAT" + str((experiment_id + 1)) + " ,"
+        pre = "REPEAT: " + str((experiment_id + 1)) + " ,"
         print(pre, dataset_name)
-        print(",", self.accuracy)
-        print(",", self.elapsed_time_train / 1e6)
-        print(",", self.elapsed_time_test / 1e6)
-        print(",", self.mean_depth_per_tree)
+        print(", accuracy", self.accuracy)
+        print(", elapsed time train", self.elapsed_time_train / 1e6)
+        print(", elapsed time test", self.elapsed_time_test / 1e6)
+        print(", mean depth tree", self.mean_depth_per_tree)
         print()
 
     def exportJSON(self, dataset_name, experiment_id):

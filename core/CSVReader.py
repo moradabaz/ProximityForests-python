@@ -51,9 +51,10 @@ class CSVReader:
         file_info = CSVReader.getFileInformation(fileName, has_header, separator)
         expected_size = file_info[0]
         data_length = file_info[1] - 1
-        dataset = ListDataset.ListDataset(expected_size, 0)
+        dataset = ListDataset.ListDataset()
 
         line = file.readline()
+
         num_line = 0
         if has_header:
             line = file.readline()
@@ -65,7 +66,10 @@ class CSVReader:
             else:
                 init_index = 0
             for j in range(init_index, len(line_array)):
-                series.append(double(line_array[j]))
+                try:
+                    series.append(double(line_array[j]))
+                except:
+                    continue
             try:
                 if init_index == 1:
                     label = line_array[0]

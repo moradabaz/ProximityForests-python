@@ -123,23 +123,23 @@ class ListDataset:
         return self.labels
 
     def reorder_class_labels(self, new_order):
-        new_dataset = ListDataset(expected_size=self.expected_size, length=self.lenght)
+        new_dataset = ListDataset()
         if new_order is None:
             new_order = dict()
 
         size = self.expected_size
         new_label = 0
         old_label = 0
-        for i in range(0, size - 1):
-            old_label = self.labels[i]
-
-            if new_order[old_label] is not None:
+        counter = 0
+        for old_label in self.labels:
+            if new_order.keys().__contains__(old_label):
                 temp_label = new_order[old_label]
             else:
                 new_order[old_label] = new_label
                 temp_label = new_label
                 new_label = new_label + 1
-            new_dataset.add_series(temp_label, self.series_data[i])
+            new_dataset.add_series(temp_label, self.series_data[counter])
+            counter = counter + 1
 
         new_dataset.set_initial_class_order(new_order)
         new_dataset.set_reordered(True)
