@@ -15,10 +15,10 @@ class AppContext:
     csv_has_header = False
     target_column_is_first = True
     dataset_name = ""
-    verbosity = 0
+    verbosity = 2
     num_repeats = 10
     num_trees = 50
-    num_candidates_per_split = 100
+    num_candidates_per_split = 10
     random_dm_per_node = True
     shuffle_dataset = True
     export_level = 0

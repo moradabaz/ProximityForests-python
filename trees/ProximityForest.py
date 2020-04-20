@@ -12,12 +12,13 @@ class ProximityForest:
 
     def __init__(self, forest_id):
         self.max_voted_classes = list()
-        self.num_votes = []
+        self.num_votes = dict()
         self.forest_id = forest_id
         self.result = pfr.PFResult(self)
-        self.trees = [pt.ProximityTree]
+        self.trees = list()
+        counter = 0
         for i in range(0, app.AppContext.num_trees):
-            self.trees[i] = pt.ProximityTree(i, self)
+            self.trees.append(pt.ProximityTree(i, self))
 
     def train(self, dataset):
         # result.startTimeTrain
@@ -39,18 +40,20 @@ class ProximityForest:
 
     def test(self, test_data: ListDataset):
         self.result.start_time_train = time.time()
-        self.num_votes = [int] * len(test_data.initial_class_labels)
-        self.max_voted_classes = [int]
+#        self.num_votes = [int] * len(test_data.initial_class_labels)
+        for label in test_data.labels:
+            self.num_votes[label] = 0
 
+        self.max_voted_classes = list()
         predicted_class = -1
         actual_class = -1
-        size = test_data.get_data_size()
+        size = test_data.get_series_size()
 
         for i in range(0, size):
             actual_class = test_data.get_class(i)
-            predicted_class = self.predict(test_data.get_data())
+            predicted_class = self.predict(test_data.series_data.__getitem__(i))
             if actual_class != predicted_class:
-                self.result.error = self.result.error + 1
+                self.result.errors = self.result.errors + 1
             else:
                 self.result.correct = self.result.correct + 1
 
@@ -62,8 +65,8 @@ class ProximityForest:
 
         if app.AppContext.verbosity > 0:
             print()
-        assert test_data.get_data_size() == self.result.errors + self.result.correct
-        self.result.accuracy = double(self.result.correct) / test_data.get_data_size()
+        assert test_data.get_series_size() == self.result.errors + self.result.correct
+        self.result.accuracy = double(self.result.correct) / test_data.get_series_size()
         self.result.error_rate = 1 - self.result.accuracy
         return self.result
 
@@ -86,31 +89,73 @@ class ProximityForest:
     def set_forest_ID(self, forest_id):
         self.forest_id = forest_id
 
+    def print_results(self, dataset_name: str, experiment_id: int, prefix: str):
+        self.result.print_results(dataset_name, experiment_id, prefix)
+
     pass
 
-    def predict(self, query):
+    def _predict(self, query):
+        label = 0
+        counter = 0
         max_vote_count = -1
-        for i in range(0, len(self.num_votes)):
-            self.num_votes[i] = 0
-        self.max_voted_classes.clear()
-        for i in range(0, len(self.trees)):
-            label = self.trees[i].predict(query)
-            self.num_votes[label] = self.num_votes[label] + 1
-        for i in range(0, len(self.num_votes)):
-            temp_count = self.num_votes[i]
-            if temp_count > max_vote_count:
-                self.max_voted_classes = temp_count
-                self.max_voted_classes.clear()
-                self.max_voted_classes.append(i)
-            elif temp_count == max_vote_count:
-                self.max_voted_classes.append(i)
+        temp_count = 0
+        for label in self.num_votes.keys():
+            self.num_votes[label] = 0
 
-        r = random.randint(len(self.max_voted_classes))
+        self.max_voted_classes.clear()
+        for tree in self.trees:
+            label = tree.predict(query)
+            if label == -1:
+                continue
+            if not self.num_votes.keys().__contains__(label):
+                self.num_votes[label] = 0
+            else:
+                self.num_votes[label] = self.num_votes[label] + 1
+
+        for label in self.num_votes:
+            if self.num_votes[label] > 0:
+                temp_count = self.num_votes[label]
+                if temp_count > max_vote_count:
+                    max_vote_count = temp_count
+                    self.max_voted_classes.clear()
+                    self.max_voted_classes.append(label)
+                elif temp_count == max_vote_count:
+                    self.max_voted_classes.append(label)
+
+        r = random.randint(0, self.max_voted_classes.__len__() - 1)
 
         if len(self.max_voted_classes) > 1:
             self.result.majority_vote_match_count = self.result.majority_vote_match_count + 1
 
         return self.max_voted_classes[r]
 
+    def predict(self, query):
+        label = -1
+        max_vote_count = -1
+        temp_count = 0
+        for label in self.num_votes.keys():
+            self.num_votes[label] = 0
+        self.max_voted_classes.clear()
+
+        for tree in self.trees:
+            label = tree.predict(query)
+            if not self.num_votes.keys().__contains__(label):
+                self.num_votes[label] = 0
+            else:
+                self.num_votes[label] = self.num_votes[label] + 1
+
+        for label in self.num_votes.keys():
+            temp_count = self.num_votes[label]
+            if temp_count > max_vote_count:
+                max_vote_count = temp_count
+                self.max_voted_classes.clear()
+                self.max_voted_classes.append(label)
+            elif temp_count == max_vote_count:
+                self.max_voted_classes.append(label)
+
+        r = random.randint(0, self.max_voted_classes.__len__() - 1)
+        if self.max_voted_classes.__len__() > 1:
+            self.result.majority_vote_match_count = self.result.majority_vote_match_count + 1
+        return self.max_voted_classes.__getitem__(r)
 
         pass

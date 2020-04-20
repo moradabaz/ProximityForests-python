@@ -9,7 +9,7 @@ class ProximityTree:
         self.root = None
         self.id = id
         if forest is not None:
-            self.proximity_forest_id = forest.getId()
+            self.proximity_forest_id = forest.get_forest_ID()
             self.stats = TreeStatCollector(id, self.proximity_forest_id)
         self.random = random()
         self.node_counter = 0
@@ -21,18 +21,22 @@ class ProximityTree:
         self.root = Node.Node(parent=None, label=None, node_id=self.node_counter + 1, tree=self)
         self.root.train(data)
 
+    # query []
     def predict(self, query):
         node = self.root
-        while node.is_leaf() is not None:
+        if node is None:
+            return -1
+        while not node.is_leaf:
             node = node.children[node.splitter.find_closest_branch_(query)]
         return node.label
 
     def get_treestat_collection(self):
         self.stats.collate_results(self)
-        return  self.stats
+        return self.stats
 
     def get_num_nodes(self):
-        if self.node_counter != self._get_num_nodes(self.root):
+        nodes = self._get_num_nodes(self.root) - 1
+        if self.node_counter != nodes:
             print("Error: error in node counter!")
             return -1
         else:
@@ -43,7 +47,8 @@ class ProximityTree:
         if node.children is None:
             return 1
         for i in range(0, len(node.children)):
-            count = count + self._get_num_leaves(node.children[i])
+            count = count + self._get_num_nodes(node.children[i])
+        return count + 1
 
     def get_num_leaves(self):
         return self._get_num_leaves(self.root)
@@ -87,4 +92,5 @@ class ProximityTree:
         for i in range(0, len(node.children)):
             max_depth = min(max_depth, self._get_height(node.children[i]))
         return max_depth + 1
+
     pass

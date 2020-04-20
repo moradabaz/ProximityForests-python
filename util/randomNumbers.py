@@ -38,7 +38,7 @@ class randomNumbers:
         return array_list
 
     @staticmethod
-    def generate_dataset():
+    def generate_empty_dataset():
         return ldt.ListDataset()
 
     pass
@@ -63,11 +63,29 @@ class randomNumbers:
 
         for i in range(0, num_datasets):
             # n_array = random.randint(num_arrays, num_arrays + 2)
-            dt = randomNumbers.generate_dataset()
+            dt = randomNumbers.generate_empty_dataset()
             arays = randomNumbers.generate_n_arrays_different_len(num_arrays)
             randomNumbers.insert_arraylist_in_dataset(arays, dt)
             datasets_list.append(dt)
         return datasets_list
+
+    @staticmethod
+    def generate_dataset(num_series, len_serie):
+        dt = randomNumbers.generate_empty_dataset()
+        arrays_ = randomNumbers.generate_several_arrays(num_series, len_serie)
+        randomNumbers.insert_arraylist_in_dataset(arrays_, dt)
+        return dt
+
+    @staticmethod
+    def generate_dataset_multiple_series(series_per_array, num_series, len_serie):
+        contador = 0
+        dt = randomNumbers.generate_empty_dataset()
+        while contador < num_series:
+            arrays_ = randomNumbers.generate_several_arrays(series_per_array, len_serie)
+            label = randomNumbers.generate_label()
+            dt.add_series(label, np.asarray(arrays_))
+            contador = contador + 1
+        return dt
 
 
 if __name__ == '__main__':

@@ -65,36 +65,36 @@ class MyTestCase(unittest.TestCase):
 
     def test_add_series(self):
         self.dataset1.add_series(1, [4, 3])
-        self.assertEqual(self.dataset1.class_size_map[1], 1)
+        self.assertEqual(self.dataset1.class_map[1], 1)
         self.assertEqual(self.dataset1.series_data[0], [4, 3])
         self.assertEqual(self.dataset1.labels[0], 1)
 
     def test_add_series2(self):
         self.dataset1.add_series(1, [4, 3])
         self.dataset1.add_series(1, [5, 6])
-        self.assertEqual(self.dataset1.class_size_map[1], 2)
+        self.assertEqual(self.dataset1.class_map[1], 2)
         self.assertEqual(self.dataset1.series_data[0], [4, 3])
         self.assertEqual(self.dataset1.series_data[1], [5, 6])
         self.assertEqual(self.dataset1.labels[0], 1)
 
     def test_remove_item1(self):
         self.dataset1.add_series(1, [4, 3])
-        self.assertEqual(self.dataset1.class_size_map[1], 1)
+        self.assertEqual(self.dataset1.class_map[1], 1)
         self.assertEqual(self.dataset1.series_data[0], [4, 3])
         self.assertEqual(self.dataset1.labels[0], 1)
         self.dataset1.remove_item(0)
-        self.assertEqual(self.dataset1.class_size_map[1], 0)
+        self.assertEqual(self.dataset1.class_map[1], 0)
         self.assertEqual(self.dataset1.series_data, [])
         self.assertEqual(self.dataset1.labels, [])
 
     def test_remove_item2(self):
         self.dataset1.add_series(1, [4, 3])
         self.dataset1.add_series(1, [5, 6])
-        self.assertEqual(self.dataset1.class_size_map[1], 2)
+        self.assertEqual(self.dataset1.class_map[1], 2)
         self.assertEqual(self.dataset1.series_data[0], [4, 3])
         self.assertEqual(self.dataset1.labels[0], 1)
         self.dataset1.remove_item(0)
-        self.assertEqual(self.dataset1.class_size_map[1], 1)
+        self.assertEqual(self.dataset1.class_map[1], 1)
         self.assertEqual(self.dataset1.series_data[0], [5, 6])
         self.assertNotEqual(self.dataset1.labels, [])
 

@@ -19,17 +19,19 @@ class Splitter:
         splits = dict()
         branch = 0
         r = None
-        datasets = Splitter.get_list_from_dict(data_per_class)
-        for entry in datasets:
-            lenght = entry.get_expected_size() - 1
+        for key in data_per_class.keys():
+            entry = data_per_class[key]
+            lenght = entry.get_series_size() - 1
             if lenght < 0:
-                return
-            r = random.randint(0, lenght)
-            splits[branch] = ListDataset.ListDataset()
-            self.temp_exemplars[branch] = np.asarray(entry.get_series(r))
-            branch = branch + 1
+                continue
+            else:
+                r = random.randint(0, lenght)
+                splits[branch] = ListDataset.ListDataset()
+                self.temp_exemplars[branch] = np.asarray(entry.get_series(r))
+                branch = branch + 1
 
         # this
+        # get_series_size
         sample_size = sample.expected_size
         for j in range(0, sample_size):
             temp_exemplar_list = self.get_list_from_dict(self.temp_exemplars)
@@ -59,14 +61,15 @@ class Splitter:
         data_per_class = data.split_classes()
         best_weighted_gini = 1000000
         parent_size = data.get_expected_size()
-        splits = self.split_data(data, data_per_class)
-        weighted_gini = self.weighted_gini(parent_size, splits)
-        if weighted_gini < best_weighted_gini:
-            best_weighted_gini = weighted_gini
-            self.best_splits = splits
-            self.exemplars = self.temp_exemplars
+        for i in range(0, AppContext.AppContext.num_candidates_per_split):
+            splits = self.split_data(data, data_per_class)
+            weighted_gini = self.weighted_gini(parent_size, splits)
+            if weighted_gini < best_weighted_gini:
+                best_weighted_gini = weighted_gini
+                self.best_splits = splits
+                self.exemplars = self.temp_exemplars
 
-        self.num_children = best_weighted_gini
+        self.num_children = self.best_splits.__len__()
         return self.best_splits
 
     @staticmethod

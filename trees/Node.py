@@ -29,16 +29,18 @@ class Node:
         if dataset is None:
             print("[ERROR] Dataset is none or empty")
             return
-
-        if dataset.gini() == 0:
+        gini = dataset.gini()
+        if gini == 0:
             self.label = dataset.labels[0]
             self.is_leaf = True
             return
 
         self.splitter = sp.Splitter(self)
         best_split = self.splitter.find_best_splits(dataset)
-        for split in best_split.values():
-            self.children.append(Node(self, split, self.tree.node_counter + 1, self.tree))
+
+        for i in range(0, len(best_split.values())):
+            self.children.append(Node(self, i, self.tree.node_counter + 1, self.tree))
+            self.tree.node_counter = self.tree.node_counter + 1
 
         counter = 0
         for split in best_split.values():

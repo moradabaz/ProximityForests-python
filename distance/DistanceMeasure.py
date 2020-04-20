@@ -14,7 +14,7 @@ class DistanceMeasure:
         bsf = 100000
 
         for i in range(0, len(temp_exemplars)):
-            exemplars = np.asarray(temp_exemplars[i])
+            exemplars = np.asarray(temp_exemplars.__getitem__(i))
 
             if DistanceMeasure.are_equal(exemplars, array_query):
                 return i

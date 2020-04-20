@@ -4,45 +4,47 @@ import datetime, time
 import statistics as st
 import os
 import json
+import numpy as np
 
 
 class PFResult:
-    results_collated = False
-    forest_id = -1
-    majority_vote_match_count = 0
 
-    start_time_train = 0
-    end_time_train = 0
-    elapsed_time_train = 0
-
-    start_time_test = 0
-    end_time_test = 0
-    elapsed_time_test = 0
-
-    errors = 0
-    correct = 0
-    accuracy = 0
-    error_rate = 0
-
-    total_num_trees = -1
-
-    mean_num_nodes_per_tree = -1
-    sd_num_nodes_per_tree = -1
-
-    mean_depth_per_tree = -1
-    sd_depth_per_tree = -1
-
-    mean_weighted_depth_per_tree = -1
-    sd_weighted_depth_per_tree = -1
 
     def __init__(self, forest: ProximityForest):
         self.forest_id = forest.forest_id
         self.forest = forest
+        self.results_collated = False
+        self.forest_id = -1
+        self.majority_vote_match_count = 0
+
+        self.start_time_train = 0
+        self.end_time_train = 0
+        self.elapsed_time_train = 0
+
+        self.start_time_test = 0
+        self.end_time_test = 0
+        self.elapsed_time_test = 0
+
+        self.errors = 0
+        self.correct = 0
+        self.accuracy = 0
+        self.error_rate = 0
+
+        self.total_num_trees = -1
+
+        self.mean_num_nodes_per_tree = -1
+        self.sd_num_nodes_per_tree = -1
+
+        self.mean_depth_per_tree = -1
+        self.sd_depth_per_tree = -1
+
+        self.mean_weighted_depth_per_tree = -1
+        self.sd_weighted_depth_per_tree = -1
 
     def collate_results(self):
-        nodes = [None] * self.total_num_trees
-        depths = [None] * self.total_num_trees
-        weighted_depth = [None] * self.total_num_trees
+        nodes = dict()
+        depths = dict()
+        weighted_depth = dict()
         if self.results_collated:
             return
         trees = self.forest.get_trees()
@@ -50,19 +52,23 @@ class PFResult:
 
         for i in range(0, total_num_trees):
             tree = trees[i]
-            tree_stats = tree.get_tree_stat_collection()
+            tree_stats = tree.get_treestat_collection()
             nodes[i] = tree_stats.num_nodes
             depths[i] = tree_stats.depth
-            weighted_depth[i] = tree_stats.weighted_path
+            weighted_depth[i] = tree_stats.weighted_depth
 
-        self.mean_num_nodes_per_tree = st.mean(nodes)
-        self.sd_num_nodes_per_tree = st.pstdev(nodes)
+        array_node = PFResult.get_list_from_dict(nodes)
+        array_depth = PFResult.get_list_from_dict(depths)
+        array_weighted_depth = PFResult.get_list_from_dict(weighted_depth)
 
-        self.mean_depth_per_tree = st.mean(depths)
-        self.sd_depth_per_tree = st.pstdev(depths)
+        self.mean_num_nodes_per_tree = st.mean(array_node)
+        self.sd_num_nodes_per_tree = st.pstdev(array_node)
 
-        self.mean_weighted_depth_per_tree = st.mean(weighted_depth)
-        self.sd_weighted_depth_per_tree = st.pstdev(weighted_depth)
+        self.mean_depth_per_tree = st.mean(array_depth)
+        self.sd_depth_per_tree = st.pstdev(array_depth)
+
+        self.mean_weighted_depth_per_tree = st.mean(array_weighted_depth)
+        self.sd_weighted_depth_per_tree = st.pstdev(array_weighted_depth)
 
         self.results_collated = True
 
@@ -75,7 +81,7 @@ class PFResult:
 
         self.collate_results()
 
-        pre = "REPEAT" + (experiment_id + 1) + " ,"
+        pre = "REPEAT" + str((experiment_id + 1)) + " ,"
         print(pre, dataset_name)
         print(",", self.accuracy)
         print(",", self.elapsed_time_train / 1e6)
@@ -101,4 +107,13 @@ class PFResult:
             return
 
         return file_path
+
+
+    @staticmethod
+    def get_list_from_dict(query: dict):
+        lista = list()
+        for entry in query.values():
+            lista.append(entry)
+        return lista
+
     pass
