@@ -59,7 +59,7 @@ class ProximityForest:
 
             if app.AppContext.verbosity > 0:
                 if (i % app.AppContext.print_test_progress_for_each_instances) == 0:
-                    print("*")
+                    print("Muestra numero:", i)
         self.result.end_time_test = time.time()
         self.result.elapsed_time_test = self.result.end_time_test - self.result.start_time_test
 

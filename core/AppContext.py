@@ -10,7 +10,7 @@ class AppContext:
     config_skip_distance_when_exemplar_matches_query = True
     config_use_random_choice_when_min_distance_is_equal = True
     training_file = "/Users/morad/git/ProximityForest/paper/ItalyPowerDemand_TRAIN.csv"
-    testing_file = "/Users/morad/git/ProximityForest/paper/ItalyPowerDemand_TRAIN.csv"
+    testing_file = "/Users/morad/git/ProximityForest/paper/ItalyPowerDemand_TEST.csv"
     output_dir = "output/"
     csv_has_header = False
     target_column_is_first = False

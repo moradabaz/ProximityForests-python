@@ -53,7 +53,9 @@ class ExperimentRunner:
 
             result = pforest.test(self.test_data)
 
-            result.print_results(dataset_name, i, "")
+            pforest.print_results(dataset_name, i, "")
+
+            #result.print_results(dataset_name, i, "")
 
             if AppContext.AppContext.export_level > 0:
                 result.exportJSON(dataset_name, i)

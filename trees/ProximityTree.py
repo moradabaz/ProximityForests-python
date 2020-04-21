@@ -39,7 +39,6 @@ class ProximityTree:
     def get_num_nodes(self):
         nodes = self._get_num_nodes(self.root) - 1
         if self.node_counter != nodes:
-            print("Error: error in node counter!")
             return -1
         else:
             return self.node_counter
