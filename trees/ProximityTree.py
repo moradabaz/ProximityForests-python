@@ -18,7 +18,8 @@ class ProximityTree:
         return self.root
 
     def train(self, data):
-        self.root = Node.Node(parent=None, label=None, node_id=self.node_counter + 1, tree=self)
+        self.node_counter = self.node_counter + 1
+        self.root = Node.Node(parent=None, label=None, node_id=self.node_counter, tree=self)
         self.root.train(data)
 
     # query []

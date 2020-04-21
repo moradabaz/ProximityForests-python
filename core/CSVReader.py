@@ -48,11 +48,7 @@ class CSVReader:
             print("File Not Found: [", fileName, "]")
             return
         start = time.time()
-        file_info = CSVReader.getFileInformation(fileName, has_header, separator)
-        expected_size = file_info[0]
-        data_length = file_info[1] - 1
         dataset = ListDataset.ListDataset()
-
         line = file.readline()
 
         num_line = 0
@@ -62,21 +58,20 @@ class CSVReader:
             line_array = line.split(separator)
             series = list()
             if targetColumnsIsFirst:
-                init_index = 1
+                for j in range(1, len(line_array)):
+                    try:
+                        series.append(double(line_array[j]))
+                    except:
+                        continue
+                label = double(line_array[0])
             else:
-                init_index = 0
-            for j in range(init_index, len(line_array)):
-                try:
-                    series.append(double(line_array[j]))
-                except:
-                    continue
-            try:
-                if init_index == 1:
-                    label = line_array[0]
-                else:
-                    label = num_line
-            except:
-                label = none
+                contador = 0
+                for j in range(0, len(line_array) - 1):
+                    try:
+                        series.append(double(line_array[j]))
+                    except:
+                        continue
+                label = abs(int(double(line_array[len(series)])))
 
             if label != none:
                 dataset.add_series(label, series)

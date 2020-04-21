@@ -32,7 +32,7 @@ class Splitter:
 
         # this
         # get_series_size
-        sample_size = sample.expected_size
+        sample_size = sample.get_expected_size()
         for j in range(0, sample_size):
             temp_exemplar_list = self.get_list_from_dict(self.temp_exemplars)
             closest_branch = Splitter.find_closest_branch(sample.get_series(j), temp_exemplar_list)

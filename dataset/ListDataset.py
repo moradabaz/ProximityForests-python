@@ -43,7 +43,7 @@ class ListDataset:
         return self.series_data.__len__()
 
     def add_series(self, label, series):
-        self.expected_size = self.expected_size + 1
+        #self.expected_size = self.expected_size + 1
         self.series_data.append(series)
         self.labels.append(label)
         exists = False
@@ -103,7 +103,7 @@ class ListDataset:
             label = self.labels.__getitem__(i)
 
             if not split.keys().__contains__(label):
-                class_set = ListDataset(expected_size=self.class_map[label])
+                class_set = ListDataset()
                 split[label] = class_set
             split[label].add_series(label, self.series_data[i])
         return split

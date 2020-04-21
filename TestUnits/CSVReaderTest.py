@@ -70,11 +70,13 @@ class MyTestCase(unittest.TestCase):
             print(j)
 
     def test_dataset_labels3(self):
-        dataset = CSVReader.CSVReader.readCSVToListDataset(fileName="/Users/morad/PycharmProjects/PForests/util/tabla1.csv", has_header=False, targetColumnsIsFirst=True, separator=" ")
-        print(len(dataset.labels))
-        for i in dataset.series_data:
+        train_dataset = CSVReader.CSVReader.readCSVToListDataset(fileName="/Users/morad/Downloads/ItalyPowerDemand/ItalyPowerDemand_TRAIN.csv", has_header=False, targetColumnsIsFirst=False, separator=",")
+        test_dataset = CSVReader.CSVReader.readCSVToListDataset(fileName="/Users/morad/Downloads/ItalyPowerDemand/ItalyPowerDemand_TEST.csv", has_header=False, targetColumnsIsFirst=False, separator=",")
+
+        print(len(train_dataset.labels))
+        for i in train_dataset.series_data:
             print(i)
-        for j in dataset.labels:
+        for j in test_dataset.labels:
             print(j)
 
 

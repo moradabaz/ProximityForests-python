@@ -20,7 +20,7 @@ class AppContext:
     num_trees = 50
     num_candidates_per_split = 5
     random_dm_per_node = True
-    shuffle_dataset = True
+    shuffle_dataset = False
     export_level = 0
     separator = ","
     training_dataset = ListDataset.ListDataset()

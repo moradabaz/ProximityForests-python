@@ -27,7 +27,8 @@ class DistanceMeasure:
             elif bsf == dist:
                 closest_nodes.append(i)
 
-        r = np.random.randint(len(closest_nodes), size=1)[0]
+        #r = np.random.randint(len(closest_nodes), size=1)[0]
+        r = random.randint(0, len(closest_nodes) - 1)
         return closest_nodes[r]
 
     @staticmethod
