@@ -2,10 +2,10 @@ import dtw
 import random
 import numpy as np
 from core import AppContext
-
+import timeit
 
 class DistanceMeasure:
-
+    contadorEx = 0
     @staticmethod
     def find_closest_nodes(query, temp_exemplars: list):
         array_query = np.asarray(query)
@@ -29,6 +29,7 @@ class DistanceMeasure:
 
         #r = np.random.randint(len(closest_nodes), size=1)[0]
         r = random.randint(0, len(closest_nodes) - 1)
+        DistanceMeasure.contadorEx = DistanceMeasure.contadorEx + 1
         return closest_nodes[r]
 
     @staticmethod

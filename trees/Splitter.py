@@ -4,6 +4,7 @@ from dataset import ListDataset
 from core import AppContext
 import numpy as np
 import random
+import time
 
 
 class Splitter:
@@ -16,6 +17,7 @@ class Splitter:
         self.exemplars = None
 
     def split_data(self, sample: ListDataset, data_per_class: dict):
+        start = time.clock()
         splits = dict()
         branch = 0
         r = None
@@ -39,6 +41,8 @@ class Splitter:
             if closest_branch == -1:
                 assert False
             splits[closest_branch].add_series(sample.get_class(j), sample.get_series(j))
+        stop = time.clock()
+        # print("[TIEMPO][SPLIT DATA]:", stop - start)
         return splits
 
     @staticmethod
@@ -58,11 +62,15 @@ class Splitter:
         return wgini
 
     def find_best_splits(self, data):
+        #start = time.clock()
         data_per_class = data.split_classes()
         best_weighted_gini = 1000000
         parent_size = data.get_expected_size()
         for i in range(0, AppContext.AppContext.num_candidates_per_split):
+            start = time.clock()
             splits = self.split_data(data, data_per_class)
+            stop = time.clock()
+            print("[TIEMPO SPLIT DATA]", (stop - start))
             weighted_gini = self.weighted_gini(parent_size, splits)
             if weighted_gini < best_weighted_gini:
                 best_weighted_gini = weighted_gini
@@ -70,6 +78,8 @@ class Splitter:
                 self.exemplars = self.temp_exemplars
 
         self.num_children = self.best_splits.__len__()
+        #stop = time.clock()
+        #print("[TIEMPO][FIND BEST SPLITS]:", stop - start)
         return self.best_splits
 
     @staticmethod

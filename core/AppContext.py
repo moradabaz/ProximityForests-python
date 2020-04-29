@@ -1,4 +1,4 @@
-from numpy.distutils.fcompiler import none
+
 from dataset import ListDataset
 import util.Constants
 from dtw import *
@@ -17,7 +17,7 @@ class AppContext:
     dataset_name = ""
     verbosity = 2
     num_repeats = 1
-    num_trees = 50
+    num_trees = 1
     num_candidates_per_split = 5
     random_dm_per_node = True
     shuffle_dataset = False
@@ -108,9 +108,9 @@ class AppContext:
         return self.verbosity
 
     def set_value(self, arg, value):
-        if arg == none:
+        if arg is None:
             return
-        if value == none:
+        if value is None:
             return
         if arg == "-train":
             self.set_training_dataset(value)
@@ -124,7 +124,7 @@ class AppContext:
             self.set_num_trees(int(value))
         elif arg == "-r":
             self.set_num_candidates_per_split(int(value))
-        elif arg == "-on_tree":
+        elif arg == "-trees":
             self.set_random_dm_per_node(value)
         elif arg == "-export":
             self.set_export_level(int(value))

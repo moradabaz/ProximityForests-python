@@ -51,6 +51,8 @@ class ExperimentRunner:
 
             pforest.train(self.train_data)
 
+            print("------------TIME----TO----TEST------")
+
             result = pforest.test(self.test_data)
 
             pforest.print_results(dataset_name, i, "")

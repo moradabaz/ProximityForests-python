@@ -1,7 +1,7 @@
 import sys
-from numpy.distutils.fcompiler import none
 from core import AppContext, ExperimentRunner
-
+from distance.DistanceMeasure import DistanceMeasure
+import timeit
 
 class PFApplication:
 
@@ -14,7 +14,7 @@ class PFApplication:
         return self.appcontext
 
     def parse_args(self):
-        argc = "-out=output -repeats=1 -trees=100 -r=1 -on_tree=true -export=1 -verbosity=2"
+        argc = "-out=output -repeats=1 -trees=1 -r=1 -on_tree=true -export=1 -verbosity=2"
         argv = argc.split(" ")
         if len(argv) > 1:
             for i in range(1, len(argv)):
@@ -31,4 +31,9 @@ pf.parse_args()
 print("Hola Mundo")
 pf.appcontext.print_content()
 experimentrunner = ExperimentRunner.ExperimentRunner()
+start = timeit.default_timer()
 experimentrunner.run()
+stop = timeit.default_timer()
+print("[FDP - NUM. EJECUCIONES]:", DistanceMeasure.contadorEx)
+print("Tiempo de ejecución TOTAL:", stop - start)
+
