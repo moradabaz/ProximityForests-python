@@ -1,7 +1,7 @@
 from random import random
 from trees import Node
 from core.TreeStatCollector import TreeStatCollector
-
+import numpy as np
 
 class ProximityTree:
 

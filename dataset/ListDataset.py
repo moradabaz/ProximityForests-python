@@ -7,6 +7,7 @@ class ListDataset:
         self.series_data = list()
         self.labels = list()
         self.class_map = dict()
+        self.series_map = dict()
         self.initial_class_labels = dict()
         self.lenght = length
         self.is_ordered = False
@@ -51,8 +52,19 @@ class ListDataset:
             if lab == label:
                 exists = True
                 self.class_map[label] = self.class_map[label] + 1
+                series_list = self.series_map[label]
+                series_list.append(series)
+                self.series_map[label] = series_list
         if not exists:
+            series_list = list()
+            series_list.append(series)
+            self.series_map[label] = series_list
             self.class_map[label] = 1
+
+    def get_series_from_label(self, label):
+        if not self.series_map.keys().__contains__(label):
+            return list()
+        return self.series_map[label]
 
     def remove_item(self, i):
         label = self.labels[i]
