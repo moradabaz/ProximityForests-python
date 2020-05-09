@@ -1,4 +1,4 @@
-from numpy import double
+
 import numpy as np
 from trees import ProximityTree as pt
 from core import AppContext as app
@@ -39,7 +39,7 @@ class ProximityForest:
         # print memory usages
 
     def test(self, test_data: ListDataset):
-        self.result.start_time_train = time.time()
+        self.result.start_time_test = time.time()
         #        self.num_votes = [int] * len(test_data.initial_class_labels)
         for label in test_data.labels:
             self.num_votes[label] = 0
@@ -56,17 +56,14 @@ class ProximityForest:
                 self.result.errors = self.result.errors + 1
             else:
                 self.result.correct = self.result.correct + 1
-
-            # if app.AppContext.verbosity > 0:
-            #    if (i % app.AppContext.print_test_progress_for_each_instances) == 0:
-            #        print("*")
         self.result.end_time_test = time.time()
+
         self.result.elapsed_time_test = self.result.end_time_test - self.result.start_time_test
 
         if app.AppContext.verbosity > 0:
             print()
         assert test_data.get_series_size() == self.result.errors + self.result.correct
-        self.result.accuracy = double(self.result.correct) / test_data.get_series_size()
+        self.result.accuracy = np.double(self.result.correct) / test_data.get_series_size()
         self.result.error_rate = 1 - self.result.accuracy
         return self.result
 

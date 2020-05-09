@@ -1,4 +1,4 @@
-import dtw
+from dtaidistance import dtw
 from distance import DistanceMeasure as dm
 from dataset import ListDataset
 from core import AppContext

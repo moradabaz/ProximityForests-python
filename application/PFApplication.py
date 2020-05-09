@@ -3,6 +3,7 @@ from core import AppContext, ExperimentRunner
 from distance.DistanceMeasure import DistanceMeasure
 import timeit
 
+
 class PFApplication:
 
     def __init__(self):
@@ -36,4 +37,3 @@ experimentrunner.run()
 stop = timeit.default_timer()
 print("[FDP - NUM. EJECUCIONES]:", DistanceMeasure.contadorEx)
 print("Tiempo de ejecución TOTAL:", stop - start)
-
