@@ -1,19 +1,19 @@
-
 from dataset import ListDataset
 import util.Constants
-from dtw import *
 
 
 class AppContext:
+    num_test_series = 0
+    num_train_series = 0
     print_test_progress_for_each_instances = 100
     config_majority_vote_tie_break_randomly = True
     config_skip_distance_when_exemplar_matches_query = True
     config_use_random_choice_when_min_distance_is_equal = True
-    training_file = "/Users/morad/git/ProximityForest/paper/ItalyPowerDemand_TRAIN.csv"
-    testing_file = "/Users/morad/git/ProximityForest/paper/ItalyPowerDemand_TEST.csv"
+    training_file = "/Users/morad/Desktop/resultados/ElectricDevices/ElectricDevices_TRAIN.ts"
+    testing_file = "/Users/morad/Desktop/resultados/ElectricDevices/ElectricDevices_TEST.ts"
     output_dir = "output/"
     csv_has_header = False
-    target_column_is_first = False
+    target_column_is_first = True
     dataset_name = ""
     verbosity = 2
     num_repeats = 1
@@ -26,9 +26,19 @@ class AppContext:
     training_dataset = ListDataset.ListDataset()
     testing_dataset = ListDataset.ListDataset()
 
-    def __init__(self, train_dataset, test_dataset):
+    def __init__(self, train_dataset: ListDataset, test_dataset: ListDataset):
         self.training_file = train_dataset
+        # self.num_train_series = len(train_dataset.series_data())
         self.testing_file = test_dataset
+        # self.num_test_series = len(test_dataset.get_series_size())
+
+    def print_parameters(self):
+        print("dataset name", self.dataset_name)
+        print("train dataset", self.training_file)
+        print("test dataset", self.testing_file)
+        print("number of trees", self.num_trees)
+        print("number of repeats", self.num_repeats)
+        print("number of candidates", self.num_candidates_per_split)
 
     def get_training_dataset(self):
         return self.training_file

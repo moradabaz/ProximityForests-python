@@ -39,7 +39,7 @@ class CSVReader:
         return num_lines, num_columns
 
     @staticmethod
-    def readCSVToListDataset(fileName, has_header, targetColumnsIsFirst=True, separator=" "):
+    def readCSVToListDataset(fileName, has_header, labelLastColumn=False, separator=" "):
         file = none
         try:
             file = open(fileName, "r")
@@ -55,22 +55,25 @@ class CSVReader:
         if has_header:
             line = file.readline()
         while len(line) > 0:
-            line_array = line.split(separator)
-            series = list()
-            if targetColumnsIsFirst:
-                for j in range(1, len(line_array)):
-                    try:
-                        series.append(double(line_array[j]))
-                    except:
-                        continue
-                label = double(line_array[0])
+            label = 0
+            if labelLastColumn:
+                line_array = line.split(":")
+                try:
+                    label = int(line_array[1].split("\n")[0])
+                except:
+                    label = line_array[1]
+                line_array = line_array[0].split(separator)
             else:
-                contador = 0
-                for j in range(0, len(line_array) - 1):
-                    try:
-                        series.append(double(line_array[j]))
-                    except:
-                        continue
+                line_array = line.split(separator)
+
+            series = list()
+            contador = 0
+            for j in range(0, len(line_array) - 1):
+                try:
+                    series.append(double(line_array[j]))
+                except:
+                    continue
+            if not labelLastColumn:
                 label = abs(int(double(line_array[len(series)])))
 
             if label != none:
@@ -84,4 +87,8 @@ class CSVReader:
         elapsed = end - start
         print("finished in", elapsed, "seconds")
         file.close()
+
+        print("Dataset Series:", dataset.get_series_size())
+        print("Dataset Labels:", dataset.get_labels())
+        # exit(0)
         return dataset

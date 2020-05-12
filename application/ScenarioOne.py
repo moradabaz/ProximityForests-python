@@ -1,6 +1,7 @@
 import sys
 
 sys.path.append("/Users/morad/PycharmProjects/PForests/")
+sys.setrecursionlimit(30000)
 import time
 import timeit
 from datetime import date
@@ -18,6 +19,8 @@ import numpy as np
 class ScenarioOne:
     query_file = ""
     type = 1
+    time_start = 0
+    time_stop = 0
 
     def __init__(self):
         self.appcontext = AppContext.AppContext(train_dataset="/Users/morad/PycharmProjects/PForests/util/tabla1.csv",
@@ -47,6 +50,8 @@ class ScenarioOne:
                     AppContext.AppContext.num_candidates_per_split = int(value)
                 elif arg == "-output":
                     AppContext.AppContext.output_dir = value
+                elif arg == "-targetlast":
+                    AppContext.AppContext.target_column_is_first = value
                 elif arg == "-calculate":
                     value = value.upper().lower()
                     if value == "accuracy":
@@ -84,6 +89,7 @@ class ScenarioOne:
             file.writelines("Number of Candidates per tree: %s\n" % AppContext.AppContext.num_candidates_per_split)
             file.writelines("Number of repeats: %s\n" % AppContext.AppContext.num_repeats)
             file.writelines("% s\n" % str(linea) for linea in stats)
+            file.writelines("Time: %s\n" % str(stop - start))
             ## file.writelines(stats)
         file.close()
 
@@ -160,7 +166,7 @@ if scenario.type == 0:
     print("Calculating accuracy using the test dataset....")
     start = timeit.default_timer()
     result = experimentrunner.run()
-    top = timeit.default_timer()
+    stop = timeit.default_timer()
     scenario.save()
 elif scenario.type == 1:
     pforest = experimentrunner.load_traindata()

@@ -5,10 +5,10 @@ import statistics as st
 import os
 import json
 import numpy as np
+from core import AppContext
 
 
 class PFResult:
-
 
     def __init__(self, forest: ProximityForest):
         self.forest_id = forest.forest_id
@@ -41,34 +41,31 @@ class PFResult:
         self.mean_weighted_depth_per_tree = -1
         self.sd_weighted_depth_per_tree = -1
 
+        self.num_train_series = AppContext.AppContext.num_train_series
+        self.num_test_series = AppContext.AppContext.num_test_series
+
     def collate_results(self):
-        nodes = dict()
-        depths = dict()
-        weighted_depth = dict()
+        nodes = list()
+        depths = list()
+        weighted_depth = list()
         if self.results_collated:
             return
         trees = self.forest.get_trees()
-        total_num_trees = len(trees)
 
-        for i in range(0, total_num_trees):
-            tree = trees[i]
+        for tree in trees:
             tree_stats = tree.get_treestat_collection()
-            nodes[i] = tree_stats.num_nodes
-            depths[i] = tree_stats.depth
-            weighted_depth[i] = tree_stats.weighted_depth
+            nodes.append(tree_stats.num_nodes)
+            depths.append(tree_stats.depth)
+            weighted_depth.append(tree_stats.weighted_depth)
 
-        array_node = PFResult.get_list_from_dict(nodes)
-        array_depth = PFResult.get_list_from_dict(depths)
-        array_weighted_depth = PFResult.get_list_from_dict(weighted_depth)
+        self.mean_num_nodes_per_tree = st.mean(np.asarray(nodes))
+        self.sd_num_nodes_per_tree = st.pstdev(np.asarray(nodes))
 
-        self.mean_num_nodes_per_tree = st.mean(array_node)
-        self.sd_num_nodes_per_tree = st.pstdev(array_node)
+        self.mean_depth_per_tree = st.mean(np.asarray(depths))
+        self.sd_depth_per_tree = st.pstdev(np.asarray(depths))
 
-        self.mean_depth_per_tree = st.mean(array_depth)
-        self.sd_depth_per_tree = st.pstdev(array_depth)
-
-        self.mean_weighted_depth_per_tree = st.mean(array_weighted_depth)
-        self.sd_weighted_depth_per_tree = st.pstdev(array_weighted_depth)
+        self.mean_weighted_depth_per_tree = st.mean(np.asarray(weighted_depth))
+        self.sd_weighted_depth_per_tree = st.pstdev(np.asarray(weighted_depth))
 
         self.results_collated = True
 
@@ -89,6 +86,27 @@ class PFResult:
         print(", mean depth tree", self.mean_depth_per_tree)
         print()
 
+    def result_statistics(self, dataset_name):
+        time_duration = time.localtime(self.elapsed_time_train)
+        resultados = list()
+        self.collate_results()
+        result = "Train series number: " + str(AppContext.AppContext.num_train_series)
+        resultados.append(result)
+        result = "Test series number: " + str(AppContext.AppContext.num_test_series)
+        resultados.append(result)
+        result = "Correct (TP+TN): " + str(self.correct)
+        resultados.append(result)
+        result = "Incorrect (FP+FN): " + str(self.errors)
+        resultados.append(result)
+        result = 'Accuracy: ' + str(self.accuracy)
+        resultados.append(result)
+        result = "elapsed time train: " + str(self.elapsed_time_train / 1e6)
+        resultados.append(result)
+        result = "elapsed time test: " + str(self.elapsed_time_test / 1e6)
+        resultados.append(result)
+
+        return resultados
+
     def exportJSON(self, dataset_name, experiment_id):
         file = ""
         timestamp = time.asctime().split()
@@ -107,7 +125,6 @@ class PFResult:
             return
 
         return file_path
-
 
     @staticmethod
     def get_list_from_dict(query: dict):
