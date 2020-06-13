@@ -2,7 +2,8 @@ import io
 import time
 
 from numpy import double
-
+from scipy.io import arff
+import re
 from dataset import ListDataset
 
 from numpy.distutils.fcompiler import none
@@ -39,7 +40,14 @@ class CSVReader:
         return num_lines, num_columns
 
     @staticmethod
-    def readCSVToListDataset(fileName, has_header, labelLastColumn=False, separator=" "):
+    def read_file(fileName, has_header=False, labelLastColumn=False, separator=" "):
+        file = fileName.split(".")[1]
+        if file == "arff" or file == "ts":
+            return CSVReader.load_arff_data(fileName)
+        return CSVReader.readCSVToListDataset(fileName, has_header, labelLastColumn, separator)
+
+    @staticmethod
+    def readCSVToListDataset(fileName, has_header, labelLastColumn=False, separator=","):
         file = none
         try:
             file = open(fileName, "r")
@@ -50,7 +58,9 @@ class CSVReader:
         start = time.time()
         dataset = ListDataset.ListDataset()
         line = file.readline()
-
+        line.strip()
+        line.rstrip()
+        line.lstrip()
         num_line = 0
         if has_header:
             line = file.readline()
@@ -68,7 +78,7 @@ class CSVReader:
 
             series = list()
             contador = 0
-            for j in range(0, len(line_array) - 1):
+            for j in range(0, len(line_array)):
                 try:
                     series.append(double(line_array[j]))
                 except:
@@ -91,4 +101,46 @@ class CSVReader:
         print("Dataset Series:", dataset.get_series_size())
         print("Dataset Labels:", dataset.get_labels())
         # exit(0)
+        return dataset
+
+    @staticmethod
+    def load_data(full_data_path):
+        f = open(full_data_path)
+        print("FICHERO:", f)
+        data, meta = arff.loadarff(f)
+        f.close()
+        return data
+
+    @staticmethod
+    def load_arff_data(fullpath):
+        file = None
+        try:
+            file = CSVReader.load_data(fullpath)
+            print("Reading File: [", fullpath, "]")
+        except:
+            print("File Not Found: [", fullpath, "]")
+            return
+        start = time.time()
+        dataset = ListDataset.ListDataset()
+        tam_series = len(file)
+
+        for i in range(0, tam_series):
+            serie_lenth = len(file[i])
+            if serie_lenth <= 0:
+                continue
+            try:
+                class_label = int(file[i][serie_lenth - 1])
+            except:
+                class_label = file[i][serie_lenth - 1]
+            serie = list()
+            for j in range(0, serie_lenth - 1):
+                try:
+                    serie.append(double(file[i][j]))
+                except:
+                    continue
+            dataset.add_series(class_label, serie)
+
+        end = time.time()
+        elapsed = end - start
+        print("finished in", elapsed, "seconds")
         return dataset

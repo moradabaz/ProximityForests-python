@@ -1,6 +1,6 @@
 import sys
 from dataset import ListDataset
-from core import CSVReader, AppContext, PFResult
+from core import FileReader, AppContext, PFResult, Sequence_stats
 from trees import ProximityForest, ProximityTree, Splitter
 
 
@@ -12,17 +12,18 @@ class ExperimentRunner:
         self.def_separator = ","
 
     def run(self):
-        train_data_original = CSVReader.CSVReader.readCSVToListDataset(AppContext.AppContext.training_file,
-                                                                       AppContext.AppContext.csv_has_header,
-                                                                       AppContext.AppContext.target_column_is_first,
-                                                                       separator=self.def_separator)
-        test_data_original = CSVReader.CSVReader.readCSVToListDataset(AppContext.AppContext.testing_file,
-                                                                      AppContext.AppContext.csv_has_header,
-                                                                      AppContext.AppContext.target_column_is_first,
-                                                                      separator=self.def_separator)
+        train_data_original = FileReader.CSVReader.read_file(AppContext.AppContext.training_file,
+                                                             AppContext.AppContext.csv_has_header,
+                                                             False,
+                                                             separator=self.def_separator)
+        test_data_original = FileReader.CSVReader.read_file(AppContext.AppContext.testing_file,
+                                                            AppContext.AppContext.csv_has_header,
+                                                            False,
+                                                            separator=self.def_separator)
 
         self.train_data = train_data_original.reorder_class_labels(None)
         self.test_data = test_data_original.reorder_class_labels(self.train_data.initial_class_labels)
+        AppContext.AppContext.Sequence_stats = Sequence_stats.SequenceStats(self.train_data, 10)
 
         print("Series: Length:", len(self.train_data.series_data[0]))
 
@@ -70,21 +71,21 @@ class ExperimentRunner:
             if AppContext.AppContext.export_level > 0:
                 result.exportJSON(dataset_name, i)
 
-            return pforest.result
+            return pforest
             # Proximity Forest implementation
 
     # except:
     #     return
 
     def load_traindata(self):
-        train_data_original = CSVReader.CSVReader.readCSVToListDataset(AppContext.AppContext.training_file,
+        train_data_original = FileReader.CSVReader.readCSVToListDataset(AppContext.AppContext.training_file,
+                                                                        AppContext.AppContext.csv_has_header,
+                                                                        AppContext.AppContext.target_column_is_first,
+                                                                        separator=self.def_separator)
+        test_data_original = FileReader.CSVReader.readCSVToListDataset(AppContext.AppContext.testing_file,
                                                                        AppContext.AppContext.csv_has_header,
                                                                        AppContext.AppContext.target_column_is_first,
                                                                        separator=self.def_separator)
-        test_data_original = CSVReader.CSVReader.readCSVToListDataset(AppContext.AppContext.testing_file,
-                                                                      AppContext.AppContext.csv_has_header,
-                                                                      AppContext.AppContext.target_column_is_first,
-                                                                      separator=self.def_separator)
 
         self.train_data = train_data_original.reorder_class_labels(None)
         self.test_data = test_data_original.reorder_class_labels(self.train_data.initial_class_labels)

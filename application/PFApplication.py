@@ -1,4 +1,5 @@
 import sys
+sys.setrecursionlimit(31000)
 from core import AppContext, ExperimentRunner
 from distance.DistanceMeasure import DistanceMeasure
 import timeit
@@ -35,5 +36,4 @@ experimentrunner = ExperimentRunner.ExperimentRunner()
 start = timeit.default_timer()
 experimentrunner.run()
 stop = timeit.default_timer()
-print("[FDP - NUM. EJECUCIONES]:", DistanceMeasure.contadorEx)
 print("Tiempo de ejecución TOTAL:", stop - start)

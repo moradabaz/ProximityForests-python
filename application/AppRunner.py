@@ -1,7 +1,6 @@
 import sys
 
-sys.path.append("/Users/morad/PycharmProjects/PForests/")
-sys.setrecursionlimit(30000)
+sys.path.append("/Users/morad/PycharmProjects/PForests/")       # TODO: CHANGE
 import time
 import timeit
 from datetime import date
@@ -56,6 +55,8 @@ class ScenarioOne:
                     value = value.upper().lower()
                     if value == "accuracy":
                         self.type = 0
+                    elif value == "all":
+                        self.type = 2
                     else:
                         self.type = 1
                 elif arg == "-query_file":
@@ -70,15 +71,15 @@ class ScenarioOne:
         return x
 
     @staticmethod
-    def save():
+    def save_training():
         f_path = ""
         name = AppContext.AppContext.dataset_name
         if type == 1:
-            f_path = name + '_' + 'query' + str(date.today()) + "_" + str(
+            f_path = 'outputs/' + name + '_' + 'query' + str(date.today()) + "_" + str(
                 time.localtime().tm_hour) + "-" + str(time.localtime().tm_min) + "-" + str(
                 time.localtime().tm_sec) + ".txt"
         else:
-            f_path = name + '_' + 'accuracy' + str(date.today()) + "_" + \
+            f_path = 'outputs/' + name + '_' + 'accuracy' + str(date.today()) + "_" + \
                      str(time.localtime().tm_hour) + "-" + str(time.localtime().tm_min) + "-" + \
                      str(time.localtime().tm_sec) + ".txt"
 
@@ -91,6 +92,27 @@ class ScenarioOne:
             file.writelines("% s\n" % str(linea) for linea in stats)
             file.writelines("Time: %s\n" % str(stop - start))
             ## file.writelines(stats)
+        file.close()
+
+    @staticmethod
+    def save_all(pforest: ProximityForest):
+        f_path = ""
+        name = AppContext.AppContext.dataset_name
+        f_path = '../outputs/' + name + '_' + 'results' + str(date.today()) + "_" + \
+                     str(time.localtime().tm_hour) + "-" + str(time.localtime().tm_min) + "-" + \
+                     str(time.localtime().tm_sec) + ".txt"
+
+        result = pforest.result
+        glob_dist = 0
+        with open(f_path, 'w+') as file:
+            stats = result.result_statistics(AppContext.AppContext.dataset_name)
+            file.writelines("Dataset: %s\n" % AppContext.AppContext.dataset_name)
+            file.writelines("Number of Trees: %s\n" % AppContext.AppContext.num_trees)
+            file.writelines("Number of Candidates per tree: %s\n" % AppContext.AppContext.num_candidates_per_split)
+            file.writelines("Number of repeats: %s\n" % AppContext.AppContext.num_repeats)
+            file.writelines("% s\n" % str(linea) for linea in stats)
+            file.writelines("Time: %s\n" % str(stop - start))
+            file.writelines("\n")
         file.close()
 
     @staticmethod
@@ -120,10 +142,6 @@ class ScenarioOne:
         print(lista[best_serie_id])
         print("Dist: ", best_dist)
 
-        print("DISTANCIAS")
-        resultado = pforest.calculate_diffs(np.asarray(lista[best_serie_id]), np.asarray(query))
-        print(resultado)
-        print(np.max(resultado))
 
         name = AppContext.AppContext.dataset_name
         f_path = name + '_' + 'query' + str(date.today()) + "_" + str(
@@ -143,12 +161,6 @@ class ScenarioOne:
             file.writelines("%s " % q for q in lista[best_serie_id])
             file.writelines(" ] \n")
             file.writelines("DTW distance: %s\n" % best_dist)
-            file.writelines("Distance difference array per each position: [ ")
-            file.writelines("%s " % q for q in resultado)
-            file.writelines(" ] \n")
-            file.writelines("Max dist: %s\n" % np.max(resultado))
-            file.writelines("Min dist: %s\n" % np.min(resultado))
-            ## file.writelines(stats)
         file.close()
 
     pass
@@ -165,9 +177,17 @@ experimentrunner = ExperimentRunner.ExperimentRunner()
 if scenario.type == 0:
     print("Calculating accuracy using the test dataset....")
     start = timeit.default_timer()
+    pforest = experimentrunner.run()
+    result = pforest.result
+    stop = timeit.default_timer()
+    scenario.save_training()
+
+elif scenario.type == 2:
+    print("Calculating accuracy using the test dataset....")
+    start = timeit.default_timer()
     result = experimentrunner.run()
     stop = timeit.default_timer()
-    scenario.save()
+    scenario.save_all(pforest=result)
 elif scenario.type == 1:
     pforest = experimentrunner.load_traindata()
     print("Opening query file...")

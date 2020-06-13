@@ -1,10 +1,11 @@
 from trees import Splitter as sp
-from trees import ProximityTree as ptree
 from dataset import ListDataset as ltd
-import time
+
+
 class Node:
 
-    def __init__(self, parent, label, node_id, tree):
+    def __init__(self, parent, label, node_id, depth, tree, train_cache=None):
+        self.depth = depth
         self.is_leaf = False
         self.node_depth = 0
         self.parent = parent
@@ -13,6 +14,7 @@ class Node:
         self.tree = tree
         self.children = list()
         self.splitter = None
+        self.train_cache = train_cache
         if parent is not None:
             self.node_depth = parent.node_depth + 1
 
@@ -24,25 +26,32 @@ class Node:
 
     def get_children(self):
         return self.children
-
+    """
+        1 - We initialize our splitter in the node.
+        2 - We search our best splits
+        3 - For each dataset of the splits:
+            3.1 - We create a Node-Child 
+            3.2 - We train the node-Child
+        :param  dataset
+    """
     def train(self, dataset: ltd.ListDataset):
-        start = time.clock()
         if dataset is None:
             print("[ERROR] Dataset is none or empty")
-            return
+            exit(0)
         gini = dataset.gini()
         if gini == 0:
-            self.label = dataset.labels[0]
+            self.label = dataset.classes[0]
             self.is_leaf = True
             return
         self.splitter = sp.Splitter(self)
         best_split = self.splitter.find_best_splits(dataset)
         for i in range(0, len(best_split.values())):
-            self.children.append(Node(self, i, self.tree.node_counter + 1, self.tree))
+            self.children.append(Node(self, i, self.tree.node_counter + 1, self.depth + 1, self.tree))
             self.tree.node_counter = self.tree.node_counter + 1
         counter = 0
         for split in best_split.values():
-            self.children[counter].train(split)
+            try:
+                self.children[counter].train(split)
+            except OverflowError:
+                return
             counter = counter + 1
-        stop = time.clock()
-        print("[TIEMPO][NODE - TRAIN]: ", (stop - start))

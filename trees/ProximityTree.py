@@ -1,34 +1,44 @@
+import sys
 from random import random
 from trees import Node
 from core.TreeStatCollector import TreeStatCollector
-import numpy as np
+
+"""
+A tree has:
+- id
+- root
+- 
+"""
+
 
 class ProximityTree:
 
-    def __init__(self, id, forest):
+    def __init__(self, id, forest, depth=0):
+        self.random = random()
+        self.node_counter = 0
+        self.tree_depth = depth
         self.root = None
         self.id = id
         if forest is not None:
             self.proximity_forest_id = forest.get_forest_ID()
             self.stats = TreeStatCollector(id, self.proximity_forest_id)
-        self.random = random()
-        self.node_counter = 0
 
     def get_root_node(self):
         return self.root
 
     def train(self, data):
         self.node_counter = self.node_counter + 1
-        self.root = Node.Node(parent=None, label=None, node_id=self.node_counter, tree=self)
+        self.root = Node.Node(parent=None, label=None, node_id=self.node_counter, depth=self.tree_depth, tree=self)
         self.root.train(data)
 
-    # query []
     def predict(self, query):
         node = self.root
         if node is None:
             return -1
         while not node.is_leaf:
             posicion = node.splitter.find_closest_branch_(query)
+            if posicion == -1:
+                node.is_leaf = True
             node = node.children[posicion]
         return node.label
 
@@ -89,7 +99,6 @@ class ProximityTree:
         max_depth = 0
         if node.children is not None:
             return 0
-
         for i in range(0, len(node.children)):
             max_depth = min(max_depth, self._get_height(node.children[i]))
         return max_depth + 1

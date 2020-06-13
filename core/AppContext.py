@@ -1,4 +1,5 @@
 from dataset import ListDataset
+from core import Sequence_stats
 import util.Constants
 
 
@@ -13,7 +14,7 @@ class AppContext:
     testing_file = "/Users/morad/Desktop/resultados/ElectricDevices/ElectricDevices_TEST.ts"
     output_dir = "output/"
     csv_has_header = False
-    target_column_is_first = True
+    target_column_is_first = False
     dataset_name = ""
     verbosity = 2
     num_repeats = 1
@@ -25,6 +26,7 @@ class AppContext:
     separator = ","
     training_dataset = ListDataset.ListDataset()
     testing_dataset = ListDataset.ListDataset()
+    sequence_stats = None
 
     def __init__(self, train_dataset: ListDataset, test_dataset: ListDataset):
         self.training_file = train_dataset
