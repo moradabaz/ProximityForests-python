@@ -1,9 +1,6 @@
-import io
 import time
-
 from numpy import double
 from scipy.io import arff
-import re
 from dataset import ListDataset
 
 from numpy.distutils.fcompiler import none
@@ -11,33 +8,6 @@ from numpy.distutils.fcompiler import none
 
 class CSVReader:
 
-    @staticmethod
-    def getFileInformation(filename, has_header=False, separator=" "):
-        line_array = []
-        file = none
-        length_check = True
-        num_lines = 0
-        num_columns = 0
-        try:
-            file = open(filename, "r")
-        except:
-            print("[ERROR]", "File", filename, "Not Found")
-            return
-        line = file.readline()
-        length_check = True
-        while len(line) != 0:
-            num_lines = num_lines + 1
-            if length_check:
-                length_check = False
-                line_array = line.split(separator)
-            line = file.readline()
-
-        if has_header:
-            if num_lines > 0:
-                num_lines = num_lines - 1
-        num_columns = len(line_array)
-        file.close()
-        return num_lines, num_columns
 
     @staticmethod
     def read_file(fileName, has_header=False, labelLastColumn=False, separator=" "):
@@ -48,7 +18,6 @@ class CSVReader:
 
     @staticmethod
     def readCSVToListDataset(fileName, has_header, labelLastColumn=False, separator=","):
-        file = none
         try:
             file = open(fileName, "r")
             print("Reading File: [", fileName, "]")
@@ -77,30 +46,23 @@ class CSVReader:
                 line_array = line.split(separator)
 
             series = list()
-            contador = 0
             for j in range(0, len(line_array)):
                 try:
                     series.append(double(line_array[j]))
                 except:
                     continue
             if not labelLastColumn:
-                label = abs(int(double(line_array[len(series)])))
-
+                label = abs(int(double(line_array[len(series) - 1])))
             if label != none:
                 dataset.add_series(label, series)
             num_line = num_line + 1
             line = file.readline()
-
-            # TODO: IMPLEMENT MEMORY STATS
-
         end = time.time()
         elapsed = end - start
         print("finished in", elapsed, "seconds")
         file.close()
-
         print("Dataset Series:", dataset.get_series_size())
         print("Dataset Labels:", dataset.get_labels())
-        # exit(0)
         return dataset
 
     @staticmethod
@@ -113,7 +75,6 @@ class CSVReader:
 
     @staticmethod
     def load_arff_data(fullpath):
-        file = None
         try:
             file = CSVReader.load_data(fullpath)
             print("Reading File: [", fullpath, "]")
@@ -123,7 +84,6 @@ class CSVReader:
         start = time.time()
         dataset = ListDataset.ListDataset()
         tam_series = len(file)
-
         for i in range(0, tam_series):
             serie_lenth = len(file[i])
             if serie_lenth <= 0:
@@ -139,7 +99,6 @@ class CSVReader:
                 except:
                     continue
             dataset.add_series(class_label, serie)
-
         end = time.time()
         elapsed = end - start
         print("finished in", elapsed, "seconds")

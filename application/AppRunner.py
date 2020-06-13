@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append("/Users/morad/PycharmProjects/PForests/")       # TODO: CHANGE
+sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
 import time
 import timeit
 from datetime import date
@@ -20,6 +20,7 @@ class ScenarioOne:
     type = 1
     time_start = 0
     time_stop = 0
+    AppContext.AppContext.output_dir = "../outputs/"
 
     def __init__(self):
         self.appcontext = AppContext.AppContext(train_dataset="/Users/morad/PycharmProjects/PForests/util/tabla1.csv",
@@ -31,7 +32,6 @@ class ScenarioOne:
     def get_args(self):
         if len(sys.argv) > 1:
             for i in range(1, len(sys.argv)):
-                # print(sys.argv[i])
                 options = sys.argv[i].split("=")
                 arg = options[0]
                 value = options[1]
@@ -75,11 +75,11 @@ class ScenarioOne:
         f_path = ""
         name = AppContext.AppContext.dataset_name
         if type == 1:
-            f_path = 'outputs/' + name + '_' + 'query' + str(date.today()) + "_" + str(
+            f_path = AppContext.AppContext.output_dir + name + '_' + 'query' + str(date.today()) + "_" + str(
                 time.localtime().tm_hour) + "-" + str(time.localtime().tm_min) + "-" + str(
                 time.localtime().tm_sec) + ".txt"
         else:
-            f_path = 'outputs/' + name + '_' + 'accuracy' + str(date.today()) + "_" + \
+            f_path = AppContext.AppContext.output_dir + name + '_' + 'accuracy' + str(date.today()) + "_" + \
                      str(time.localtime().tm_hour) + "-" + str(time.localtime().tm_min) + "-" + \
                      str(time.localtime().tm_sec) + ".txt"
 
@@ -96,14 +96,12 @@ class ScenarioOne:
 
     @staticmethod
     def save_all(pforest: ProximityForest):
-        f_path = ""
         name = AppContext.AppContext.dataset_name
-        f_path = '../outputs/' + name + '_' + 'results' + str(date.today()) + "_" + \
-                     str(time.localtime().tm_hour) + "-" + str(time.localtime().tm_min) + "-" + \
-                     str(time.localtime().tm_sec) + ".txt"
+        f_path = AppContext.AppContext.output_dir + name + '_' + 'results' + str(date.today()) + "_" + \
+                 str(time.localtime().tm_hour) + "-" + str(time.localtime().tm_min) + "-" + \
+                 str(time.localtime().tm_sec) + ".txt"
 
         result = pforest.result
-        glob_dist = 0
         with open(f_path, 'w+') as file:
             stats = result.result_statistics(AppContext.AppContext.dataset_name)
             file.writelines("Dataset: %s\n" % AppContext.AppContext.dataset_name)
@@ -141,7 +139,6 @@ class ScenarioOne:
         print("Series aproximate:", best_serie_id)
         print(lista[best_serie_id])
         print("Dist: ", best_dist)
-
 
         name = AppContext.AppContext.dataset_name
         f_path = name + '_' + 'query' + str(date.today()) + "_" + str(

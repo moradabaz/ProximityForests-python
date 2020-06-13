@@ -1,7 +1,7 @@
 import sys
 from dataset import ListDataset
-from core import FileReader, AppContext, PFResult, Sequence_stats
-from trees import ProximityForest, ProximityTree, Splitter
+from core import FileReader, AppContext
+from trees import ProximityForest
 
 
 class ExperimentRunner:
@@ -23,23 +23,9 @@ class ExperimentRunner:
 
         self.train_data = train_data_original.reorder_class_labels(None)
         self.test_data = test_data_original.reorder_class_labels(self.train_data.initial_class_labels)
-        AppContext.AppContext.Sequence_stats = Sequence_stats.SequenceStats(self.train_data, 10)
-
         print("Series: Length:", len(self.train_data.series_data[0]))
-
-        # AppContext.AppContext.set_training_dataset(self.train_data)
-        # AppContext.AppContext.set_testing_dataset(self.test_data)
-
-        train_data_original = None
-        test_data_original = None
-
-        #  try:
         training_file = open(AppContext.AppContext.training_file)
         dataset_name = training_file.name
-        # AppContext.AppContext.set_dataset_name(dataset_name)
-
-        # PrintUtilities.printConfiguration()
-
         if AppContext.AppContext.shuffle_dataset:
             print("Shuffling in the training set...")
             self.train_data.shuffle()
@@ -65,17 +51,9 @@ class ExperimentRunner:
             result = pforest.test(self.test_data)
 
             pforest.print_results(dataset_name, i, "")
-
-            # result.print_results(dataset_name, i, "")
-
             if AppContext.AppContext.export_level > 0:
                 result.exportJSON(dataset_name, i)
-
             return pforest
-            # Proximity Forest implementation
-
-    # except:
-    #     return
 
     def load_traindata(self):
         train_data_original = FileReader.CSVReader.readCSVToListDataset(AppContext.AppContext.training_file,

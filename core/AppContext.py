@@ -1,6 +1,4 @@
 from dataset import ListDataset
-from core import Sequence_stats
-import util.Constants
 
 
 class AppContext:
@@ -30,9 +28,7 @@ class AppContext:
 
     def __init__(self, train_dataset: ListDataset, test_dataset: ListDataset):
         self.training_file = train_dataset
-        # self.num_train_series = len(train_dataset.series_data())
         self.testing_file = test_dataset
-        # self.num_test_series = len(test_dataset.get_series_size())
 
     def print_parameters(self):
         print("dataset name", self.dataset_name)
