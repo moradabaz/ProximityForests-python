@@ -1,16 +1,12 @@
 import sys
-
 sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
 import time
 import timeit
 from datetime import date
 from math import inf
-
 from dtaidistance import dtw
 from numpy import double
-
 from trees.ProximityForest import ProximityForest
-
 from core import AppContext, ExperimentRunner
 import numpy as np
 
@@ -37,6 +33,8 @@ class ScenarioOne:
                 value = options[1]
                 if arg == "-name":
                     AppContext.AppContext.dataset_name = value
+                elif arg == "-syspath":
+                    sys.path.append(value)
                 elif arg == "-train":
                     AppContext.AppContext.training_file = value
                 elif arg == "-test":
@@ -162,7 +160,7 @@ class ScenarioOne:
 
     pass
 
-
+sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
 scenario = ScenarioOne()
 scenario.get_args()
 
@@ -172,7 +170,7 @@ experimentrunner = ExperimentRunner.ExperimentRunner()
 # aqui entrena
 # stop = timeit.default_timer()
 if scenario.type == 0:
-    print("Calculating accuracy using the test dataset....")
+    print("Calculating accuracy using the test dataStructures....")
     start = timeit.default_timer()
     pforest = experimentrunner.run()
     result = pforest.result
@@ -180,7 +178,7 @@ if scenario.type == 0:
     scenario.save_training()
 
 elif scenario.type == 2:
-    print("Calculating accuracy using the test dataset....")
+    print("Calculating accuracy using the test dataStructures....")
     start = timeit.default_timer()
     result = experimentrunner.run()
     stop = timeit.default_timer()

@@ -3,7 +3,7 @@ import random
 
 class ListDataset:
     """
-        :param: series_data: List of series in the dataset
+        :param: series_data: List of series in the dataStructures
         :param: classes: List of classes in the datasets.
         :param: class_map: map which indicates the number of series per label -> <label, nº series>
         :param
