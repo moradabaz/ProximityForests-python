@@ -1,5 +1,5 @@
 from trees import Splitter as sp
-from dataset import ListDataset as ltd
+from dataStructures import ListDataset as ltd
 
 
 class Node:
@@ -29,10 +29,10 @@ class Node:
     """
         1 - We initialize our splitter in the node.
         2 - We search our best splits
-        3 - For each dataset of the splits:
+        3 - For each dataStructures of the splits:
             3.1 - We create a Node-Child 
             3.2 - We train the node-Child
-        :param  dataset
+        :param  dataStructures
     """
     def train(self, dataset: ltd.ListDataset):
         if dataset is None:

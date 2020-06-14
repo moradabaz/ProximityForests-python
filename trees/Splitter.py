@@ -1,5 +1,5 @@
 from distance import DistanceMeasure as dm
-from dataset import ListDataset
+from dataStructures import ListDataset
 from core import AppContext
 import numpy as np
 import random
@@ -17,9 +17,9 @@ class Splitter:
 
     """
     
-    This function splits the data collected and structured from the dataset 
-    For each class, we get their respective dataset and get a random exemplar serie from it.
-    Then, for each set of series of the sample dataset:
+    This function splits the data collected and structured from the dataStructures 
+    For each class, we get their respective dataStructures and get a random exemplar serie from it.
+    Then, for each set of series of the sample dataStructures:
     - we find the closest branch (class) which series are similiar to the exemplar serie
       previously extracted randomly.
     - We insert the closest branch, which is a class, into a list
@@ -68,7 +68,7 @@ class Splitter:
         return wgini
 
     """
-    This function finds the best splits of a dataset
+    This function finds the best splits of a dataStructures
     splitting the data n_candidate times and returning
     the less weighted gini split
     """

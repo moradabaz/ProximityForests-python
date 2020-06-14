@@ -3,7 +3,7 @@ import numpy as np
 from trees import ProximityTree as pt
 from core import AppContext as app
 from core import PFResult as pfr
-from dataset import ListDataset
+from dataStructures import ListDataset
 import random
 import time
 
@@ -25,7 +25,7 @@ class ProximityForest:
     """
     def train(self, dataset):
         self.result.start_time_train = time.time()
-        print("Training dataset ...")
+        print("Training dataStructures ...")
         for i in range(0, app.AppContext.num_trees):
             self.trees[i].train(dataset)
             if app.AppContext.verbosity > 0:

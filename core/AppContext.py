@@ -1,4 +1,4 @@
-from dataset import ListDataset
+from dataStructures import ListDataset
 
 
 class AppContext:
@@ -31,9 +31,9 @@ class AppContext:
         self.testing_file = test_dataset
 
     def print_parameters(self):
-        print("dataset name", self.dataset_name)
-        print("train dataset", self.training_file)
-        print("test dataset", self.testing_file)
+        print("dataStructures name", self.dataset_name)
+        print("train dataStructures", self.training_file)
+        print("test dataStructures", self.testing_file)
         print("number of trees", self.num_trees)
         print("number of repeats", self.num_repeats)
         print("number of candidates", self.num_candidates_per_split)
@@ -62,7 +62,7 @@ class AppContext:
     def get_dataset_name(self):
         return self.dataset_name
 
-    # dataset name
+    # dataStructures name
     def set_dataset_name(self, dataset_name):
         self.dataset_name = dataset_name
 
@@ -101,7 +101,7 @@ class AppContext:
     def get_export_level(self):
         return self.export_level
 
-    # shuffle dataset
+    # shuffle dataStructures
     def set_shuffle_dataset(self, shuffle_dataset):
         self.shuffle_dataset = shuffle_dataset
 

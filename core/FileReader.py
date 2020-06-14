@@ -1,7 +1,7 @@
 import time
 from numpy import double
 from scipy.io import arff
-from dataset import ListDataset
+from dataStructures import ListDataset
 
 from numpy.distutils.fcompiler import none
 

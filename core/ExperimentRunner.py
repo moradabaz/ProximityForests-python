@@ -1,5 +1,5 @@
 import sys
-from dataset import ListDataset
+from dataStructures import ListDataset
 from core import FileReader, AppContext
 from trees import ProximityForest
 
