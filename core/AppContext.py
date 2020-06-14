@@ -10,7 +10,7 @@ class AppContext:
     config_use_random_choice_when_min_distance_is_equal = True
     training_file = ""
     testing_file = ""
-    output_dir = "output/"
+    output_dir = "../output/"
     csv_has_header = False
     target_column_is_first = False
     dataset_name = ""
