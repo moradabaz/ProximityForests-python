@@ -5,6 +5,11 @@ import numpy as np
 
 class DistanceMeasure:
 
+    """
+    This fonction finds the serie which is the most similar to the query serie
+        :param temp_exemplar -> list of serie
+        :param query -> Set of series
+    """
     @staticmethod
     def find_closest_nodes(query, temp_exemplars: list):
         array_query = np.asarray(query)

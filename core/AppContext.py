@@ -8,8 +8,8 @@ class AppContext:
     config_majority_vote_tie_break_randomly = True
     config_skip_distance_when_exemplar_matches_query = True
     config_use_random_choice_when_min_distance_is_equal = True
-    training_file = "/Users/morad/Desktop/resultados/ElectricDevices/ElectricDevices_TRAIN.ts"
-    testing_file = "/Users/morad/Desktop/resultados/ElectricDevices/ElectricDevices_TEST.ts"
+    training_file = ""
+    testing_file = ""
     output_dir = "output/"
     csv_has_header = False
     target_column_is_first = False

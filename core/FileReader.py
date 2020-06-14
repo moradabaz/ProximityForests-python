@@ -6,15 +6,15 @@ from dataset import ListDataset
 from numpy.distutils.fcompiler import none
 
 
-class CSVReader:
+class FileReader:
 
 
     @staticmethod
     def read_file(fileName, has_header=False, labelLastColumn=False, separator=" "):
         file = fileName.split(".")[1]
         if file == "arff" or file == "ts":
-            return CSVReader.load_arff_data(fileName)
-        return CSVReader.readCSVToListDataset(fileName, has_header, labelLastColumn, separator)
+            return FileReader.load_arff_data(fileName)
+        return FileReader.readCSVToListDataset(fileName, has_header, labelLastColumn, separator)
 
     @staticmethod
     def readCSVToListDataset(fileName, has_header, labelLastColumn=False, separator=","):
@@ -76,7 +76,7 @@ class CSVReader:
     @staticmethod
     def load_arff_data(fullpath):
         try:
-            file = CSVReader.load_data(fullpath)
+            file = FileReader.load_data(fullpath)
             print("Reading File: [", fullpath, "]")
         except:
             print("File Not Found: [", fullpath, "]")

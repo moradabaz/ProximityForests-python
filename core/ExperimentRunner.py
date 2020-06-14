@@ -12,14 +12,14 @@ class ExperimentRunner:
         self.def_separator = ","
 
     def run(self):
-        train_data_original = FileReader.CSVReader.read_file(AppContext.AppContext.training_file,
+        train_data_original = FileReader.FileReader.read_file(AppContext.AppContext.training_file,
+                                                              AppContext.AppContext.csv_has_header,
+                                                              False,
+                                                              separator=self.def_separator)
+        test_data_original = FileReader.FileReader.read_file(AppContext.AppContext.testing_file,
                                                              AppContext.AppContext.csv_has_header,
                                                              False,
                                                              separator=self.def_separator)
-        test_data_original = FileReader.CSVReader.read_file(AppContext.AppContext.testing_file,
-                                                            AppContext.AppContext.csv_has_header,
-                                                            False,
-                                                            separator=self.def_separator)
 
         self.train_data = train_data_original.reorder_class_labels(None)
         self.test_data = test_data_original.reorder_class_labels(self.train_data.initial_class_labels)
@@ -56,14 +56,14 @@ class ExperimentRunner:
             return pforest
 
     def load_traindata(self):
-        train_data_original = FileReader.CSVReader.readCSVToListDataset(AppContext.AppContext.training_file,
+        train_data_original = FileReader.FileReader.readCSVToListDataset(AppContext.AppContext.training_file,
+                                                                         AppContext.AppContext.csv_has_header,
+                                                                         AppContext.AppContext.target_column_is_first,
+                                                                         separator=self.def_separator)
+        test_data_original = FileReader.FileReader.readCSVToListDataset(AppContext.AppContext.testing_file,
                                                                         AppContext.AppContext.csv_has_header,
                                                                         AppContext.AppContext.target_column_is_first,
                                                                         separator=self.def_separator)
-        test_data_original = FileReader.CSVReader.readCSVToListDataset(AppContext.AppContext.testing_file,
-                                                                       AppContext.AppContext.csv_has_header,
-                                                                       AppContext.AppContext.target_column_is_first,
-                                                                       separator=self.def_separator)
 
         self.train_data = train_data_original.reorder_class_labels(None)
         self.test_data = test_data_original.reorder_class_labels(self.train_data.initial_class_labels)
