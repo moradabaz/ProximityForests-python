@@ -73,7 +73,6 @@ class Splitter:
     the less weighted gini split
     """
     def find_best_splits(self, sample_dataset):
-        print("Searching best splits...")
         series_per_class = sample_dataset.split_classes()
         best_weighted_gini = 1000000
         num_series = sample_dataset.get_series_data_length()
