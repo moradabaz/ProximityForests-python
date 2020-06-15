@@ -1,0 +1,12 @@
+Dataset: Plane
+Number of Trees: 100
+Number of Candidates per tree: 5
+Number of repeats: 1
+Train series number: 105
+Test series number: 105
+Correct (TP+TN): 104
+Incorrect (FP+FN): 1
+Accuracy: 0.9904761904761905
+elapsed time train: 47.173235225999996
+elapsed time test: 10.017160095000001
+Time: 57.209777798000005
