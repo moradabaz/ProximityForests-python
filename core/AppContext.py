@@ -8,10 +8,11 @@ class AppContext:
     config_majority_vote_tie_break_randomly = True
     config_skip_distance_when_exemplar_matches_query = True
     config_use_random_choice_when_min_distance_is_equal = True
-    training_file = ""
-    testing_file = ""
+    training_file = "/Users/morad/PycharmProjects/PForests/datasets/ItalyPowerDemand/ItalyPowerDemand_TRAIN.csv"
+    testing_file = "/Users/morad/PycharmProjects/PForests/datasets/ItalyPowerDemand/ItalyPowerDemand_TEST.csv"
     output_dir = "../output/"
-    csv_has_header = False
+    csv_has_header = True
+    ignore_first_col = True
     target_column_is_first = False
     dataset_name = ""
     verbosity = 2

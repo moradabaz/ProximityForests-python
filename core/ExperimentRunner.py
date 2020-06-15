@@ -13,12 +13,12 @@ class ExperimentRunner:
 
     def run(self):
         train_data_original = FileReader.FileReader.read_file(AppContext.AppContext.training_file,
-                                                              AppContext.AppContext.csv_has_header,
-                                                              False,
-                                                              separator=self.def_separator)
+                                                            has_header=True,
+                                                            labelLastColumn=True,
+                                                            separator=self.def_separator)
         test_data_original = FileReader.FileReader.read_file(AppContext.AppContext.testing_file,
-                                                             AppContext.AppContext.csv_has_header,
-                                                             False,
+                                                             has_header=True,
+                                                             labelLastColumn=True,
                                                              separator=self.def_separator)
 
         self.train_data = train_data_original.reorder_class_labels(None)

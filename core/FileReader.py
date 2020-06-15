@@ -10,14 +10,14 @@ class FileReader:
 
 
     @staticmethod
-    def read_file(fileName, has_header=False, labelLastColumn=False, separator=" "):
+    def read_file(fileName, has_header=True, labelLastColumn=True, separator=","):
         file = fileName.split(".")[1]
         if file == "arff" or file == "ts":
             return FileReader.load_arff_data(fileName)
         return FileReader.readCSVToListDataset(fileName, has_header, labelLastColumn, separator)
 
     @staticmethod
-    def readCSVToListDataset(fileName, has_header, labelLastColumn=False, separator=","):
+    def readCSVToListDataset(fileName, has_header=True, labelLastColumn=True, ignore_first_column=True, separator=","):
         try:
             file = open(fileName, "r")
             print("Reading File: [", fileName, "]")
@@ -33,8 +33,10 @@ class FileReader:
         num_line = 0
         if has_header:
             line = file.readline()
+
         while len(line) > 0:
             label = 0
+            """
             if labelLastColumn:
                 line_array = line.split(":")
                 try:
@@ -44,20 +46,39 @@ class FileReader:
                 line_array = line_array[0].split(separator)
             else:
                 line_array = line.split(separator)
+            """
+            line_array = line.split(separator)
 
             series = list()
-            for j in range(0, len(line_array)):
+
+            if ignore_first_column:
+                index = 1
+            else:
+                index = 0
+
+            if labelLastColumn:
+                serie_length = len(line_array) - 1
+            else:
+                serie_length = len(line_array)
+
+            for j in range(index, serie_length):
                 try:
                     series.append(double(line_array[j]))
                 except:
+                    print("Problem with", line_array[j])
                     continue
-            if not labelLastColumn:
-                label = abs(int(double(line_array[len(series) - 1])))
+            if labelLastColumn:
+                try:
+                    label = int(line_array[serie_length].split("\n")[0])
+                except:
+                    label = line_array[serie_length].split("\n")[0]
+
             if label != none:
                 dataset.add_series(label, series)
             num_line = num_line + 1
             line = file.readline()
         end = time.time()
+
         elapsed = end - start
         print("finished in", elapsed, "seconds")
         file.close()

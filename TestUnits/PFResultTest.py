@@ -1,7 +1,7 @@
 import unittest
 from core import PFResult
 from trees import ProximityForest
-from dataset import ListDataset
+from dataStructures import ListDataset
 from util import randomNumbers as rdnumbers
 from core import AppContext as appcontext
 

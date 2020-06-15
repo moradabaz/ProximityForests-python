@@ -1,6 +1,6 @@
 import unittest
-from core.FileReader import CSVReader as reader
-from dataset.ListDataset import ListDataset
+from core.FileReader import FileReader as reader
+from dataStructures.ListDataset import ListDataset
 import numpy as np
 
 class MyTestCase(unittest.TestCase):
@@ -14,6 +14,34 @@ class MyTestCase(unittest.TestCase):
 
     def test_something(self):
         self.assertEqual(True, False)
+
+    def test_csv_vs_arff_train(self):
+
+        data_arff = reader.read_file("/Users/morad/PycharmProjects/PForests/datasets/ItalyPowerDemand/ItalyPowerDemand_TRAIN.arff")
+        data_csv = reader.readCSVToListDataset("/Users/morad/PycharmProjects/PForests/datasets/ItalyPowerDemand/ItalyPowerDemand_TRAIN.csv", has_header=True, labelLastColumn=True, separator=",")
+
+        print("ARFF LABELS: ", data_arff.get_labels())
+        print("CSV LABELS : ", data_csv.get_labels())
+        for i in range(0, data_arff.get_series_size()):
+            print("ARFF serie: ", data_arff.get_series(i))
+            print("CSV  serie: ", data_csv.get_series(i))
+            print("-------------------------------------")
+            print("")
+
+    def test_csv_vs_arff_test(self):
+        data_arff = reader.read_file(
+            "/Users/morad/PycharmProjects/PForests/datasets/ItalyPowerDemand/ItalyPowerDemand_TEST.arff")
+        data_csv = reader.readCSVToListDataset(
+            "/Users/morad/PycharmProjects/PForests/datasets/ItalyPowerDemand/ItalyPowerDemand_TEST.csv",
+            has_header=True, labelLastColumn=True, separator=",")
+
+        print("ARFF LABELS: ", data_arff.get_labels())
+        print("CSV LABELS : ", data_csv.get_labels())
+        for i in range(0, data_arff.get_series_size()):
+            print("ARFF serie: ", data_arff.get_series(i))
+            print("CSV  serie: ", data_csv.get_series(i))
+            print("-------------------------------------")
+            print("")
 
     def test_number_series_italy(self):
         series_data_std = self.data_standard_italy.series_data

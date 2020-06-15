@@ -1,5 +1,5 @@
 import unittest
-from dataset import ListDataset
+from dataStructures import ListDataset
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,4 +1,4 @@
-from dataset import ListDataset
+from dataStructures import ListDataset
 from trees import Splitter
 import unittest
 import numpy as np
