@@ -135,7 +135,7 @@ experimentrunner = ExperimentRunner.ExperimentRunner()
 # start = timeit.default_timer()
 # aqui entrena
 # stop = timeit.default_timer()
-print("Calculating accuracy using the test dataStructures....")
+print("Calculating accuracy using the test....")
 print("")
 start = timeit.default_timer()
 pforest = experimentrunner.run()

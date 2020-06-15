@@ -33,29 +33,14 @@ class FileReader:
         num_line = 0
         if has_header:
             line = file.readline()
-
         while len(line) > 0:
             label = 0
-            """
-            if labelLastColumn:
-                line_array = line.split(":")
-                try:
-                    label = int(line_array[1].split("\n")[0])
-                except:
-                    label = line_array[1]
-                line_array = line_array[0].split(separator)
-            else:
-                line_array = line.split(separator)
-            """
             line_array = line.split(separator)
-
             series = list()
-
             if ignore_first_column:
                 index = 1
             else:
                 index = 0
-
             if labelLastColumn:
                 serie_length = len(line_array) - 1
             else:
@@ -72,7 +57,6 @@ class FileReader:
                     label = int(line_array[serie_length].split("\n")[0])
                 except:
                     label = line_array[serie_length].split("\n")[0]
-
             if label != none:
                 dataset.add_series(label, series)
             num_line = num_line + 1
@@ -80,10 +64,8 @@ class FileReader:
         end = time.time()
 
         elapsed = end - start
-        print("finished in", elapsed, "seconds")
+        print("parsing process finished in", elapsed, "seconds")
         file.close()
-        print("Dataset Series:", dataset.get_series_size())
-        print("Dataset Labels:", dataset.get_labels())
         return dataset
 
     @staticmethod
