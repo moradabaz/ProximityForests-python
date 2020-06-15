@@ -100,9 +100,9 @@ class PFResult:
         resultados.append(result)
         result = 'Accuracy: ' + str(self.accuracy)
         resultados.append(result)
-        result = "elapsed time train: " + str(self.elapsed_time_train / 1e6)
+        result = "elapsed time train: " + str(self.elapsed_time_train)
         resultados.append(result)
-        result = "elapsed time test: " + str(self.elapsed_time_test / 1e6)
+        result = "elapsed time test: " + str(self.elapsed_time_test)
         resultados.append(result)
 
         return resultados

@@ -1,5 +1,6 @@
 import sys
-sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
+#sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
+sys.path.append(sys.argv[1])
 import time
 import timeit
 from datetime import date
@@ -27,7 +28,7 @@ class ScenarioOne:
 
     def get_args(self):
         if len(sys.argv) > 1:
-            for i in range(1, len(sys.argv)):
+            for i in range(2, len(sys.argv)):
                 options = sys.argv[i].split("=")
                 arg = options[0]
                 value = options[1]

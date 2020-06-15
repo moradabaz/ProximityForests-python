@@ -1,3 +1,4 @@
+import timeit
 
 import numpy as np
 from trees import ProximityTree as pt
@@ -24,7 +25,7 @@ class ProximityForest:
     In the training method, we train each tree
     """
     def train(self, dataset):
-        self.result.start_time_train = time.time()
+        self.result.start_time_train = timeit.default_timer()
         print("Training dataStructures ...")
         for i in range(0, app.AppContext.num_trees):
             self.trees[i].train(dataset)
@@ -33,7 +34,7 @@ class ProximityForest:
                 if app.AppContext.verbosity > 1:
                     if ((i + 1) % 20) == 0:
                         print(".")
-        self.result.end_time_train = time.time()
+        self.result.end_time_train = timeit.default_timer()
         self.result.elapsed_time_train = self.result.end_time_train - self.result.start_time_train
 
     """
@@ -43,7 +44,7 @@ class ProximityForest:
     and compare it with its actual class
     """
     def test(self, test_data: ListDataset):
-        self.result.start_time_test = time.time()
+        self.result.start_time_test = timeit.default_timer()
         for label in test_data.classes:
             self.num_classes_predicted[label] = 0
         self.max_voted_classes = list()
@@ -55,7 +56,7 @@ class ProximityForest:
                 self.result.errors = self.result.errors + 1
             else:
                 self.result.correct = self.result.correct + 1
-        self.result.end_time_test = time.time()
+        self.result.end_time_test = timeit.default_timer()
         self.result.elapsed_time_test = self.result.end_time_test - self.result.start_time_test
         if app.AppContext.verbosity > 0:
             print()
