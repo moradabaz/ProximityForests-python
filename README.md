@@ -1,4 +1,4 @@
-PForests (Gamma Phase)
+PForests (Gamma Version)
 
 This is the Proximity Forest algorithm implemented to classify Time Series.
 
@@ -15,20 +15,18 @@ Packages to Install Previously:
 
 
 How to run a simple execution:
-* Open the file `AppRunner.py` in your `application` directory.
-* Set the full path of your project in the second line of the file `AppRunner.py`
-    *  `sys.path.append("[Absolute path of your project directory]")`
-* Open the `sh` script `TermLauncher.sh` in the folder `/application`:
-    * Change the variable `$DATASET_DIR` and write the full path of the datasets directory.
-    `$DATASET_DIR=[YOUR_PROJECT_FULL_PATH]/dataset`.
-    * To run the `TermLauncher.sh` script you have to pass a parameter which is the name of the dataset. The Following names you have available are:
+* Download the project
+* Give full permissions to your project
+* Go to the directory `launchers`
+* Execute the following command:
+   * `sh TermLauncherParam.sh [DATASET_NAME]`, where `[DATASET_NAME]` is the name of the dataset you have stored in the project. The Names available are:
         * `ItalyPowerDemand`
         * `MoteStrain`
         * `Plane`
         * `GesturePebbleZ2`
        
-    * Run this example:
-        - `sh TermLauncher.sh ItalyPowerDemand`
+ * Try this example:
+       - `sh TermLauncherParam.sh ItalyPowerDemand`
 
 
 
