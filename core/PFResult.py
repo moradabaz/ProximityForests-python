@@ -107,24 +107,17 @@ class PFResult:
 
         return resultados
 
-    def exportJSON(self, dataset_name, experiment_id):
-        file = ""
-        timestamp = time.asctime().split()
-        hora = time.asctime().split()[3].split(":")
-        timestamp = timestamp[1] + "_" + timestamp[2] + "_" + hora[0] + "-" + hora[1] + "-" + hora[2]
-
-        file_path = app.AppContext.output_dir + os.path.sep + self.forest_id + timestamp + ".json"
-        file = None
-        json_string = json.dumps(self)
-        try:
-            file = open(file_path, "w+")
-            file.write(json_string)
-            file.close()
-        except:
-            print("Error: Could create file ")
-            return
-
-        return file_path
+    def exportJSONstats(self):
+        data_stats = [{
+            'train_series': AppContext.AppContext.num_train_series,
+            'test_series': AppContext.AppContext.num_test_series,
+            'correct_predictions': self.correct,
+            'incorrect_predictions': self.errors,
+            'accuracy': self.accuracy,
+            'training_time': self.elapsed_time_train,
+            'testing_time': self.elapsed_time_test
+        }]
+        return data_stats
 
     @staticmethod
     def get_list_from_dict(query: dict):

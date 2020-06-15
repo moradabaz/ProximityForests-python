@@ -29,11 +29,6 @@ class ProximityForest:
         print("Training dataStructures ...")
         for i in range(0, app.AppContext.num_trees):
             self.trees[i].train(dataset)
-            if app.AppContext.verbosity > 0:
-                print(i, ".")
-                if app.AppContext.verbosity > 1:
-                    if ((i + 1) % 20) == 0:
-                        print(".")
         self.result.end_time_train = timeit.default_timer()
         self.result.elapsed_time_train = self.result.end_time_train - self.result.start_time_train
 

@@ -4,13 +4,9 @@ sys.path.append(sys.argv[1])
 import time
 import timeit
 from datetime import date
-from math import inf
-from dtaidistance import dtw
-from numpy import double
 from trees.ProximityForest import ProximityForest
 from core import AppContext, ExperimentRunner
-import numpy as np
-
+import json
 
 class ScenarioOne:
     query_file = ""
@@ -70,16 +66,32 @@ class ScenarioOne:
         return x
 
     @staticmethod
-    def save_training():
-        f_path = ""
+    def save_json():
         name = AppContext.AppContext.dataset_name
-        if type == 1:
-            f_path = AppContext.AppContext.output_dir + name + '_' + 'query' + str(date.today()) + "_" + str(
-                time.localtime().tm_hour) + "-" + str(time.localtime().tm_min) + "-" + str(
-                time.localtime().tm_sec) + ".txt"
-        else:
-            f_path = AppContext.AppContext.output_dir + name + '_' + 'accuracy' + str(date.today()) + "_" + \
-                     str(time.localtime().tm_hour) + "-" + str(time.localtime().tm_min) + "-" + \
+        f_path = AppContext.AppContext.output_dir + name + '_results_' + str(
+                time.localtime().tm_hour) + str(time.localtime().tm_min) + str(
+                time.localtime().tm_sec) + ".json"
+        data = {}
+        data_stats = result.exportJSONstats()
+        data['dataset'] = []
+        data['dataset'].append({
+            'name': AppContext.AppContext.dataset_name,
+            'n_trees' : AppContext.AppContext.num_trees,
+            'n_candidates' : AppContext.AppContext.num_candidates_per_split,
+            'n_repeats': AppContext.AppContext.num_repeats,
+            'execution_time': str(stop - start),
+            'stats': data_stats
+        })
+        with open(f_path, 'w+') as file:
+            file.write(json.dumps(data))
+
+        return
+
+    @staticmethod
+    def save_training():
+        name = AppContext.AppContext.dataset_name
+        f_path = AppContext.AppContext.output_dir + name + '_' + 'accuracy' + "_" + \
+                     str(time.localtime().tm_hour) + str(time.localtime().tm_min) + \
                      str(time.localtime().tm_sec) + ".txt"
 
         with open(f_path, 'w+') as file:
@@ -112,53 +124,6 @@ class ScenarioOne:
             file.writelines("\n")
         file.close()
 
-    @staticmethod
-    def classify_best_serie(query: list, pforest: ProximityForest):
-        lista = query[0]
-        print(lista)
-        lista = lista.split(" ")
-        query = list()
-        for q in lista:
-            query.append(double(q))
-        print(query)
-        label = pforest.predict(query)
-        print(label)
-        lista = experimentrunner.train_data.get_series_from_label(label)
-        num_series = len(lista)
-        best_dist = inf
-        best_serie_id = -1
-        for i in range(0, num_series):
-            serie = lista[i]
-            dist = dtw.distance_fast(np.asarray(query), np.asarray(serie))
-            if dist < best_dist:
-                best_dist = dist
-                best_serie_id = i
-        print("QUERY")
-        print(query)
-        print("Series aproximate:", best_serie_id)
-        print(lista[best_serie_id])
-        print("Dist: ", best_dist)
-
-        name = AppContext.AppContext.dataset_name
-        f_path = name + '_' + 'query' + str(date.today()) + "_" + str(
-            time.localtime().tm_hour) + "-" + str(time.localtime().tm_min) + "-" + str(
-            time.localtime().tm_sec) + ".txt"
-
-        with open(f_path, 'w+') as file:
-            file.writelines("Dataset: %s\n" % AppContext.AppContext.dataset_name)
-            file.writelines("Number of Trees: %s\n" % AppContext.AppContext.num_trees)
-            file.writelines("Number of Candidates per tree: %s\n" % AppContext.AppContext.num_candidates_per_split)
-            file.writelines("Number of repeats: %s\n" % AppContext.AppContext.num_repeats)
-            file.writelines("Query: ")
-            file.writelines("%s " % q for q in query)
-            file.writelines("\n")
-            file.writelines("Best serie id: %s \n" % best_serie_id)
-            file.writelines("Most similar serie: [ ")
-            file.writelines("%s " % q for q in lista[best_serie_id])
-            file.writelines(" ] \n")
-            file.writelines("DTW distance: %s\n" % best_dist)
-        file.close()
-
     pass
 
 sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
@@ -170,23 +135,11 @@ experimentrunner = ExperimentRunner.ExperimentRunner()
 # start = timeit.default_timer()
 # aqui entrena
 # stop = timeit.default_timer()
-if scenario.type == 0:
-    print("Calculating accuracy using the test dataStructures....")
-    start = timeit.default_timer()
-    pforest = experimentrunner.run()
-    result = pforest.result
-    stop = timeit.default_timer()
-    scenario.save_training()
-
-elif scenario.type == 2:
-    print("Calculating accuracy using the test dataStructures....")
-    start = timeit.default_timer()
-    result = experimentrunner.run()
-    stop = timeit.default_timer()
-    scenario.save_all(pforest=result)
-elif scenario.type == 1:
-    pforest = experimentrunner.load_traindata()
-    print("Opening query file...")
-    query = scenario.read_query_path(query=scenario.query_file)
-    print("Query loaded...")
-    scenario.classify_best_serie(query, pforest)
+print("Calculating accuracy using the test dataStructures....")
+print("")
+start = timeit.default_timer()
+pforest = experimentrunner.run()
+result = pforest.result
+stop = timeit.default_timer()
+scenario.save_training()
+scenario.save_json()
