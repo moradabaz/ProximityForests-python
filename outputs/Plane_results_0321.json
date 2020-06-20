@@ -1,1 +1,0 @@
-{"dataset": [{"name": "Plane", "n_trees": 100, "n_candidates": 5, "n_repeats": 1, "execution_time": "57.209777798000005", "stats": [{"train_series": 105, "test_series": 105, "correct_predictions": 104, "incorrect_predictions": 1, "accuracy": 0.9904761904761905, "training_time": 47.173235225999996, "testing_time": 10.017160095000001}]}]}

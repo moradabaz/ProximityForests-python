@@ -46,6 +46,8 @@ class ScenarioOne:
                     AppContext.AppContext.output_dir = value
                 elif arg == "-targetlast":
                     AppContext.AppContext.target_column_is_first = value
+                elif arg == "-ignoreFirst":
+                    AppContext.AppContext.ignore_first_col = value
                 elif arg == "-calculate":
                     value = value.upper().lower()
                     if value == "accuracy":
@@ -84,7 +86,7 @@ class ScenarioOne:
         })
         with open(f_path, 'w+') as file:
             file.write(json.dumps(data))
-
+        file.close()
         return
 
     @staticmethod

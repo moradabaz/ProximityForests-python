@@ -17,7 +17,7 @@ class FileReader:
         return FileReader.readCSVToListDataset(fileName, has_header, labelLastColumn, separator)
 
     @staticmethod
-    def readCSVToListDataset(fileName, has_header=True, labelLastColumn=True, ignore_first_column=True, separator=","):
+    def readCSVToListDataset(fileName, has_header=True, labelLastColumn=True, ignore_first_column=False, separator=","):
         try:
             file = open(fileName, "r")
             print("Reading File: [", fileName, "]")
