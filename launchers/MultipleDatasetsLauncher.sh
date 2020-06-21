@@ -1,7 +1,7 @@
 CUR_DIR=$(cd .. && pwd)
 for d in $CUR_DIR/datasets/*; do
   if [ -d $d ]; then
-    dataset=$(echo $d | cut -f7 -d '/')
+    dataset=$(basename $d)
     DATASET_DIR=$CUR_DIR/datasets/$dataset/
     echo ""
     echo "Executing dataset [ $dataset ]  ..."
@@ -9,3 +9,4 @@ for d in $CUR_DIR/datasets/*; do
     echo "Classification process finished"
   fi
 done
+
