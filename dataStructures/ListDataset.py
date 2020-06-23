@@ -1,4 +1,5 @@
 import random
+import math
 
 
 class ListDataset:
@@ -8,6 +9,7 @@ class ListDataset:
         :param: class_map: map which indicates the number of series per label -> <label, nº series>
         :param
     """
+
     def __init__(self, expected_size=0, length=0):
         self.series_data = list()
         self.classes = list()
@@ -186,3 +188,15 @@ class ListDataset:
     def shuffle(self):
         random.shuffle(self.series_data)
         random.shuffle(self.classes)
+
+    @staticmethod
+    def stdv(dataset):
+        suma = 0
+        suma2 = 0
+        for serie in dataset.series_data:
+            for i in range(0, len(serie)):
+                suma = suma + serie[i]
+                suma2 = suma2 + serie[i] * serie[i]
+        n = len(dataset.series_data) * len(dataset.series_data[0])
+        mean = suma / n
+        return math.sqrt(abs(suma2 / (n - (mean * mean))))

@@ -14,7 +14,7 @@ class FileReader:
         file = fileName.split(".")[1]
         if file == "arff" or file == "ts":
             return FileReader.load_arff_data(fileName)
-        return FileReader.readCSVToListDataset(fileName, has_header, labelLastColumn, separator)
+        return FileReader.readCSVToListDataset(fileName, has_header, labelLastColumn, False, separator)
 
     @staticmethod
     def readCSVToListDataset(fileName, has_header=True, labelLastColumn=True, ignore_first_column=False, separator=","):

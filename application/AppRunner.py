@@ -48,6 +48,8 @@ class ScenarioOne:
                     AppContext.AppContext.target_column_is_first = value
                 elif arg == "-ignoreFirst":
                     AppContext.AppContext.ignore_first_col = value
+                elif arg == "-edistance":
+                    AppContext.AppContext.elastic_distance = value
                 elif arg == "-calculate":
                     value = value.upper().lower()
                     if value == "accuracy":

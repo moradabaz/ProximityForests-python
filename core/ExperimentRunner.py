@@ -3,19 +3,20 @@ from dataStructures import ListDataset
 from core import FileReader, AppContext
 from trees import ProximityForest
 
-
 class ExperimentRunner:
 
     def __init__(self):
+        self.g_value = 0
+        self.series_length = 0
         self.train_data = ListDataset.ListDataset()
         self.test_data = ListDataset.ListDataset()
         self.def_separator = ","
 
     def run(self):
         train_data_original = FileReader.FileReader.read_file(AppContext.AppContext.training_file,
-                                                            has_header=True,
-                                                            labelLastColumn=True,
-                                                            separator=self.def_separator)
+                                                              has_header=True,
+                                                              labelLastColumn=True,
+                                                              separator=self.def_separator)
         test_data_original = FileReader.FileReader.read_file(AppContext.AppContext.testing_file,
                                                              has_header=True,
                                                              labelLastColumn=True,
@@ -23,6 +24,12 @@ class ExperimentRunner:
 
         self.train_data = train_data_original.reorder_class_labels(None)
         self.test_data = test_data_original.reorder_class_labels(self.train_data.initial_class_labels)
+        self.series_length = len(self.train_data.series_data[0])
+        AppContext.AppContext.training_dataset = self.train_data
+        AppContext.AppContext.testing_dataset = self.test_data
+        AppContext.AppContext.series_length = self.series_length
+
+
         print("Series: Length:", len(self.train_data.series_data[0]))
         training_file = open(AppContext.AppContext.training_file)
         dataset_name = training_file.name
