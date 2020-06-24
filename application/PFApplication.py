@@ -1,7 +1,6 @@
 import sys
 sys.setrecursionlimit(31000)
 from core import AppContext, ExperimentRunner
-from distance.DistanceMeasure import DistanceMeasure
 import timeit
 
 

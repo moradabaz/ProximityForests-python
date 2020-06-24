@@ -1,7 +1,11 @@
 import math
 import random as rand
+import statistics
+
 import numpy as np
 import math
+
+from core.AppContext import AppContext
 
 
 class LCSS:
@@ -67,11 +71,24 @@ class LCSS:
         return 0
 
     @staticmethod
-    def get_random_epsilon(serie_length):
-        std_train = statistics.stdev(serie_length)
+    def get_random_epsilon(dataset):
+        std_train = LCSS.stdv_p()
         std_floor = std_train * 0.2
         return rand.random() * (std_train - std_floor) + std_floor
 
     @staticmethod
     def get_random_window(serie_lenght):
-        return rand.randint(0, (serie_lenght + 1) / 4)
+        return rand.randint(0, int((serie_lenght + 1) / 4))
+
+    @staticmethod
+    def stdv_p():
+        sumx = 0
+        sumx2 = 0
+        for i in range(0, AppContext.training_dataset.series_data.__len__()):
+            insarray = np.asarray(AppContext.training_dataset.series_data[i])
+            for j in range(0, len(insarray)):
+                sumx = sumx + insarray[j]
+                sumx2 = sumx2 + insarray[j] * insarray[j]
+        n = len(AppContext.training_dataset.series_data)
+        mean = sumx / n
+        return math.sqrt(abs((sumx2 / n) - mean * mean))

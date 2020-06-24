@@ -1,0 +1,12 @@
+Dataset: Chinatown
+Number of Trees: 100
+Number of Candidates per tree: 5
+Number of repeats: 1
+Train series number: 20
+Test series number: 343
+Correct (TP+TN): 334
+Incorrect (FP+FN): 9
+Accuracy: 0.9737609329446064
+elapsed time train: 0.738136956
+elapsed time test: 2.125207074
+Time: 2.8724556260000003

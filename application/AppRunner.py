@@ -72,7 +72,7 @@ class ScenarioOne:
     @staticmethod
     def save_json():
         name = AppContext.AppContext.dataset_name
-        f_path = AppContext.AppContext.output_dir + name + '_results_' + str(
+        f_path = AppContext.AppContext.output_dir + name + '_' + AppContext.AppContext.elastic_distance + '_' + str(
                 time.localtime().tm_hour) + str(time.localtime().tm_min) + str(
                 time.localtime().tm_sec) + ".json"
         data = {}
@@ -94,7 +94,7 @@ class ScenarioOne:
     @staticmethod
     def save_training():
         name = AppContext.AppContext.dataset_name
-        f_path = AppContext.AppContext.output_dir + name + '_' + 'accuracy' + "_" + \
+        f_path = AppContext.AppContext.output_dir + name + '_' + AppContext.AppContext.elastic_distance + "_" + \
                      str(time.localtime().tm_hour) + str(time.localtime().tm_min) + \
                      str(time.localtime().tm_sec) + ".txt"
 
@@ -112,7 +112,7 @@ class ScenarioOne:
     @staticmethod
     def save_all(pforest: ProximityForest):
         name = AppContext.AppContext.dataset_name
-        f_path = AppContext.AppContext.output_dir + name + '_' + 'results' + str(date.today()) + "_" + \
+        f_path = AppContext.AppContext.output_dir + name + '_' + AppContext.AppContext.elastic_distance + str(date.today()) + "_" + \
                  str(time.localtime().tm_hour) + "-" + str(time.localtime().tm_min) + "-" + \
                  str(time.localtime().tm_sec) + ".txt"
 

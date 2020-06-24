@@ -2,7 +2,7 @@ from dataStructures import ListDataset
 
 
 class AppContext:
-    elastic_distance = 0
+    elastic_distance = "dtw"
     series_length = 0
     num_test_series = 0
     num_train_series = 0
@@ -10,8 +10,8 @@ class AppContext:
     config_majority_vote_tie_break_randomly = True
     config_skip_distance_when_exemplar_matches_query = True
     config_use_random_choice_when_min_distance_is_equal = True
-    training_file = "/Users/morad/PycharmProjects/PForests/datasets/MelbournePedestrian/MelbournePedestrian_TRAIN.csv"
-    testing_file = "/Users/morad/PycharmProjects/PForests/datasets/MelbournePedestrian/MelbournePedestrian_TEST.csv"
+    training_file = "/Users/morad/PycharmProjects/PForests/datasets/ItalyPowerDemand/ItalyPowerDemand_TRAIN.csv"
+    testing_file = "/Users/morad/PycharmProjects/PForests/datasets/ItalyPowerDemand/ItalyPowerDemand_TEST.csv"
     output_dir = "../output/"
     csv_has_header = True
     ignore_first_col = True

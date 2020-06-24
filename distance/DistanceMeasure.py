@@ -2,11 +2,9 @@ import dtaidistance.dtw as dtw
 import random
 import numpy as np
 from core import AppContext
-from distance import *
-from distance.ERP import ERP
 from distance.LCSS import LCSS
-from distance.MSM import MSM
 from distance.TWE import TWE
+import math
 
 
 class DistanceMeasure:
@@ -33,12 +31,12 @@ class DistanceMeasure:
                 dist = dtw.distance_fast(array_query, exemplars, window=2)
             elif AppContext.AppContext.elastic_distance == "lcss":
                 win_size = LCSS.get_random_window(AppContext.AppContext.series_length)
-                esilon = LCSS.get_random_epsilon(AppContext.AppContext.series_length)
+                esilon = LCSS.get_random_epsilon(AppContext.AppContext.training_dataset)
                 dist = LCSS.distance(array_query, exemplars, window_size=win_size, epsilon=esilon)
             elif AppContext.AppContext.elastic_distance == "twe":
                 dist = TWE.distance(array_query, exemplars, TWE.get_random_nu(), TWE.get_random_lambda())
             else:
-                dist = dtw.distance(array_query, exemplars, window=2)
+                dist = dtw.distance_fast(array_query, exemplars, window=2)
 
             if dist < bsf:
                 bsf = dist
@@ -82,3 +80,17 @@ class DistanceMeasure:
             if first[i] != second[i]:
                 return False
         return True
+
+    @staticmethod
+    def stdv_p():
+        sumx = 0
+        sumx2 = 0
+        for i in range(0, AppContext.AppContext.training_dataset.series_data.__len__()):
+            insarray = np.asarray(AppContext.AppContext.training_dataset[i])
+            for j in range(0, len(insarray)):
+                sumx = sumx + insarray[j]
+                sumx2 = sumx2 + insarray[j] * insarray[j]
+        n = len(AppContext.AppContext.training_dataset.series_data)
+        mean = sumx / n
+        return math.sqrt((sumx2 / n) - mean * mean)
+
