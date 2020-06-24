@@ -61,7 +61,7 @@ class LCSS:
                 j = j + 1
             if j_stop < length2:
                 matrix[i][j_stop] = -np.inf
-        res = 1.0 - (1.0 * matrix[length1 - 1][length2 - 1] / min_length)
+        res = 1.0 - 1.0 * matrix[length1 - 1][length2 - 1] / min_length
         return res
 
     @staticmethod
