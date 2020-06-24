@@ -29,17 +29,17 @@ class DistanceMeasure:
             except RecursionError:
                 return -1
 
-            #dist = dtw.distance_fast(array_query, exemplars, window=2)
-            #  windowsize = ERP.ERP.get_random_window(AppContext.AppContext.series_length)
-            #  g_value = ERP.ERP.get_random_g(AppContext.AppContext.training_dataset)
-            # dist = ERP.ERP.erp_distance(array_query, exemplars, windowsize, g_value)
-            #msm_cost = MSM.get_random_cost()
-            #dist = MSM.distance(array_query, exemplars, msm_cost)
             if AppContext.AppContext.elastic_distance == "dtw":
-                dist = dtw.distance(array_query, exemplars, window=2)
+                dist = dtw.distance_fast(array_query, exemplars, window=2)
             elif AppContext.AppContext.elastic_distance == "lcss":
-                dist = LCSS.distance(array_query, exemplars, window_size=)
-            dist = TWE.distance(array_query, exemplars, TWE.get_random_nu(), TWE.get_random_lambda())
+                win_size = LCSS.get_random_window(AppContext.AppContext.series_length)
+                esilon = LCSS.get_random_epsilon(AppContext.AppContext.series_length)
+                dist = LCSS.distance(array_query, exemplars, window_size=win_size, epsilon=esilon)
+            elif AppContext.AppContext.elastic_distance == "twe":
+                dist = TWE.distance(array_query, exemplars, TWE.get_random_nu(), TWE.get_random_lambda())
+            else:
+                dist = dtw.distance(array_query, exemplars, window=2)
+
             if dist < bsf:
                 bsf = dist
                 closest_nodes.clear()

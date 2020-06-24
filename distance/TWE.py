@@ -62,7 +62,7 @@ class TWE:
                     h_trans = i
                 dist = Di1[i] + D[i - 1][j] + lambada + nu * h_trans
                 if dmin > dist:
-                    dmin + dist
+                    dmin = dist
                 if j > 1:
                     h_trans = 1
                 else:

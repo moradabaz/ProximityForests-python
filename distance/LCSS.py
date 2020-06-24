@@ -1,6 +1,9 @@
 import math
+import random as rand
 import numpy as np
 import math
+
+
 class LCSS:
 
     @staticmethod
@@ -62,3 +65,13 @@ class LCSS:
         if math.fabs((a - b)) <= epsilon:
             return 1
         return 0
+
+    @staticmethod
+    def get_random_epsilon(serie_length):
+        std_train = statistics.stdev(serie_length)
+        std_floor = std_train * 0.2
+        return rand.random() * (std_train - std_floor) + std_floor
+
+    @staticmethod
+    def get_random_window(serie_lenght):
+        return rand.randint(0, (serie_lenght + 1) / 4)
