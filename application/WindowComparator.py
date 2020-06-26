@@ -76,12 +76,6 @@ class ScenarioTwo:
     @staticmethod
     def open_json():
         data = {'dataset': []}
-        data['dataset'].append({
-            'name': AppContext.AppContext.dataset_name,
-            'n_trees': AppContext.AppContext.num_trees,
-            'n_candidates': AppContext.AppContext.num_candidates_per_split,
-            'n_repeats': AppContext.AppContext.num_repeats,
-        })
         return data
 
     @staticmethod
