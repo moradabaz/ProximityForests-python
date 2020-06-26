@@ -1,0 +1,335 @@
+{
+  "dataset": [
+    {
+      "name": "ItalyPowerDemand" ,
+      "n_trees": 100 ,
+      "n_candidates": 5 ,
+      "n_repeats": 1
+    } ,
+    {
+      "stats_0": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 980 ,
+          "incorrect_predictions": 49 ,
+          "accuracy": 0.9523809523809523 ,
+          "training_time": 4.024558394 ,
+          "testing_time": 11.718831051000002
+        }
+      ]
+    } ,
+    {
+      "stats_1": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 976 ,
+          "incorrect_predictions": 53 ,
+          "accuracy": 0.9484936831875608 ,
+          "training_time": 2.28155121 ,
+          "testing_time": 6.798393488999999
+        }
+      ]
+    } ,
+    {
+      "stats_2": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 990 ,
+          "incorrect_predictions": 39 ,
+          "accuracy": 0.9620991253644315 ,
+          "training_time": 2.432022530000001 ,
+          "testing_time": 7.0827120579999985
+        }
+      ]
+    } ,
+    {
+      "stats_3": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 977 ,
+          "incorrect_predictions": 52 ,
+          "accuracy": 0.9494655004859086 ,
+          "training_time": 2.695309848000001 ,
+          "testing_time": 7.841614778999997
+        }
+      ]
+    } ,
+    {
+      "stats_4": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 983 ,
+          "incorrect_predictions": 46 ,
+          "accuracy": 0.9552964042759962 ,
+          "training_time": 3.070914733000002 ,
+          "testing_time": 9.100579596000003
+        }
+      ]
+    } ,
+    {
+      "stats_5": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 968 ,
+          "incorrect_predictions": 61 ,
+          "accuracy": 0.9407191448007775 ,
+          "training_time": 3.101969143000005 ,
+          "testing_time": 8.860061333000004
+        }
+      ]
+    } ,
+    {
+      "stats_6": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 978 ,
+          "incorrect_predictions": 51 ,
+          "accuracy": 0.9504373177842566 ,
+          "training_time": 3.27694038300001 ,
+          "testing_time": 9.436295256000008
+        }
+      ]
+    } ,
+    {
+      "stats_7": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 972 ,
+          "incorrect_predictions": 57 ,
+          "accuracy": 0.9446064139941691 ,
+          "training_time": 3.316787204999997 ,
+          "testing_time": 9.44283876
+        }
+      ]
+    } ,
+    {
+      "stats_8": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 976 ,
+          "incorrect_predictions": 53 ,
+          "accuracy": 0.9484936831875608 ,
+          "training_time": 3.336411756000004 ,
+          "testing_time": 9.477923145000005
+        }
+      ]
+    } ,
+    {
+      "stats_9": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 968 ,
+          "incorrect_predictions": 61 ,
+          "accuracy": 0.9407191448007775 ,
+          "training_time": 3.441671477 ,
+          "testing_time": 10.057469623000003
+        }
+      ]
+    } ,
+    {
+      "stats_10": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 984 ,
+          "incorrect_predictions": 45 ,
+          "accuracy": 0.956268221574344 ,
+          "training_time": 3.607982230999994 ,
+          "testing_time": 10.248314659000002
+        }
+      ]
+    } ,
+    {
+      "stats_11": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 974 ,
+          "incorrect_predictions": 55 ,
+          "accuracy": 0.9465500485908649 ,
+          "training_time": 3.635995707999996 ,
+          "testing_time": 10.462000950000004
+        }
+      ]
+    } ,
+    {
+      "stats_12": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 971 ,
+          "incorrect_predictions": 58 ,
+          "accuracy": 0.9436345966958212 ,
+          "training_time": 3.629642990000008 ,
+          "testing_time": 10.771948933999994
+        }
+      ]
+    } ,
+    {
+      "stats_13": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 968 ,
+          "incorrect_predictions": 61 ,
+          "accuracy": 0.9407191448007775 ,
+          "training_time": 3.665666984000012 ,
+          "testing_time": 11.371778795000012
+        }
+      ]
+    } ,
+    {
+      "stats_14": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 974 ,
+          "incorrect_predictions": 55 ,
+          "accuracy": 0.9465500485908649 ,
+          "training_time": 3.770334264999974 ,
+          "testing_time": 12.324406254999985
+        }
+      ]
+    } ,
+    {
+      "stats_15": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 971 ,
+          "incorrect_predictions": 58 ,
+          "accuracy": 0.9436345966958212 ,
+          "training_time": 4.090172342000017 ,
+          "testing_time": 13.654099736000006
+        }
+      ]
+    } ,
+    {
+      "stats_16": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 970 ,
+          "incorrect_predictions": 59 ,
+          "accuracy": 0.9426627793974732 ,
+          "training_time": 4.857753541000022 ,
+          "testing_time": 12.710279852000014
+        }
+      ]
+    } ,
+    {
+      "stats_17": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 970 ,
+          "incorrect_predictions": 59 ,
+          "accuracy": 0.9426627793974732 ,
+          "training_time": 4.210406070999994 ,
+          "testing_time": 12.059710299999978
+        }
+      ]
+    } ,
+    {
+      "stats_18": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 964 ,
+          "incorrect_predictions": 65 ,
+          "accuracy": 0.9368318756073858 ,
+          "training_time": 4.1801039099999855 ,
+          "testing_time": 11.481895912999988
+        }
+      ]
+    } ,
+    {
+      "stats_19": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 967 ,
+          "incorrect_predictions": 62 ,
+          "accuracy": 0.9397473275024295 ,
+          "training_time": 3.982826837999994 ,
+          "testing_time": 11.979006122000044
+        }
+      ]
+    } ,
+    {
+      "stats_20": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 976 ,
+          "incorrect_predictions": 53 ,
+          "accuracy": 0.9484936831875608 ,
+          "training_time": 4.2232865419999825 ,
+          "testing_time": 12.28421671999996
+        }
+      ]
+    } ,
+    {
+      "stats_21": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 966 ,
+          "incorrect_predictions": 63 ,
+          "accuracy": 0.9387755102040817 ,
+          "training_time": 4.055297613999983 ,
+          "testing_time": 12.195519047000005
+        }
+      ]
+    } ,
+    {
+      "stats_22": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 964 ,
+          "incorrect_predictions": 65 ,
+          "accuracy": 0.9368318756073858 ,
+          "training_time": 3.880503711000017 ,
+          "testing_time": 11.313807811000004
+        }
+      ]
+    } ,
+    {
+      "stats_23": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 950 ,
+          "incorrect_predictions": 79 ,
+          "accuracy": 0.923226433430515 ,
+          "training_time": 4.269779051 ,
+          "testing_time": 17.029716828999995
+        }
+      ]
+    } ,
+    {
+      "stats_24": [
+        {
+          "train_series": 67 ,
+          "test_series": 1029 ,
+          "correct_predictions": 971 ,
+          "incorrect_predictions": 58 ,
+          "accuracy": 0.9436345966958212 ,
+          "training_time": 4.327843184000017 ,
+          "testing_time": 13.678091647999963
+        }
+      ]
+    }
+  ]
+}

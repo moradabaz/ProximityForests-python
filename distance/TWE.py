@@ -52,7 +52,7 @@ class TWE:
         for i in range(1, r + 1):
             for j in range(1, c + 1):
                 h_trans = math.fabs(i - j)
-                if j > 1 and j > 1:
+                if i > 1 and j > 1:
                     h_trans = h_trans + math.fabs((i - 1) - (j - 1))
                 dist0 = D[i - 1][j - 1] + nu * h_trans + D[i][j]
                 dmin = dist0

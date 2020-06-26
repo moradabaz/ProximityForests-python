@@ -46,7 +46,7 @@ class ProximityForest:
         size = test_data.get_series_size()
         for i in range(0, size):
             actual_class = test_data.get_class(i)
-            predicted_class = self.predict(test_data.series_data.__getitem__(i))
+            predicted_class = self.predict(test_data.series_data[i])
             if actual_class != predicted_class:
                 self.result.errors = self.result.errors + 1
             else:

@@ -1,5 +1,6 @@
 import sys
-#sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
+
+# sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
 sys.path.append(sys.argv[1])
 import time
 import timeit
@@ -8,7 +9,8 @@ from trees.ProximityForest import ProximityForest
 from core import AppContext, ExperimentRunner
 import json
 
-class ScenarioOne:
+
+class ScenarioTwo:
     query_file = ""
     type = 1
     time_start = 0
@@ -72,18 +74,29 @@ class ScenarioOne:
         return x
 
     @staticmethod
+    def open_json():
+        data = {'dataset': []}
+        data['dataset'].append({
+            'name': AppContext.AppContext.dataset_name,
+            'n_trees': AppContext.AppContext.num_trees,
+            'n_candidates': AppContext.AppContext.num_candidates_per_split,
+            'n_repeats': AppContext.AppContext.num_repeats,
+        })
+        return data
+
+    @staticmethod
     def save_json():
         name = AppContext.AppContext.dataset_name
         f_path = AppContext.AppContext.output_dir + name + '_' + AppContext.AppContext.elastic_distance + '_' + str(
-                time.localtime().tm_hour) + str(time.localtime().tm_min) + str(
-                time.localtime().tm_sec) + ".json"
+            time.localtime().tm_hour) + str(time.localtime().tm_min) + str(
+            time.localtime().tm_sec) + ".json"
         data = {}
         data_stats = result.exportJSONstats()
         data['dataset'] = []
         data['dataset'].append({
             'name': AppContext.AppContext.dataset_name,
-            'n_trees' : AppContext.AppContext.num_trees,
-            'n_candidates' : AppContext.AppContext.num_candidates_per_split,
+            'n_trees': AppContext.AppContext.num_trees,
+            'n_candidates': AppContext.AppContext.num_candidates_per_split,
             'n_repeats': AppContext.AppContext.num_repeats,
             'execution_time': str(stop - start),
             'stats': data_stats
@@ -97,8 +110,8 @@ class ScenarioOne:
     def save_training():
         name = AppContext.AppContext.dataset_name
         f_path = AppContext.AppContext.output_dir + name + '_' + AppContext.AppContext.elastic_distance + "_" + \
-                     str(time.localtime().tm_hour) + str(time.localtime().tm_min) + \
-                     str(time.localtime().tm_sec) + ".txt"
+                 str(time.localtime().tm_hour) + str(time.localtime().tm_min) + \
+                 str(time.localtime().tm_sec) + ".txt"
 
         with open(f_path, 'w+') as file:
             stats = result.result_statistics(AppContext.AppContext.dataset_name)
@@ -116,7 +129,8 @@ class ScenarioOne:
     @staticmethod
     def save_all(pforest: ProximityForest):
         name = AppContext.AppContext.dataset_name
-        f_path = AppContext.AppContext.output_dir + name + '_' + AppContext.AppContext.elastic_distance + str(date.today()) + "_" + \
+        f_path = AppContext.AppContext.output_dir + name + '_' + AppContext.AppContext.elastic_distance + str(
+            date.today()) + "_" + \
                  str(time.localtime().tm_hour) + "-" + str(time.localtime().tm_min) + "-" + \
                  str(time.localtime().tm_sec) + ".txt"
 
@@ -134,8 +148,9 @@ class ScenarioOne:
 
     pass
 
+
 sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
-scenario = ScenarioOne()
+scenario = ScenarioTwo()
 scenario.get_args()
 
 experimentrunner = ExperimentRunner.ExperimentRunner()
@@ -145,9 +160,20 @@ experimentrunner = ExperimentRunner.ExperimentRunner()
 # stop = timeit.default_timer()
 print("Calculating accuracy using the test....")
 print("")
-start = timeit.default_timer()
-pforest = experimentrunner.run()
-result = pforest.result
-stop = timeit.default_timer()
-scenario.save_training()
-scenario.save_json()
+name = AppContext.AppContext.dataset_name
+f_path = AppContext.AppContext.output_dir + name + '_' + AppContext.AppContext.elastic_distance + '_' + str(
+    time.localtime().tm_hour) + str(time.localtime().tm_min) + str(
+    time.localtime().tm_sec) + ".json"
+data = ScenarioTwo.open_json()
+for i in range(0, 25):
+    AppContext.AppContext.window_length = i
+    start = timeit.default_timer()
+    pforest = experimentrunner.run()
+    result = pforest.result
+    data_stats = result.exportJSONstats()
+    stat = {"stats_" + str(i): data_stats}
+    data['dataset'].append(stat)
+    stop = timeit.default_timer()
+with open(f_path, 'w+') as file:
+    file.write(json.dumps(data))
+file.close()

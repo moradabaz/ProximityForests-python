@@ -2,7 +2,7 @@ import dtaidistance.dtw as dtw
 import random
 import numpy as np
 from core import AppContext
-from distance.LCSS import LCSS
+from distance.lcss import LCSS
 from distance.TWE import TWE
 import math
 
@@ -28,11 +28,10 @@ class DistanceMeasure:
                 return -1
 
             if AppContext.AppContext.elastic_distance == "dtw":
-                dist = dtw.distance_fast(array_query, exemplars, window=2)
+                dist = dtw.distance_fast(array_query, exemplars, window=AppContext.AppContext.window_length)
             elif AppContext.AppContext.elastic_distance == "lcss":
-                win_size = LCSS.get_random_window(AppContext.AppContext.series_length)
-                esilon = LCSS.get_random_epsilon(AppContext.AppContext.training_dataset)
-                dist = LCSS.distance(array_query, exemplars, window_size=win_size, epsilon=esilon)
+                esilon = LCSS.get_random_epsilon()
+                dist = LCSS.distance(array_query, exemplars, window_size=-np.inf, epsilon=esilon)
             elif AppContext.AppContext.elastic_distance == "twe":
                 dist = TWE.distance(array_query, exemplars, TWE.get_random_nu(), TWE.get_random_lambda())
             else:

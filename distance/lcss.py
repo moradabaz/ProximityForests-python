@@ -61,7 +61,7 @@ class LCSS:
                 j = j + 1
             if j_stop < length2:
                 matrix[i][j_stop] = -np.inf
-        res = 1.0 - 1.0 * matrix[length1 - 1][length2 - 1] / min_length
+        res = 1.0 - (1.0 * matrix[length1 - 1][length2 - 1] / min_length)
         return res
 
     @staticmethod
@@ -71,7 +71,7 @@ class LCSS:
         return 0
 
     @staticmethod
-    def get_random_epsilon(dataset):
+    def get_random_epsilon():
         std_train = LCSS.stdv_p()
         std_floor = std_train * 0.2
         return rand.random() * (std_train - std_floor) + std_floor

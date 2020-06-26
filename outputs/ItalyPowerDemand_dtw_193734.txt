@@ -1,0 +1,14 @@
+Dataset: ItalyPowerDemand
+Number of Trees: 100
+Number of Candidates per tree: 5
+Number of repeats: 1
+Elastic distance chosen: dtw
+Window lenght: 2
+Train series number: 67
+Test series number: 1029
+Correct (TP+TN): 980
+Incorrect (FP+FN): 49
+Accuracy: 0.9523809523809523
+elapsed time train: 2.805476397
+elapsed time test: 7.880301486
+Time: 10.715918012

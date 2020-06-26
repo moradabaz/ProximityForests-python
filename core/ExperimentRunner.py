@@ -2,6 +2,8 @@ import sys
 from dataStructures import ListDataset
 from core import FileReader, AppContext
 from trees import ProximityForest
+import random
+
 
 class ExperimentRunner:
 
@@ -13,6 +15,7 @@ class ExperimentRunner:
         self.def_separator = ","
 
     def run(self):
+        random.seed(1234)
         train_data_original = FileReader.FileReader.read_file(AppContext.AppContext.training_file,
                                                               has_header=True,
                                                               labelLastColumn=True,
@@ -28,7 +31,6 @@ class ExperimentRunner:
         AppContext.AppContext.training_dataset = self.train_data
         AppContext.AppContext.testing_dataset = self.test_data
         AppContext.AppContext.series_length = self.series_length
-
 
         print("Series: Length:", len(self.train_data.series_data[0]))
         training_file = open(AppContext.AppContext.training_file)

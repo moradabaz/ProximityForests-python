@@ -3,6 +3,7 @@ from dataStructures import ListDataset
 
 class AppContext:
     elastic_distance = "dtw"
+    window_length = 2
     series_length = 0
     num_test_series = 0
     num_train_series = 0
