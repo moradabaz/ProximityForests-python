@@ -28,7 +28,9 @@ class ProximityForest:
         self.result.start_time_train = timeit.default_timer()
         print("Training dataStructures ...")
         for i in range(0, app.AppContext.num_trees):
+            #print("training tree number ", i)
             self.trees[i].train(dataset)
+            #print("training tree number ", self.trees[i].time_best_splits)
         self.result.end_time_train = timeit.default_timer()
         self.result.elapsed_time_train = self.result.end_time_train - self.result.start_time_train
 

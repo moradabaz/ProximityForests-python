@@ -17,6 +17,7 @@ class ProximityTree:
         self.random = random()
         self.node_counter = 0
         self.tree_depth = depth
+        self.time_best_splits = 0
         self.root = None
         self.id = id
         if forest is not None:

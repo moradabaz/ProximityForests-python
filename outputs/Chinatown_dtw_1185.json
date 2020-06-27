@@ -1,1 +1,0 @@
-{"dataset": [{"name": "Chinatown", "n_trees": 100, "n_candidates": 5, "n_repeats": 1, "execution_time": "2.8498882350000003", "stats": [{"train_series": 20, "test_series": 343, "correct_predictions": 306, "incorrect_predictions": 37, "accuracy": 0.892128279883382, "training_time": 0.7475422949999999, "testing_time": 2.093301695}]}]}

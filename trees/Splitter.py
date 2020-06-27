@@ -74,7 +74,7 @@ class Splitter:
     """
     def find_best_splits(self, sample_dataset):
         series_per_class = sample_dataset.split_classes()
-        best_weighted_gini = 1000000
+        best_weighted_gini = np.inf
         num_series = sample_dataset.get_series_data_length()
         for i in range(0, AppContext.AppContext.num_candidates_per_split):
             splits = self.split_data(sample_dataset, series_per_class)

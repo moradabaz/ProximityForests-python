@@ -28,7 +28,8 @@ class DistanceMeasure:
                 return -1
 
             if AppContext.AppContext.elastic_distance == "dtw":
-                dist = dtw.distance_fast(array_query, exemplars, window=AppContext.AppContext.window_length)
+                dist = dtw.distance_fast(array_query, exemplars, window=AppContext.AppContext.window_length,
+                                         max_dist=bsf)
             elif AppContext.AppContext.elastic_distance == "lcss":
                 esilon = LCSS.get_random_epsilon()
                 dist = LCSS.distance(array_query, exemplars, window_size=-np.inf, epsilon=esilon)
@@ -48,7 +49,7 @@ class DistanceMeasure:
             print("There are no closest Nodes")
             r = 0
         elif len(closest_nodes) == 1:
-            r = 0
+            return closest_nodes[0]
         else:
             r = random.randint(0, len(closest_nodes) - 1)
         return closest_nodes[r]
@@ -92,4 +93,3 @@ class DistanceMeasure:
         n = len(AppContext.AppContext.training_dataset.series_data)
         mean = sumx / n
         return math.sqrt((sumx2 / n) - mean * mean)
-

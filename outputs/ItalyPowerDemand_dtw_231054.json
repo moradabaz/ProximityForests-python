@@ -1,0 +1,1 @@
+{"dataset": [{"name": "ItalyPowerDemand", "n_trees": 100, "n_candidates": 5, "n_repeats": 1, "execution_time": "9.340919242", "stats": [{"train_series": 67, "test_series": 1029, "correct_predictions": 982, "incorrect_predictions": 47, "accuracy": 0.9543245869776482, "training_time": 2.3775434310000003, "testing_time": 6.941989850000001}]}]}

@@ -115,7 +115,7 @@ class ListDataset:
     def split_classes(self):
         split = dict()
         for i in range(0, self.classes.__len__()):
-            label = self.classes.__getitem__(i)
+            label = self.classes[i]
             if not split.keys().__contains__(label):
                 class_set = ListDataset()
                 split[label] = class_set

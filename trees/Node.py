@@ -1,5 +1,6 @@
 from trees import Splitter as sp
 from dataStructures import ListDataset as ltd
+import timeit
 
 
 class Node:
@@ -26,6 +27,7 @@ class Node:
 
     def get_children(self):
         return self.children
+
     """
         1 - We initialize our splitter in the node.
         2 - We search our best splits
@@ -34,6 +36,7 @@ class Node:
             3.2 - We train the node-Child
         :param  dataStructures
     """
+
     def train(self, dataset: ltd.ListDataset):
         if dataset is None:
             print("[ERROR] Dataset is none or empty")
@@ -44,7 +47,10 @@ class Node:
             self.is_leaf = True
             return
         self.splitter = sp.Splitter(self)
+        start = timeit.default_timer()
         best_split = self.splitter.find_best_splits(dataset)
+        stop = timeit.default_timer()
+        self.tree.time_best_splits = self.tree.time_best_splits + (stop - start)
         for i in range(0, len(best_split.values())):
             self.children.append(Node(self, i, self.tree.node_counter + 1, self.depth + 1, self.tree))
             self.tree.node_counter = self.tree.node_counter + 1

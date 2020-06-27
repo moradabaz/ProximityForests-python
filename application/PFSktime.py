@@ -14,6 +14,7 @@ class PFSktime:
     name = ''
     training_path = None
     testing_path = None
+    jobs = 1
 
     def save_json(self, total_time, time_train, time_test, accuracy):
         f_path = '../outputs/sktime_' + self.name + '_results_' + str(
@@ -25,7 +26,8 @@ class PFSktime:
             'exec_time': total_time,
             'training_time': time_train,
             'testing_time': time_test,
-            'accuracy': accuracy
+            'accuracy': accuracy,
+            'n_jobs': self.jobs
         })
         with open(f_path, 'w+') as file:
             file.write(json.dumps(data))
@@ -44,6 +46,8 @@ class PFSktime:
                     self.training_path = value
                 elif arg == "-test":
                     self.testing_path = value
+                elif arg == "-jobs":
+                    self.jobs = int(value)
 
 
 pass
@@ -61,7 +65,7 @@ elif sys.argv[1].split(".")[1] == "ts":
     data_train = ts_loader(pfsktime.training_path)
     data_test = ts_loader(pfsktime.training_path)
 
-pforest = pf.ProximityForest(distance_measure=dtw_distance, n_jobs=1)
+pforest = pf.ProximityForest(distance_measure=dtw_distance, n_jobs=pfsktime.jobs)
 start = timeit.default_timer()
 train_time_start = timeit.default_timer()
 print("Training... ")

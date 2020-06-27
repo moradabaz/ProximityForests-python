@@ -1,0 +1,1 @@
+{"dataset": [{"name": "PenDigitsDim1", "n_trees": 100, "n_candidates": 5, "n_repeats": 1, "execution_time": "1579.3666691629999", "stats": [{"train_series": 7494, "test_series": 3498, "correct_predictions": 3031, "incorrect_predictions": 467, "accuracy": 0.8664951400800457, "training_time": 1441.20027122, "testing_time": 137.42209259499987}]}]}
