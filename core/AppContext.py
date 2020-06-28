@@ -1,6 +1,5 @@
 from dataStructures import ListDataset
 
-
 class AppContext:
     elastic_distance = "dtw"
     window_length = 1.5
@@ -11,8 +10,8 @@ class AppContext:
     config_majority_vote_tie_break_randomly = True
     config_skip_distance_when_exemplar_matches_query = True
     config_use_random_choice_when_min_distance_is_equal = True
-    training_file = "/Users/morad/PycharmProjects/PForests/datasets/ItalyPowerDemand/ItalyPowerDemand_TRAIN.csv"
-    testing_file = "/Users/morad/PycharmProjects/PForests/datasets/ItalyPowerDemand/ItalyPowerDemand_TEST.csv"
+    training_file = "/Users/morad/PycharmProjects/PForests/datasets/PenDigitsDim1/PenDigitsDim1_TRAIN.csv"
+    testing_file = "/Users/morad/PycharmProjects/PForests/datasets/PenDigitsDim1/PenDigitsDim1_TEST.csv"
     output_dir = "../output/"
     csv_has_header = True
     ignore_first_col = True
@@ -20,7 +19,7 @@ class AppContext:
     dataset_name = ""
     verbosity = 2
     num_repeats = 1
-    num_trees = 1
+    num_trees = 100
     num_candidates_per_split = 5
     random_dm_per_node = True
     shuffle_dataset = False
