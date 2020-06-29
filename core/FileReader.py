@@ -3,11 +3,8 @@ from numpy import double
 from scipy.io import arff
 from dataStructures import ListDataset
 
-from numpy.distutils.fcompiler import none
-
 
 class FileReader:
-
 
     @staticmethod
     def read_file(fileName, has_header=True, labelLastColumn=True, separator=","):
@@ -57,7 +54,7 @@ class FileReader:
                     label = int(line_array[serie_length].split("\n")[0])
                 except:
                     label = line_array[serie_length].split("\n")[0]
-            if label != none:
+            if label is not None:
                 dataset.add_series(label, series)
             num_line = num_line + 1
             line = file.readline()
