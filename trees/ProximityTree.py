@@ -47,12 +47,10 @@ class ProximityTree:
         self.stats.collate_results(self)
         return self.stats
 
+    3
+
     def get_num_nodes(self):
-        nodes = self._get_num_nodes(self.root) - 1
-        if self.node_counter != nodes:
-            return -1
-        else:
-            return self.node_counter
+        return self._get_num_nodes(self.root)
 
     def _get_num_nodes(self, node):
         count = 0
@@ -67,7 +65,7 @@ class ProximityTree:
 
     def _get_num_leaves(self, n):
         count = 0
-        if n.children is None:
+        if n.children is None or n.children == 0:
             return 1
         for i in range(0, len(n.children)):
             count = count + self._get_num_leaves(n.children[i])
@@ -90,7 +88,7 @@ class ProximityTree:
 
     def _get_height(self, n):
         max_depth = 0
-        if n.children is None:
+        if n.children is None or n.children == 0:
             return 0
         for i in range(0, len(n.children)):
             max_depth = max(max_depth, self._get_height(n.children[i]))

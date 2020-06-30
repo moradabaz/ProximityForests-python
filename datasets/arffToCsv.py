@@ -15,8 +15,6 @@ directory = sys.argv[1] + '/'
 files = [arff for arff in os.listdir(directory) if arff.endswith(".arff")]
 
 
-
-# Function for converting arff list to csv list
 def toCsv(content):
     data = False
     header = ""
@@ -39,7 +37,7 @@ def toCsv(content):
 
 # Main loop for reading and writing files
 for file in files:
-    file = os.getcwd() + '/' + directory  + file
+    file = os.getcwd() + '/' + directory + file
     with open(file, "r") as inFile:
         content = inFile.readlines()
         name, ext = os.path.splitext(inFile.name)

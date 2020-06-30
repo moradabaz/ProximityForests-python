@@ -10,8 +10,8 @@ class AppContext:
     config_majority_vote_tie_break_randomly = True
     config_skip_distance_when_exemplar_matches_query = True
     config_use_random_choice_when_min_distance_is_equal = True
-    training_file = "/Users/morad/PycharmProjects/PForests/datasets/PenDigitsDim1/PenDigitsDim1_TRAIN.csv"
-    testing_file = "/Users/morad/PycharmProjects/PForests/datasets/PenDigitsDim1/PenDigitsDim1_TEST.csv"
+    training_file = "/Users/morad/PycharmProjects/PForests/datasets/Chinatown/Chinatown_TRAIN.csv"
+    testing_file =  "/Users/morad/PycharmProjects/PForests/datasets/Chinatown/Chinatown_TEST.csv"
     output_dir = "../output/"
     csv_has_header = True
     ignore_first_col = True

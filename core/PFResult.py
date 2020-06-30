@@ -1,10 +1,15 @@
 from trees import ProximityForest
 from core import AppContext as app
 import time
-import statistics as st
 import os
 import json
 import numpy as np
+import statistics as st
+# t-test for independent samples
+from math import sqrt
+from scipy.stats import sem
+from scipy.stats import t
+
 from core import AppContext
 
 
@@ -29,18 +34,16 @@ class PFResult:
         self.correct = 0
         self.accuracy = 0
         self.error_rate = 0
-
         self.total_num_trees = -1
-
         self.mean_num_nodes_per_tree = -1
         self.sd_num_nodes_per_tree = -1
-
         self.mean_depth_per_tree = -1
         self.sd_depth_per_tree = -1
-
         self.mean_weighted_depth_per_tree = -1
         self.sd_weighted_depth_per_tree = -1
-
+        self.std_error_nodes_per_tree = -1
+        self.std_error_depth_per_tree = -1
+        self.total_nodes = -1
         self.num_train_series = AppContext.AppContext.num_train_series
         self.num_test_series = AppContext.AppContext.num_test_series
 
@@ -51,22 +54,21 @@ class PFResult:
         if self.results_collated:
             return
         trees = self.forest.get_trees()
-
         for tree in trees:
             tree_stats = tree.get_treestat_collection()
             nodes.append(tree_stats.num_nodes)
             depths.append(tree_stats.depth)
             weighted_depth.append(tree_stats.weighted_depth)
-
-        self.mean_num_nodes_per_tree = st.mean(np.asarray(nodes))
-        self.sd_num_nodes_per_tree = st.pstdev(np.asarray(nodes))
-
-        self.mean_depth_per_tree = st.mean(np.asarray(depths))
-        self.sd_depth_per_tree = st.pstdev(np.asarray(depths))
-
-        self.mean_weighted_depth_per_tree = st.mean(np.asarray(weighted_depth))
+        self.mean_num_nodes_per_tree = np.mean(np.asarray(nodes))
+        self.sd_num_nodes_per_tree = st.pstdev(nodes)
+        self.mean_depth_per_tree = np.mean(np.asarray(depths))
+        self.sd_depth_per_tree = st.pstdev(depths)
+        self.mean_weighted_depth_per_tree = np.mean(np.asarray(weighted_depth))
         self.sd_weighted_depth_per_tree = st.pstdev(np.asarray(weighted_depth))
-
+        self.std_error_nodes_per_tree = sem(nodes)
+        self.std_error_depth_per_tree = sem(depths)
+        self.total_nodes = len(nodes)
+        self.max_depth = len(depths)
         self.results_collated = True
 
     def print_results(self, dataset_name: str, experiment_id: int, prefix: str):
@@ -115,7 +117,16 @@ class PFResult:
             'incorrect_predictions': self.errors,
             'accuracy': self.accuracy,
             'training_time': self.elapsed_time_train,
-            'testing_time': self.elapsed_time_test
+            'testing_time': self.elapsed_time_test,
+            'total_nodes': str(self.total_nodes),
+            'mean_depth_tree': str(self.mean_depth_per_tree),
+            'sd_depth_per_tree': str(self.sd_depth_per_tree),
+            'mean_nodes_per_tree': str(self.mean_num_nodes_per_tree),
+            'sd_nodes_per_tree': str(self.sd_num_nodes_per_tree),
+            'mean_weighted_depth_per_tree': str(self.mean_weighted_depth_per_tree),
+            'sd_weighted_depth_per_tree': str(self.sd_weighted_depth_per_tree),
+            'std_error_nodes_per_tree': str(self.std_error_nodes_per_tree),
+            'std_error_depth_per_tree': str(self.std_error_depth_per_tree)
         }]
         return data_stats
 
