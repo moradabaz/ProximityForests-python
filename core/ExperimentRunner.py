@@ -64,6 +64,38 @@ class ExperimentRunner:
                 result.exportJSON(dataset_name, i)
             return pforest
 
+    def run_data(self, train_data_original, test_data_original, name):
+        self.train_data = train_data_original.reorder_class_labels(None)
+        self.test_data = test_data_original.reorder_class_labels(self.train_data.initial_class_labels)
+        self.series_length = len(self.train_data.series_data[0])
+        AppContext.AppContext.training_dataset = self.train_data
+        AppContext.AppContext.testing_dataset = self.test_data
+        AppContext.AppContext.series_length = self.series_length
+        num_repeats = AppContext.AppContext.num_repeats
+        for i in range(0, num_repeats):
+            if AppContext.AppContext.verbosity > 0:
+                print("Number of repeats:", AppContext.AppContext.num_repeats)
+                print("Number of trees:")
+                print("Experimenting...")
+            else:
+                print("This is ...")
+
+            print("Creating Proximity Forest in repeat", i + 1)
+            pforest = ProximityForest.ProximityForest(i)
+            AppContext.AppContext.num_train_series = self.train_data.get_series_size()
+
+            pforest.train(self.train_data)
+
+            print("Testing process...")
+
+            AppContext.AppContext.num_test_series = self.test_data.get_series_size()
+            result = pforest.test(self.test_data)
+
+            pforest.print_results(name, i, "")
+            if AppContext.AppContext.export_level > 0:
+                result.exportJSON(name, i)
+            return pforest
+
     def load_traindata(self):
         train_data_original = FileReader.FileReader.readCSVToListDataset(AppContext.AppContext.training_file,
                                                                          AppContext.AppContext.csv_has_header,

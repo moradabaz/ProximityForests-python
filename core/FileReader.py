@@ -103,3 +103,29 @@ class FileReader:
         elapsed = end - start
         print("finished in", elapsed, "seconds")
         return dataset
+
+
+    @staticmethod
+    def parse_arff_data(file):
+        start = time.time()
+        dataset = ListDataset.ListDataset()
+        tam_series = len(file)
+        for i in range(0, tam_series):
+            serie_lenth = len(file[i])
+            if serie_lenth <= 0:
+                continue
+            try:
+                class_label = int(file[i][serie_lenth - 1])
+            except:
+                class_label = file[i][serie_lenth - 1]
+            serie = list()
+            for j in range(0, serie_lenth - 1):
+                try:
+                    serie.append(double(file[i][j]))
+                except:
+                    continue
+            dataset.add_series(class_label, serie)
+        end = time.time()
+        elapsed = end - start
+        print("finished in", elapsed, "seconds")
+        return dataset
