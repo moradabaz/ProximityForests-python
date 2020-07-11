@@ -130,6 +130,20 @@ class PFResult:
         }]
         return data_stats
 
+    def _exportJSONstats(self):
+        data_stats = [{
+            'accuracy': self.accuracy,
+            'total_nodes': str(self.total_nodes),
+            'mean_depth_tree': str(self.mean_depth_per_tree),
+            'sd_depth_per_tree': str(self.sd_depth_per_tree),
+            'mean_nodes_per_tree': str(self.mean_num_nodes_per_tree),
+            'sd_nodes_per_tree': str(self.sd_num_nodes_per_tree),
+            'std_error_nodes_per_tree': str(self.std_error_nodes_per_tree),
+            'std_error_depth_per_tree': str(self.std_error_depth_per_tree)
+        }]
+        return data_stats
+
+
     @staticmethod
     def get_list_from_dict(query: dict):
         lista = list()

@@ -12,13 +12,15 @@ trainin_path = sys.argv[3]
 name = sys.argv[2]
 
 
-def save_json(accuracies):
+def save_json(folds):
     f_path = '../outputs/' + name + '_Folds_' + str(time.localtime().tm_hour) + str(time.localtime().tm_min) + str(
         time.localtime().tm_sec) + ".json"
-    data = {'folds_accuracies': []}
-    for fold in accuracies:
-        data['folds_accuracies'].append({
-            'Fold_' + str(fold): str(accuracies[fold])
+    data = {'fold_stats': []}
+    for fold in folds:
+        data_stats = folds[fold]._exportJSONstats()
+        data['fold_stats'].append({
+            'name': name,
+            'Fold_' + str(fold): data_stats
         })
     with open(f_path, 'w+') as file:
         file.write(json.dumps(data))
@@ -58,5 +60,6 @@ for turn in folds.keys():
     print("FOLD ", turn, " ->")
     train_dataset = FileReader.parse_arff_data(train_data)
     pforest = runner.run_data(train_dataset, test_dataset, name)
-    fold_accuracies[turn] = pforest.result.accuracy
+    fold_accuracies[turn] = pforest.result
+
 save_json(fold_accuracies)
