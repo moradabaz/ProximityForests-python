@@ -7,6 +7,8 @@ from sktime.utils.load_data import load_from_tsfile_to_dataframe as ts_loader
 from sktime.utils.load_data import load_from_arff_to_dataframe as arff_loader
 from sktime.distances.elastic import dtw_distance
 import random
+from sktime.classification.distance_based._proximity_forest import ProximityForest, ProximityStump, ProximityTree
+
 sys.path.append(sys.argv[1])
 
 
@@ -66,6 +68,7 @@ elif sys.argv[1].split(".")[1] == "ts":
     data_test = ts_loader(pfsktime.training_path)
 
 pforest = pf.ProximityForest(distance_measure=dtw_distance, n_jobs=pfsktime.jobs)
+
 start = timeit.default_timer()
 train_time_start = timeit.default_timer()
 print("Training... ")
@@ -83,3 +86,4 @@ pfsktime.save_json((stop - start), (train_time_stop - train_time_start), (test_t
 print(predictions)
 
 # pforest.predict_proba()
+

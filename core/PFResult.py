@@ -1,15 +1,9 @@
 from trees import ProximityForest
 from core import AppContext as app
 import time
-import os
-import json
 import numpy as np
 import statistics as st
-# t-test for independent samples
-from math import sqrt
 from scipy.stats import sem
-from scipy.stats import t
-
 from core import AppContext
 
 

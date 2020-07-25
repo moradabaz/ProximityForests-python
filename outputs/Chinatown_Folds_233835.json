@@ -1,0 +1,174 @@
+{
+  "fold_stats": [
+    {
+      "name": "Chinatown",
+      "Fold_1": [
+        {
+          "accuracy": 1.0,
+          "total_nodes": "100",
+          "mean_depth_tree": "3.97",
+          "sd_depth_per_tree": "1.0242558274181308",
+          "mean_nodes_per_tree": "7.38",
+          "sd_nodes_per_tree": "2.3442696090680357",
+          "mean_weighted_depth_per_tree": "-1.0",
+          "sd_weighted_depth_per_tree": "0.0",
+          "std_error_nodes_per_tree": "0.2356079606276306",
+          "std_error_depth_per_tree": "0.10294158390548351"
+        }
+      ]
+    },
+    {
+      "name": "Chinatown",
+      "Fold_2": [
+        {
+          "accuracy": 1.0,
+          "total_nodes": "100",
+          "mean_depth_tree": "3.87",
+          "sd_depth_per_tree": "1.035905401086412",
+          "mean_nodes_per_tree": "7.0",
+          "sd_nodes_per_tree": "2.4",
+          "mean_weighted_depth_per_tree": "-1.0",
+          "sd_weighted_depth_per_tree": "0.0",
+          "std_error_nodes_per_tree": "0.2412090756622109",
+          "std_error_depth_per_tree": "0.10411241011231051"
+        }
+      ]
+    },
+    {
+      "name": "Chinatown",
+      "Fold_3": [
+        {
+          "accuracy": 1.0,
+          "total_nodes": "100",
+          "mean_depth_tree": "3.87",
+          "sd_depth_per_tree": "0.9127431182978045",
+          "mean_nodes_per_tree": "7.12",
+          "sd_nodes_per_tree": "2.1320412753978286",
+          "mean_weighted_depth_per_tree": "-1.0",
+          "sd_weighted_depth_per_tree": "0.0",
+          "std_error_nodes_per_tree": "0.2142782105468298",
+          "std_error_depth_per_tree": "0.0917341349506906"
+        }
+      ]
+    },
+    {
+      "name": "Chinatown",
+      "Fold_4": [
+        {
+          "accuracy": 1.0,
+          "total_nodes": "100",
+          "mean_depth_tree": "3.77",
+          "sd_depth_per_tree": "0.8928045698807775",
+          "mean_nodes_per_tree": "7.08",
+          "sd_nodes_per_tree": "2.261327044016411",
+          "mean_weighted_depth_per_tree": "-1.0",
+          "sd_weighted_depth_per_tree": "0.0",
+          "std_error_nodes_per_tree": "0.22727191919048256",
+          "std_error_depth_per_tree": "0.0897302354366417"
+        }
+      ]
+    },
+    {
+      "name": "Chinatown",
+      "Fold_5": [
+        {
+          "accuracy": 1.0,
+          "total_nodes": "100",
+          "mean_depth_tree": "3.97",
+          "sd_depth_per_tree": "0.8769834662067467",
+          "mean_nodes_per_tree": "7.52",
+          "sd_nodes_per_tree": "2.165548429382266",
+          "mean_weighted_depth_per_tree": "-1.0",
+          "sd_weighted_depth_per_tree": "0.0",
+          "std_error_nodes_per_tree": "0.21764580623043708",
+          "std_error_depth_per_tree": "0.08814015468948797"
+        }
+      ]
+    },
+    {
+      "name": "Chinatown",
+      "Fold_6": [
+        {
+          "accuracy": 1.0,
+          "total_nodes": "100",
+          "mean_depth_tree": "4.02",
+          "sd_depth_per_tree": "0.8829496021857646",
+          "mean_nodes_per_tree": "7.5",
+          "sd_nodes_per_tree": "2.0663978319771825",
+          "mean_weighted_depth_per_tree": "-1.0",
+          "sd_weighted_depth_per_tree": "0.0",
+          "std_error_nodes_per_tree": "0.20768079625067198",
+          "std_error_depth_per_tree": "0.08873977391647712"
+        }
+      ]
+    },
+    {
+      "name": "Chinatown",
+      "Fold_7": [
+        {
+          "accuracy": 1.0,
+          "total_nodes": "100",
+          "mean_depth_tree": "4.11",
+          "sd_depth_per_tree": "0.9475758544834287",
+          "mean_nodes_per_tree": "7.98",
+          "sd_nodes_per_tree": "2.3064258063072396",
+          "mean_weighted_depth_per_tree": "-1.0",
+          "sd_weighted_depth_per_tree": "0.0",
+          "std_error_nodes_per_tree": "0.23180451534284946",
+          "std_error_depth_per_tree": "0.09523495665824064"
+        }
+      ]
+    },
+    {
+      "name": "Chinatown",
+      "Fold_8": [
+        {
+          "accuracy": 1.0,
+          "total_nodes": "100",
+          "mean_depth_tree": "3.87",
+          "sd_depth_per_tree": "0.783007024234138",
+          "mean_nodes_per_tree": "7.4",
+          "sd_nodes_per_tree": "2.039607805437114",
+          "mean_weighted_depth_per_tree": "-1.0",
+          "sd_weighted_depth_per_tree": "0.0",
+          "std_error_nodes_per_tree": "0.20498829727621531",
+          "std_error_depth_per_tree": "0.07869516689688949"
+        }
+      ]
+    },
+    {
+      "name": "Chinatown",
+      "Fold_9": [
+        {
+          "accuracy": 1.0,
+          "total_nodes": "100",
+          "mean_depth_tree": "3.99",
+          "sd_depth_per_tree": "0.8306021911842034",
+          "mean_nodes_per_tree": "7.48",
+          "sd_nodes_per_tree": "2.137662274541982",
+          "mean_weighted_depth_per_tree": "-1.0",
+          "sd_weighted_depth_per_tree": "0.0",
+          "std_error_nodes_per_tree": "0.2148431422167712",
+          "std_error_depth_per_tree": "0.08347866115772862"
+        }
+      ]
+    },
+    {
+      "name": "Chinatown",
+      "Fold_10": [
+        {
+          "accuracy": 1.0,
+          "total_nodes": "100",
+          "mean_depth_tree": "3.77",
+          "sd_depth_per_tree": "0.9576533819707421",
+          "mean_nodes_per_tree": "7.16",
+          "sd_nodes_per_tree": "2.3946607275353227",
+          "mean_weighted_depth_per_tree": "-1.0",
+          "sd_weighted_depth_per_tree": "0.0",
+          "std_error_nodes_per_tree": "0.24067245858891356",
+          "std_error_depth_per_tree": "0.09624778627914703"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "fold_stats": [
+    {
+      "name": "Plane" ,
+      "Fold_1": [
+        {
+          "train_series": 945 ,
+          "test_series": 15 ,
+          "correct_predictions": 9 ,
+          "incorrect_predictions": 1 ,
+          "accuracy": 0.9 ,
+          "training_time": 6.165509506 ,
+          "testing_time": 0.146642634 ,
+          "total_nodes": "100" ,
+          "mean_depth_tree": "3.44" ,
+          "sd_depth_per_tree": "0.6216108107168021" ,
+          "mean_nodes_per_tree": "14.93" ,
+          "sd_nodes_per_tree": "1.7621293936598412" ,
+          "mean_weighted_depth_per_tree": "-1.0" ,
+          "sd_weighted_depth_per_tree": "0.0" ,
+          "std_error_nodes_per_tree": "0.17710066760079266" ,
+          "std_error_depth_per_tree": "0.06247423711443224"
+        }
+      ]
+    } ,
+    {
+      "name": "Plane" ,
+      "Fold_2": [
+        {
+          "train_series": 945 ,
+          "test_series": 15 ,
+          "correct_predictions": 10 ,
+          "incorrect_predictions": 0 ,
+          "accuracy": 1.0 ,
+          "training_time": 13.871216959999998 ,
+          "testing_time": 0.15451561999999797 ,
+          "total_nodes": "100" ,
+          "mean_depth_tree": "4.28" ,
+          "sd_depth_per_tree": "0.8953211714239756" ,
+          "mean_nodes_per_tree": "17.87" ,
+          "sd_nodes_per_tree": "2.567703253882738" ,
+          "mean_weighted_depth_per_tree": "-1.0" ,
+          "sd_weighted_depth_per_tree": "0.0" ,
+          "std_error_nodes_per_tree": "0.2580638868516277" ,
+          "std_error_depth_per_tree": "0.0899831634083271"
+        }
+      ]
+    } ,
+    {
+      "name": "Plane" ,
+      "Fold_3": [
+        {
+          "train_series": 945 ,
+          "test_series": 15 ,
+          "correct_predictions": 10 ,
+          "incorrect_predictions": 0 ,
+          "accuracy": 1.0 ,
+          "training_time": 21.917137419000003 ,
+          "testing_time": 0.4397440430000046 ,
+          "total_nodes": "100" ,
+          "mean_depth_tree": "4.07" ,
+          "sd_depth_per_tree": "0.8631917515824626" ,
+          "mean_nodes_per_tree": "17.38" ,
+          "sd_nodes_per_tree": "2.704736586065268" ,
+          "mean_weighted_depth_per_tree": "-1.0" ,
+          "sd_weighted_depth_per_tree": "0.0" ,
+          "std_error_nodes_per_tree": "0.27183625493106967" ,
+          "std_error_depth_per_tree": "0.08675403521602111"
+        }
+      ]
+    } ,
+    {
+      "name": "Plane" ,
+      "Fold_4": [
+        {
+          "train_series": 945 ,
+          "test_series": 15 ,
+          "correct_predictions": 10 ,
+          "incorrect_predictions": 0 ,
+          "accuracy": 1.0 ,
+          "training_time": 34.780803329 ,
+          "testing_time": 0.15652356900000086 ,
+          "total_nodes": "100" ,
+          "mean_depth_tree": "4.07" ,
+          "sd_depth_per_tree": "0.8515280382935139" ,
+          "mean_nodes_per_tree": "17.71" ,
+          "sd_nodes_per_tree": "2.620286243905425" ,
+          "mean_weighted_depth_per_tree": "-1.0" ,
+          "sd_weighted_depth_per_tree": "0.0" ,
+          "std_error_nodes_per_tree": "0.2633486761928475" ,
+          "std_error_depth_per_tree": "0.0855817879238476"
+        }
+      ]
+    } ,
+    {
+      "name": "Plane" ,
+      "Fold_5": [
+        {
+          "train_series": 945 ,
+          "test_series": 15 ,
+          "correct_predictions": 10 ,
+          "incorrect_predictions": 0 ,
+          "accuracy": 1.0 ,
+          "training_time": 40.678431352000004 ,
+          "testing_time": 0.13984836999999573 ,
+          "total_nodes": "100" ,
+          "mean_depth_tree": "4.03" ,
+          "sd_depth_per_tree": "0.8420807562223471" ,
+          "mean_nodes_per_tree": "17.23" ,
+          "sd_nodes_per_tree": "2.452977782206761" ,
+          "mean_weighted_depth_per_tree": "-1.0" ,
+          "sd_weighted_depth_per_tree": "0.0" ,
+          "std_error_nodes_per_tree": "0.24653354311084702" ,
+          "std_error_depth_per_tree": "0.08463230035055329"
+        }
+      ]
+    } ,
+    {
+      "name": "Plane" ,
+      "Fold_6": [
+        {
+          "train_series": 945 ,
+          "test_series": 15 ,
+          "correct_predictions": 10 ,
+          "incorrect_predictions": 0 ,
+          "accuracy": 1.0 ,
+          "training_time": 41.830402842 ,
+          "testing_time": 0.13329982900000914 ,
+          "total_nodes": "100" ,
+          "mean_depth_tree": "4.22" ,
+          "sd_depth_per_tree": "0.8195120499419151" ,
+          "mean_nodes_per_tree": "17.84" ,
+          "sd_nodes_per_tree": "2.4113066996962456" ,
+          "mean_weighted_depth_per_tree": "-1.0" ,
+          "sd_weighted_depth_per_tree": "0.0" ,
+          "std_error_nodes_per_tree": "0.24234544173826156" ,
+          "std_error_depth_per_tree": "0.08236406002522208"
+        }
+      ]
+    } ,
+    {
+      "name": "Plane" ,
+      "Fold_7": [
+        {
+          "train_series": 945 ,
+          "test_series": 15 ,
+          "correct_predictions": 10 ,
+          "incorrect_predictions": 0 ,
+          "accuracy": 1.0 ,
+          "training_time": 45.63044844799998 ,
+          "testing_time": 0.13667246999997928 ,
+          "total_nodes": "100" ,
+          "mean_depth_tree": "4.23" ,
+          "sd_depth_per_tree": "0.8585452812752511" ,
+          "mean_nodes_per_tree": "17.81" ,
+          "sd_nodes_per_tree": "2.480705544799705" ,
+          "mean_weighted_depth_per_tree": "-1.0" ,
+          "sd_weighted_depth_per_tree": "0.0" ,
+          "std_error_nodes_per_tree": "0.2493202881046909" ,
+          "std_error_depth_per_tree": "0.08628704737939841"
+        }
+      ]
+    } ,
+    {
+      "name": "Plane" ,
+      "Fold_8": [
+        {
+          "train_series": 945 ,
+          "test_series": 15 ,
+          "correct_predictions": 10 ,
+          "incorrect_predictions": 0 ,
+          "accuracy": 1.0 ,
+          "training_time": 51.72021449499999 ,
+          "testing_time": 0.14406740600003332 ,
+          "total_nodes": "100" ,
+          "mean_depth_tree": "4.22" ,
+          "sd_depth_per_tree": "0.9119210492142398" ,
+          "mean_nodes_per_tree": "17.81" ,
+          "sd_nodes_per_tree": "2.548313167567911" ,
+          "mean_weighted_depth_per_tree": "-1.0" ,
+          "sd_weighted_depth_per_tree": "0.0" ,
+          "std_error_nodes_per_tree": "0.2561151098528736" ,
+          "std_error_depth_per_tree": "0.0916515138991168"
+        }
+      ]
+    } ,
+    {
+      "name": "Plane" ,
+      "Fold_9": [
+        {
+          "train_series": 945 ,
+          "test_series": 15 ,
+          "correct_predictions": 10 ,
+          "incorrect_predictions": 0 ,
+          "accuracy": 1.0 ,
+          "training_time": 58.346563489999994 ,
+          "testing_time": 0.15646548999995957 ,
+          "total_nodes": "100" ,
+          "mean_depth_tree": "3.96" ,
+          "sd_depth_per_tree": "0.9046546302318913" ,
+          "mean_nodes_per_tree": "17.42" ,
+          "sd_nodes_per_tree": "2.735616932247642" ,
+          "mean_weighted_depth_per_tree": "-1.0" ,
+          "sd_weighted_depth_per_tree": "0.0" ,
+          "std_error_nodes_per_tree": "0.2749398464972278" ,
+          "std_error_depth_per_tree": "0.09092121131323903"
+        }
+      ]
+    } ,
+    {
+      "name": "Plane" ,
+      "Fold_10": [
+        {
+          "train_series": 945 ,
+          "test_series": 15 ,
+          "correct_predictions": 15 ,
+          "incorrect_predictions": 0 ,
+          "accuracy": 1.0 ,
+          "training_time": 102.870616423 ,
+          "testing_time": 0.33871399999998175 ,
+          "total_nodes": "100" ,
+          "mean_depth_tree": "4.19" ,
+          "sd_depth_per_tree": "0.891010662113535" ,
+          "mean_nodes_per_tree": "17.86" ,
+          "sd_nodes_per_tree": "2.6945129430010164" ,
+          "mean_weighted_depth_per_tree": "-1.0" ,
+          "sd_weighted_depth_per_tree": "0.0" ,
+          "std_error_nodes_per_tree": "0.2708087401421411" ,
+          "std_error_depth_per_tree": "0.08954994092232513"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,4 @@
 import sys
-
-# sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
 sys.path.append(sys.argv[1])
 import time
 import timeit

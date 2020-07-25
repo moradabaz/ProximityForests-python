@@ -1,0 +1,2 @@
+name,total_nodes,mean_depth_tree,sd_depth_per_tree,mean_nodes_per_tree,sd_nodes_per_tree,std_error_nodes_per_tree,std_error_depth_per_tree
+Chinatown,100,3.96,0.9046546302318913,7.44,2.201454064930722,0.2212544583811485,0.09092121131323902
