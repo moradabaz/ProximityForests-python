@@ -1,5 +1,6 @@
 import sys
 import time
+
 sys.path.append(sys.argv[1])
 from trees.ProximityForest import ProximityForest
 
@@ -147,12 +148,15 @@ for trees in [20, 35, 50, 75, 100, 120]:
         pforest = experimentrunner.run()
         result = pforest.result
         stop = timeit.default_timer()
-        linea = str(trees) + ',' + str(candidates) + ',' + str(round(result.accuracy, 5)) + ',' + str(round(stop - start, 5))
+        linea = str(trees) + ',' + str(candidates) + ',' + str(round(result.accuracy, 5)) + ',' + str(
+            round((stop - start), 5))
         result_lines.append(linea)
 
-start = timeit.default_timer()
-pforest = experimentrunner.run()
-result = pforest.result
-stop = timeit.default_timer()
-# scenario.save_training()
-scenario.save_json()
+name = AppContext.AppContext.dataset_name
+f_path = AppContext.AppContext.output_dir + name + '_compare_results.csv'
+with open(f_path, 'w+') as file:
+    stats = result.result_statistics(AppContext.AppContext.dataset_name)
+    file.writelines("n_trees,n_candidates,accuracy,exec_time\n")
+    file.writelines("%s\n" % str(linea) for linea in result_lines)
+    ## file.writelines(stats)
+file.close()
