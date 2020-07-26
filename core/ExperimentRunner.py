@@ -85,8 +85,8 @@ class ExperimentRunner:
 
             pforest.train(self.train_data)
 
-            print("Testing process...")
 
+            print("Testing process...")
             AppContext.AppContext.num_test_series = self.test_data.get_series_size()
             result = pforest.test(self.test_data)
 

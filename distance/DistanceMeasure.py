@@ -23,6 +23,9 @@ class DistanceMeasure:
         array_query = np.asarray(query)
         closest_nodes = list()
         bsf = np.inf
+        if len(temp_exemplars) == 0:
+            return -1
+
         for i in range(0, len(temp_exemplars)):
             exemplars = np.asarray(temp_exemplars.__getitem__(i))
             """

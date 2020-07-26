@@ -40,6 +40,7 @@ class ProximityTree:
             posicion = node.splitter.find_closest_branch_(query)
             if posicion == -1:
                 node.is_leaf = True
+                continue
             node = node.children[posicion]
         return node.label
 
