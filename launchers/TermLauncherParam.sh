@@ -6,10 +6,12 @@ CUR_DIR=$(cd .. && pwd)
 for d in $CUR_DIR/datasets/*; do
   if [ -d $d ]; then
     dataset=$(basename $d)
+    dataset="ItalyPowerDemand"
     DATASET_DIR=$CUR_DIR/datasets/$dataset/
     CUR_DIR=$(cd .. && pwd)
     DATASET_DIR=$CUR_DIR/datasets/$dataset/
     python3 ../application/PFApplication.py $CUR_DIR -name=$dataset -train=$DATASET_DIR/"$dataset"_TRAIN.arff -test=$DATASET_DIR/"$dataset"_TEST.arff -targetlast=True -calculate=accuracy
     echo "Classification process [ $dataset ] finished"
+    exit 0
   fi
 done
