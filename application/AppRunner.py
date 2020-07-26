@@ -1,7 +1,7 @@
 import sys
 
-sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
-#sys.path.append(sys.argv[1])
+# sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
+sys.path.append(sys.argv[1])
 import time
 import timeit
 from datetime import date
@@ -24,60 +24,12 @@ class ScenarioOne:
     def get_app_context(self):
         return self.appcontext
 
-    def get_args(self, line):
-
+    def get_args(self):
         if len(sys.argv) > 1:
             for i in range(2, len(sys.argv)):
                 options = sys.argv[i].split("=")
                 arg = options[0]
                 value = options[1]
-                if arg == "-name":
-                    AppContext.AppContext.dataset_name = value
-                elif arg == "-syspath":
-                    sys.path.append(value)
-                elif arg == "-train":
-                    AppContext.AppContext.training_file = value
-                elif arg == "-test":
-                    AppContext.AppContext.testing_file = value
-                elif arg == "-repeat":
-                    AppContext.AppContext.num_repeats = int(value)
-                elif arg == "-trees":
-                    AppContext.AppContext.num_trees = int(value)
-                elif arg == "-candidates":
-                    AppContext.AppContext.num_candidates_per_split = int(value)
-                elif arg == "-output":
-                    AppContext.AppContext.output_dir = value
-                elif arg == "-targetlast":
-                    AppContext.AppContext.target_column_is_first = value
-                elif arg == "-ignoreFirst":
-                    AppContext.AppContext.ignore_first_col = value
-                elif arg == "-edistance":
-                    AppContext.AppContext.elastic_distance = value
-                elif arg == '-dtw_window':
-                    AppContext.AppContext.window_length = int(value)
-                elif arg == "-calculate":
-                    value = value.upper().lower()
-                    if value == "accuracy":
-                        self.type = 0
-                    elif value == "all":
-                        self.type = 2
-                    else:
-                        self.type = 1
-                elif arg == "-query_file":
-                    if self.type == 1:
-                        self.query_file = value
-
-    def get_args_string(self, line):
-        lines = line.split(" ")
-        if len(lines) > 1:
-            for i in range(1, len(lines)):
-                options = lines[i].split("=")
-
-                arg = options[0]
-                try :
-                    value = options[1]
-                except:
-                    continue
                 if arg == "-name":
                     AppContext.AppContext.dataset_name = value
                 elif arg == "-syspath":
@@ -188,11 +140,8 @@ class ScenarioOne:
 
 # sys.path.append("/Users/morad/PycharmProjects/PForests/")  # TODO: CHANGE
 scenario = ScenarioOne()
-params = '/Users/morad/PycharmProjects/PForests/ -name=ElectricDevices -train=/Users/morad/PycharmProjects/PForests/datasets/ElectricDevices/ElectricDevices_TRAIN.arff ' \
-         '-test=/Users/morad/PycharmProjects/PForests/datasets/ElectricDevices/ElectricDevices_TEST.arff -repeat=1 -trees=35 -candidates=2 -targetlast=True ' \
-         '-calculate=accuracy '
-#scenario.get_args()
-scenario.get_args_string(params)
+scenario.get_args()
+
 experimentrunner = ExperimentRunner.ExperimentRunner()
 
 # start = timeit.default_timer()
