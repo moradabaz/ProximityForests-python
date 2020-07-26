@@ -25,26 +25,32 @@ class DistanceMeasure:
         bsf = np.inf
         for i in range(0, len(temp_exemplars)):
             exemplars = np.asarray(temp_exemplars.__getitem__(i))
-
+            """
             if AppContext.AppContext.elastic_distance == "dtw":
-                dist = dtw.distance_fast(array_query, exemplars, window=AppContext.AppContext.window_length,
-                                         max_dist=bsf)
+               # dist = dtw.distance_fast(array_query, exemplars, window=AppContext.AppContext.window_length,
+               #                          max_dist=bsf)
             elif AppContext.AppContext.elastic_distance == "lcss":
                 esilon = LCSS.get_random_epsilon()
                 dist = LCSS.distance(array_query, exemplars, window_size=-np.inf, epsilon=esilon)
             elif AppContext.AppContext.elastic_distance == "twe":
                 dist = TWE.distance(array_query, exemplars, TWE.get_random_nu(), TWE.get_random_lambda())
             else:
-                try:
-                    dist = dtw.distance_fast(array_query, exemplars, window=2)
-                except RecursionError:
-                    dist = DistanceMeasure._dtw_distance(array_query, exemplars, d=lambda x, y: abs(x - y))
-            if dist < bsf:
+            """
+            try:
+                dist = dtw.distance_fast(array_query, exemplars, window=2)
+            except RecursionError:
+                dist = DistanceMeasure._dtw_distance(array_query, exemplars, d=lambda x, y: abs(x - y))
+
+            if len(closest_nodes) == 0:
                 bsf = dist
-                closest_nodes.clear()
                 closest_nodes.append(i)
-            elif bsf == dist:
-                closest_nodes.append(i)
+            else:
+                if dist < bsf:
+                    bsf = dist
+                    closest_nodes.clear()
+                    closest_nodes.append(i)
+                elif bsf == dist:
+                    closest_nodes.append(i)
 
         if len(closest_nodes) == 0:
             print("There are no closest Nodes")
