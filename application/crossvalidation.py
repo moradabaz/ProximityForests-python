@@ -52,11 +52,14 @@ train_data = list()
 fold_accuracies = dict()
 runner = ExperimentRunner()
 for turn in folds.keys():
+    if turn == 1:
+        continue
     test_dataset = FileReader.parse_arff_data(folds[turn])
     for fold in folds.keys():
-        if fold != turn:
+        if fold < turn:
             for line in folds[fold]:
                 train_data.append(line)
+
     print("FOLD ", turn, " ->")
     train_dataset = FileReader.parse_arff_data(train_data)
     pforest = runner.run_data(train_dataset, test_dataset, name)
