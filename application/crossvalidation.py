@@ -47,20 +47,22 @@ fold_accuracies = dict()
 lineas = list()
 runner = ExperimentRunner()
 AppContext.AppContext.num_repeats = 10
-for trees in [20, 35, 50, 75, 100, 120]:
-    AppContext.AppContext.num_trees = trees
-    for candidates in [2, 3, 4, 5, 6, 7]:
-        for turn in folds.keys():
-            test_dataset = FileReader.parse_arff_data(folds[turn])
-            for fold in folds.keys():
-                if fold != turn:
-                    for line in folds[fold]:
-                        train_data.append(line)
+AppContext.AppContext.num_trees = 100
+AppContext.AppContext.num_candidates_per_split = 5
+#for trees in [20, 35, 50, 75, 100, 120]:
+#    AppContext.AppContext.num_trees = trees
+#    for candidates in [2, 3, 4, 5, 6, 7]:
+for turn in folds.keys():
+    test_dataset = FileReader.parse_arff_data(folds[turn])
+    for fold in folds.keys():
+        if fold != turn:
+            for line in folds[fold]:
+                train_data.append(line)
 
-            print("FOLD ", turn, " ->")
-            train_dataset = FileReader.parse_arff_data(train_data)
-            pforest = runner.run_data(train_dataset, test_dataset, name)
-            fold_accuracies[turn] = pforest.result.accuracy
-            linea = str(turn) + ',' + str(trees) + ',' + str(candidates) + ',' + str(fold_accuracies[turn])
-            lineas.append(linea)
+    print("FOLD ", turn, " ->")
+    train_dataset = FileReader.parse_arff_data(train_data)
+    pforest = runner.run_data(train_dataset, test_dataset, name)
+    fold_accuracies[turn] = pforest.result.accuracy
+    linea = str(turn) + ',' + str(AppContext.AppContext.num_trees) + ',' + str(AppContext.AppContext.num_candidates_per_split) + ',' + str(fold_accuracies[turn])
+    lineas.append(linea)
 save_json(lineas)
