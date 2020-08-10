@@ -19,7 +19,7 @@ class AppContext:
     target_column_is_first = False
     dataset_name = ""
     verbosity = 2
-    num_repeats = 1
+    num_repeats = 10
     num_trees = 100
     num_candidates_per_split = 5
     random_dm_per_node = True

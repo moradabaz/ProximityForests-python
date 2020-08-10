@@ -40,7 +40,7 @@ class ExperimentRunner:
             self.train_data.shuffle()
 
         num_repeats = AppContext.AppContext.num_repeats
-        for i in range(0, num_repeats):
+        for i in range(0, 10):
             if AppContext.AppContext.verbosity > 0:
                 print("Number of repeats:", AppContext.AppContext.num_repeats)
                 print("Number of trees:")
@@ -61,7 +61,7 @@ class ExperimentRunner:
             pforest.print_results(dataset_name, i, "")
             if AppContext.AppContext.export_level > 0:
                 result.exportJSON(dataset_name, i)
-            return pforest
+        return pforest
 
     def run_data(self, train_data_original, test_data_original, name):
         self.train_data = train_data_original.reorder_class_labels(None)
