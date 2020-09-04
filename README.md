@@ -1,8 +1,10 @@
+# Proximity Forest
+
 An effective and scalable distance-based classifier for time series classification. This repostitory contains the source code for the time series classification algorithm Proximity Forest, published in the paper [https://arxiv.org/abs/1808.10594]
 
 Check out the original project developed in Java: https://github.com/fpetitjean/ProximityForest
 
-PForests (Gamma Version)
+## PForests Python (Gamma Version)
 
 This is the Proximity Forest algorithm implemented to classify Time Series.
 
