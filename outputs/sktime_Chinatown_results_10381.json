@@ -1,0 +1,1 @@
+{"dataset": [{"name": "Chinatown", "exec_time": 50.006323314, "training_time": 7.6200733540000005, "testing_time": 42.386248558, "accuracy": 0.9591836734693877, "n_jobs": 1}]}

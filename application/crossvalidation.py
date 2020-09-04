@@ -46,7 +46,7 @@ train_data = list()
 fold_accuracies = dict()
 lineas = list()
 runner = ExperimentRunner()
-AppContext.AppContext.num_repeats = 1
+AppContext.AppContext.num_repeats = 10
 AppContext.AppContext.num_trees = 100
 AppContext.AppContext.num_candidates_per_split = 5
 for trees in [20, 35]:

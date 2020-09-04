@@ -153,5 +153,4 @@ start = timeit.default_timer()
 pforest = experimentrunner.run()
 result = pforest.result
 stop = timeit.default_timer()
-#scenario.save_training()
 scenario.save_json()
