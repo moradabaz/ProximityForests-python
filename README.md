@@ -1,4 +1,4 @@
-# Proximity Forest
+# Proximity Forest (Using only DTW measure)
 
 An effective and scalable distance-based classifier for time series classification. This repostitory contains the source code for the time series classification algorithm Proximity Forest, published in the paper [https://arxiv.org/abs/1808.10594]
 
