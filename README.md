@@ -60,5 +60,5 @@ If you want to compare this Proximity Forest Project to the sktime project:
    - `trees`: The number of trees for the algorithm
    - `candidates`: Number of candidates per split
 - Example:
-   `sh launchersktime.sh Plane 20 23`
+   `sh launchersktime.sh Plane 20 3`
        
