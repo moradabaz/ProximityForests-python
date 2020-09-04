@@ -44,6 +44,9 @@ Parameters of python execution:
     
 ## Comparison with Sktime.ProximityForest
 
+sktime is a Python machine learning toolbox for time series with a unified interface for multiple learning tasks.
+You can find the package through this URL: https://sktime.org
+
 If you want to compare this Proximity Forest Project to the sktime project:
 - Run the sh file `launchers/launchersktime.sh`, which can be found in the `launchers` directory, setting the following arguments:
    - `name`: The name of the dataset. The Names available are:
