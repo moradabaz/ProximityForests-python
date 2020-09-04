@@ -42,3 +42,23 @@ Parameters of python execution:
  - `-targetlast`: It indicates if the last column of the dataset is the class of the serie. 
     - P.e. if the line is `0.32, 0.45, ..., -0.12, X_AXIS`, setting `-targetlast=True` means the `X_AXIS` is the series class and it's located in the last column
     
+## Comparison with Sktime.ProximityForest
+
+If you want to compare this Proximity Forest Project to the sktime project:
+- Run the sh file `launchers/launchersktime.sh`, which can be found in the `launchers` directory, setting the following arguments:
+   - `name`: The name of the dataset. The Names available are:
+        * `ItalyPowerDemand`
+        * `MoteStrain`
+        * `Plane`
+        * `GesturePebbleZ2`
+        * `Chinatown`
+        * `ERing`
+        * `FacesUCR`
+        * `FreezerRegularTrain`
+        * `SmoothSubspace`
+        * `ElectricDevices`
+   - `trees`: The number of trees for the algorithm
+   - `candidates`: Number of candidates per split
+- Example:
+   `sh launchersktime.sh Plane 20 23`
+       
