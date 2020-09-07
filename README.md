@@ -35,7 +35,6 @@ How to run a simple execution:
        - `sh TermLauncherParam.sh ItalyPowerDemand`
 
 
-
 Parameters of python execution:
 - Run the sh file `application/TermLauncher.sh` setting the following parameters:
  - `name`: The name of the experiment
@@ -70,4 +69,34 @@ If you want to compare this Proximity Forest Project to the sktime project:
    - `candidates`: Number of candidates per split
 - Example:
    `sh launchersktime.sh Plane 20 3`
+   
+   
+## Installing Package
+
+You can install the package using the command:
+
+`pip install proximity-forest-dtw`
+
+Nevertheless, you must have installed the following packages:
+-  `numpy`
+-  `dtaidistance`
+-  `pytest`
+-  `scipy`
+
+### Example
+`from trees import ProximityForest`
+`from core import FileReader`
+`import random`
+
+`random.seed(1234)`
+`train_dataset = FileReader.FileReader.load_arff_data("/Users/moradisten/Projects/PForests/datasets/Plane/Plane_TRAIN.arff")`
+`test_dataset = FileReader.FileReader.load_arff_data("/Users/moradisten/Projects/PForests/datasets/Plane/Plane_TEST.arff")`
+
+`Pforest = ProximityForest.ProximityForest(1, n_trees=100, n_candidates=5)`
+`Pforest.train(train_dataset)`
+`results = Pforest.test(test_dataset)`
+`print(results.accuracy)`
+
+
+
        
