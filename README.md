@@ -88,7 +88,6 @@ Nevertheless, you must have installed the following packages:
 `from core import FileReader`
 `import random`
 
-`random.seed(1234)`
 `train_dataset = FileReader.FileReader.load_arff_data("/Users/moradisten/Projects/PForests/datasets/Plane/Plane_TRAIN.arff")`
 `test_dataset = FileReader.FileReader.load_arff_data("/Users/moradisten/Projects/PForests/datasets/Plane/Plane_TEST.arff")`
 
