@@ -75,7 +75,7 @@ If you want to compare this Proximity Forest Project to the sktime project:
 
 You can install the package using the command:
 
-`pip install proximity-forest-dtw`
+`pip install Pforests-dtw`
 
 Nevertheless, you must have installed the following packages:
 -  `numpy`
