@@ -84,24 +84,26 @@ Nevertheless, you must have installed the following packages:
 -  `scipy`
 
 ### Example
-`from trees import ProximityForest`
-
-`from core import FileReader`
-
-`import random`
-
-`train_dataset = FileReader.FileReader.load_arff_data("/Users/moradisten/Projects/PForests/datasets/Plane/Plane_TRAIN.arff")`
-
-`test_dataset = FileReader.FileReader.load_arff_data("/Users/moradisten/Projects/PForests/datasets/Plane/Plane_TEST.arff")`
-
-`Pforest = ProximityForest.ProximityForest(1, n_trees=100, n_candidates=5)`
-
-`Pforest.train(train_dataset)`
-
-`results = Pforest.test(test_dataset)`
-
-`print(results.accuracy)`
 
 
+```python
+from trees import ProximityForest
+
+from core import FileReader
+
+import random
+
+train_dataset = FileReader.FileReader.load_arff_data("/Users/moradisten/Projects/PForests/datasets/Plane/Plane_TRAIN.arff")
+
+test_dataset = FileReader.FileReader.load_arff_data("/Users/moradisten/Projects/PForests/datasets/Plane/Plane_TEST.arff")
+
+Pforest = ProximityForest.ProximityForest(1, n_trees=100, n_candidates=5)
+
+Pforest.train(train_dataset)
+
+results = Pforest.test(test_dataset)
+
+print(results.accuracy)
+```
 
        
