@@ -85,25 +85,29 @@ Nevertheless, you must have installed the following packages:
 
 ### Example
 
-
 ```python
 from trees import ProximityForest
-
 from core import FileReader
-
 import random
-
 train_dataset = FileReader.FileReader.load_arff_data("/Users/moradisten/Projects/PForests/datasets/Plane/Plane_TRAIN.arff")
-
 test_dataset = FileReader.FileReader.load_arff_data("/Users/moradisten/Projects/PForests/datasets/Plane/Plane_TEST.arff")
-
 Pforest = ProximityForest.ProximityForest(1, n_trees=100, n_candidates=5)
-
 Pforest.train(train_dataset)
-
 results = Pforest.test(test_dataset)
-
 print(results.accuracy)
 ```
 
+### Data Structure: ListDataset
+
+Normally, in Data Science, we are used to handle datasets with Pandas. But for these case, as researchers did, a data structure has been developed, which is the `ListDataset`.
+This data structure contains:
+* `series_data`: Contains a list of the time series (X).
+* `classes`: Contains a list of the labels (y).
+* `class_counter`: Dictionary which contains the count of each label -> <label, label count>
+* `series_map`: Map which indicates the number of series per label -> <label, nº series>
+
+
+### File Format
+
+This project reads csv and arff files. 
        
