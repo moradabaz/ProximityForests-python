@@ -110,4 +110,10 @@ This data structure contains:
 ### File Format
 
 This project reads csv and arff files. 
+
+### My Bachelor Thesis
+
+If you speak Spanish, I invite you to read my bachelor's thesis about this matter
+
+`https://figshare.com/articles/thesis/Distance-based_Time_Series_Classifiers/13269005`
        
