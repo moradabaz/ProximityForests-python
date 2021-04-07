@@ -4,7 +4,7 @@ An effective and scalable distance-based classifier for time series classificati
 
 Check out the original project developed in Java: https://github.com/fpetitjean/ProximityForest
 
-## PForests Python (Gamma Version)
+## Proximity Forests in Python using dtai DTW distance measure 
 
 This is the Proximity Forest algorithm implemented to classify Time Series.
 
